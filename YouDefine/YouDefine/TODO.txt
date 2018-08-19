@@ -1,0 +1,55 @@
+﻿--------------------------
+
+TODO LIST:
+
+--------------------------
+
+1. Create Model.Idea that corresponds to EF Core
+
+
+2. Create Index View and simple input dialog for users
+
+
+3. Choose Database and create CRUD Methods
+   -> Test if ideas are adding
+
+
+4. Create Validation for user's input
+   -> Swear Filtering
+   -> Min and Max character length
+
+
+5. Create Javascript and Styles responsible for input dialog
+   -> typer effect
+   -> random font colors when visiting
+
+
+6. Create Ideas View provided by DataBase source and backend using API
+   -> user wants to search in database for particular idea and then:
+   a) if there are already some: show it to them in IdeasView and option for adding new one
+   b) if not: only options for adding new one with special alert that has been created
+	  -> redirect to "Home"
+
+
+7. Create Administration Panel
+   -> Using Authentication and login/password authorization
+   -> Create simple Admin View
+   -> Option settings
+	  -> enable/disable swearing filter
+	  -> and more...
+
+
+8. Create simple statistics with ChartFramework:
+   -> how many ideas indices are in database
+   -> how many characters in total description
+   -> how often does user add ideas (history of adding)
+   -> how many visitors on-site
+
+
+9. Deploy web app with database and scripts
+
+
+10. Learn about security issues in Web Application and try to implement some of them
+	for better and more secure app.
+
+--------------------------------------------
