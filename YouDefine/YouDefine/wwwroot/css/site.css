@@ -1,35 +1,67 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    /*background-color: whitesmoke;*/
+    transition: background 8.0s ease;
+    background: #fc00ff;
+    background: -webkit-linear-gradient(to left, #fc00ff, #00dbde);
+    background: linear-gradient(to left, #fc00ff, #00dbde);
+    text-align: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
+
+    body.yellow {
+        background-image: linear-gradient(to top, #accbee 0%, #e7f0fd 100%);
+    }
+
 
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+    /*padding-left: 5px;
+    padding-right: 5px;*/
 }
 
-/* Carousel */
-.carousel-caption p {
-    font-size: 20px;
-    line-height: 1.4;
+.search-section {
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
 }
 
-/* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"] {
-    width: 100%;
+.search-container {
+    /*margin: auto;*/
+    /*width: 100px;
+    height: 100px;*/
+    margin: 0 auto;
 }
 
-/* QR code generator */
-#qrCode {
-    margin: 15px;
+#search-input {
+    background-color: transparent;
+    /*background-color: aquamarine;*/
+    border: 0px solid;
+    height: 80px;
+    width: 260px;
+    font-size: 60px;
+    text-decoration: none;
 }
 
-/* Hide/rearrange for smaller screens */
-@media screen and (max-width: 767px) {
-    /* Hide captions */
-    .carousel-caption {
-        display: none;
+    #search-input[value="define..."] {
+        color: red;
+        text-decoration-color: transparent;
     }
-}
+
+    #search-input::placeholder {
+        color: darkgrey;
+        text-decoration-color: transparent;
+    }
+
+    #search-input:focus {
+        outline: none;
+        border: none;
+    }
+
+
+
+/* Add responsive design for smaller devices! */
