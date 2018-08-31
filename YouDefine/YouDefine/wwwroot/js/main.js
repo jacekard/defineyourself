@@ -2,20 +2,6 @@
 
 //})();
 
-function loadBackgroundColor() {
-    $("body").animate({ backgroundColor: "red" }, "slow");
-    console.log("chuj kurwa");
-}
-
-//(function () {
-//    loadBackgroundColor();
-//    $("#search-input").click(function () {
-
-//    }
-
-
-//})();
- 
 $("#search-input").click(function () {
     $("body").addClass('yellow');
 });
@@ -29,3 +15,16 @@ $("#search-input").click(function () {
 //        $("#weather-temp").html("<strong>" + result + "</strong> degrees");
 //    }
 //});
+
+(function () {
+
+
+
+
+
+
+
+
+
+
+})();

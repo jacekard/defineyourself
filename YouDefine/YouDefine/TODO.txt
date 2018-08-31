@@ -22,9 +22,13 @@ TODO LIST:
 5. Create Javascript and Styles responsible for input dialog
    -> typer effect
    -> random font colors when visiting
+   -> styling caret
 
 
 6. Create Ideas View provided by DataBase source and backend using API
+   Integrate p5.js with main page -> responsible for showing text as particles
+   which can move and slightly rotate.
+   
    -> user wants to search in database for particular idea and then:
    a) if there are already some: show it to them in IdeasView and option for adding new one
    b) if not: only options for adding new one with special alert that has been created
@@ -43,7 +47,11 @@ TODO LIST:
    -> how many ideas indices are in database
    -> how many characters in total description
    -> how often does user add ideas (history of adding)
-   -> how many visitors on-site
+   -> how many visitors on-site 
+   {
+		when user visits site, script is determining date and time
+		and is saving entry to db
+   }
 
 
 9. Deploy web app with database and scripts
