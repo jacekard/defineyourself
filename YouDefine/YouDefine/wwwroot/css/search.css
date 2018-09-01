@@ -4,13 +4,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    width: auto;
+    height: auto;
+    font-family: 
 }
 
 .search-container {
     /*margin: auto;*/
-    /*width: 100px;
-    height: 100px;*/
-    margin: 0 auto;
+    margin-top: 250px;
+    width: 400px;
+    height: 300px;
 }
 
 #search-input {
@@ -18,9 +21,10 @@
     /*background-color: aquamarine;*/
     border: 0px solid;
     height: 80px;
-    width: 260px;
+    width: 350px;
     font-size: 60px;
     text-decoration: none;
+    padding-left: 80px;
 }
 
     #search-input[value="define..."] {
