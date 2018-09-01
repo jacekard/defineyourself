@@ -1,0 +1,39 @@
+﻿
+.search-section {
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-container {
+    /*margin: auto;*/
+    /*width: 100px;
+    height: 100px;*/
+    margin: 0 auto;
+}
+
+#search-input {
+    background-color: transparent;
+    /*background-color: aquamarine;*/
+    border: 0px solid;
+    height: 80px;
+    width: 260px;
+    font-size: 60px;
+    text-decoration: none;
+}
+
+    #search-input[value="define..."] {
+        color: red;
+        text-decoration-color: transparent;
+    }
+
+    #search-input::placeholder {
+        color: lightslategray;
+        text-decoration-color: transparent;
+    }
+
+    #search-input:focus {
+        outline: none;
+        border: none;
+    }

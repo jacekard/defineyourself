@@ -2,10 +2,6 @@
 
 //})();
 
-$("#search-input").click(function () {
-    $("body").addClass('yellow');
-});
-
 //$.ajax({
 //    url: "/api/getWeather",
 //    data: {
@@ -17,14 +13,5 @@ $("#search-input").click(function () {
 //});
 
 (function () {
-
-
-
-
-
-
-
-
-
-
+    console.log("dzialam");
 })();

@@ -1,94 +1,45 @@
-﻿body {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    z-index: 1;
-    /*background-color: whitesmoke;*/
-    /*transition: background 8.0s ease;
-    background: #fc00ff;
-    background: -webkit-linear-gradient(to left, #fc00ff, #00dbde);
-    background: linear-gradient(to left, #fc00ff, #00dbde);
-    text-align: center;*/
-    font-family:Arial, Helvetica, sans-serif
-
-    /*background: -webkit-linear-gradient(bottom,#8914d3,#00d6fe,#8914d3);
-    background: linear-gradient(0deg,#8914d3,#00d6fe,#8914d3);
-    background-size: 600% 600%;
-    -webkit-animation: u 12s linear infinite;
-    animation: u 12s linear infinite;*/
+﻿* {
+    padding: 0;
+    margin: 0;
 }
 
-    /*body.yellow {
-        background-image: linear-gradient(to top, #accbee 0%, #e7f0fd 100%);
-    }*/
-
-
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
-.body-content {
-    /*padding-left: 5px;
-    padding-right: 5px;*/
-}
-
-.noscript {
+html {
     width: 100%;
-    height: 100%;
-    background-color: whitesmoke;
-    position: absolute;
-    z-index: 9;
-    top: 0px;
-    left: 0px;
-    text-align: center;
-    padding-top: 50px;
+    height: 900px; /* height depends on you're requirement*/
 }
 
-.noscript-message {
-    font-size: 40px;
-    font-weight: 800;
-    background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+body {
+    width: 100%;
+    height: 600px; /* height depends on you're requirement*/
+
+    background: linear-gradient(50deg, #ff9a9e, #fad0c4, #ffecd2, #fcb69f, #ff9a9e, #fecfef, #a1c4fd, #c2e9fb, #cfd9df, #e2ebf0, #89f7fe, #66a6ff, #93a5cf, #e4efe9, #ff758c, #ff7eb3, #96deda, #50c9c3, #ffc3a0, #ffafbd);
+    background-position: 0% 0%;
+    -webkit-animation: animateBackground 60s infinite linear forwards; /* Safari 4+ */
+    -moz-animation: animateBackground 60s infinite linear forwards; /* Fx 5+ */
+    -o-animation: animateBackground 60s infinite linear forwards; /* Opera 12+ */
+    animation: animateBackground 60s infinite linear forwards; /* IE 10+, Fx 29+ */
+    background-size: 1000%, 1000%;
 }
 
-.search-section {
-    padding: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 60vh;
+.body-content {
+
 }
 
-.search-container {
-    /*margin: auto;*/
-    /*width: 100px;
-    height: 100px;*/
-    margin: 0 auto;
+@-webkit-keyframes animateBackground {
+  0%   { background-position: 0%; opacity: 0.9;  }
+  100%	{ background-position: 100%; opacity: 1;  }
 }
-
-#search-input {
-    background-color: transparent;
-    /*background-color: aquamarine;*/
-    border: 0px solid;
-    height: 80px;
-    width: 260px;
-    font-size: 60px;
-    text-decoration: none;
+@-moz-keyframes animateBackground {
+  0%  { background-position: 0%; opacity: 0.9; }
+  100%	{ background-position: 100%; opacity: 1; }
 }
-
-    #search-input[value="define..."] {
-        color: red;
-        text-decoration-color: transparent;
-    }
-
-    #search-input::placeholder {
-        color: darkgrey;
-        text-decoration-color: transparent;
-    }
-
-    #search-input:focus {
-        outline: none;
-        border: none;
-    }
-
-
+@-o-keyframes animateBackground {
+  0%	{ background-position: 0%; opacity: 0.9;}
+  100%	{ background-position: 100%; opacity: 1; }
+}
+@keyframes animateBackground {
+  0%	{ background-position: 0%; opacity: 0.9; }
+  100%	{ background-position: 100%; opacity: 1; }
+}
 
 /* Add responsive design for smaller devices! */
