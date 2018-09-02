@@ -22,19 +22,22 @@ function getRandomIdea() {
 
 
     $("#search-input").click(function () {
-        var option = String(Math.floor((Math.random() * 4) + 1));
-        var className = "background-variation" + option
-        $("body").removeClass();
-        $("body").addClass(className);
+        var b = $("body");
+        do {
+            var option = String(Math.floor((Math.random() * 4) + 1));
+            var className = "background-variation" + option;
+        } while (b.hasClass(className) == true);
 
+        b.removeClass();
+        b.addClass(className);
     });
 
     $("#description-button").click(function () {
         var panel = $("#description-panel");
 
         if (panel.hasClass("tooltip-inactive")) {
-                panel.removeClass();
-                panel.addClass("tooltip-open");
+            panel.removeClass();
+            panel.addClass("tooltip-open");
         } else {
             panel.removeClass();
             panel.addClass("tooltip-close");

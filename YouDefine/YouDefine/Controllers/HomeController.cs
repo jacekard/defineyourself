@@ -26,14 +26,6 @@ namespace YouDefine.Controllers
             return View();
         }
 
-        [Route("Home/Contact")]
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Contact youDefine";
-
-            return View();
-        }
-
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
