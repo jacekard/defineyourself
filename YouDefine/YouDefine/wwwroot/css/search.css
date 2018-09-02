@@ -41,15 +41,29 @@
         border: none;
     }
 
-#tooltip {
-    will-change: opacity;
-    font-family: Arial;
-    font-size: 25px;
+#description-panel {
     position: absolute;
-    left: 5px;
-    top: 5px;
+    top: 10px;
+    left: -50px;
+    border: 2px solid snow;
+    border-radius: 5px;
+    background-color: snow;
+    z-index: 5;
+    width: 900px;
+    height: 40px;
+    text-align: left;
+    padding-top: 0px;
+}
+
+#tooltip {
+    display: inline;
+    will-change: opacity;
+    font-family: 'Roboto Slab', serif;
+    font-size: 25px;
     -webkit-transition: opacity ease-out 8s;
     transition: opacity ease-out 8s;
+    height: 40px;
+    margin-left: 100px;
 }
 
 .tooltip-inactive {
@@ -57,42 +71,61 @@
     opacity: 0;
 }
 
-.tooltip-active {
+.tooltip-open {
     visibility: visible;
     -webkit-animation: animateTooltip 1.5s 1 ease-in-out forwards; /* Safari 4+ */
     -moz-animation: animateTooltip 1.5s 1 ease-in-out forwards; /* Fx 5+ */
     -o-animation: animateTooltip 1.5s 1 ease-in-out forwards; /* Opera 12+ */
-    animation: animateTooltip 1.5s 1 ease-in-out forwards, glow 1s infinite alternate;
+    animation: openTooltip 1.5s 1 ease-in-out forwards, glow 3s infinite alternate;
 }
 
+.tooltip-close {
+    /*-webkit-animation: animateTooltip 1.5s 1 ease-in-out forwards; /* Safari 4+ */
+    -moz-animation: animateTooltip 1.5s 1 ease-in-out forwards; /* Fx 5+ */
+    -o-animation: animateTooltip 1.5s 1 ease-in-out forwards; /* Opera 12+ */
+    animation: closeTooltip 1.5s 1 ease-in-out forwards, glow 3s infinite alternate;
+}
 
-#fingerprint {
+#description-button {
     position: absolute;
-    top: 5px;
+    top: 15px;
     left: 5px;
+    z-index: 10;
     font-size: 36px;
-    -webkit-transition: font-size 0.2s;
-    transition: font-size 0.2s;
     will-change: font-size;
+    -webkit-transition: width 2s, height 2s, -webkit-transform 2s, font-size 0.2s, opacity ease-out 2s;
+    transition: width 2s, height 2s, transform 2s, font-size 0.2s, opacity ease-out 2s;
+    transition-delay: 0.3s;
 }
-
-    #fingerprint:hover {
+    #description-button:hover {
         font-size: 40px;
     }
 
+.description-button-spin {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
 .refresh_small {
-    font-size: 20px;
+    font-size: 30px;
 }
 
 @keyframes glow {
     from {
-        opacity: 0.5;
-        color: black;
+        opacity: 0.8;
+        color: midnightblue;
     }
 
     to {
         opacity: 1;
-        color: blueviolet;
+        color: black;
+    }
+}
+
+@keyframes spin {
+    50% {
+        -webkit-transform: rotateY(90deg);
+        transform: rotateY(90deg);
     }
 }
 
@@ -132,19 +165,37 @@
     }
 }
 
-@keyframes animateTooltip {
+@keyframes openTooltip {
     0% {
-        left: 0px;
+        left: -600px;
         opacity: 0;
     }
 
     80% {
-        left: 50px;
-        opacity: 0.6;
+        left: 0px;
+        opacity: 0.9;
     }
 
     100% {
-        left: 45px;
+        left: -30px;
         opacity: 1;
+    }
+}
+
+@keyframes closeTooltip {
+    0% {
+        left: -30px;
+        opacity: 1;
+    }
+
+    30% {
+        left: 0px;
+        opacity: 0.9;
+    }
+
+    100% {
+        left: -600px;
+        opacity: 0;
+        visibility: hidden;
     }
 }

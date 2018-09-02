@@ -12,8 +12,12 @@
 //    }
 //});
 
+function getRandomIdea() {
+    console.log("random idea");
+}
 
 (function () {
+    "use strict";
     console.log("dzialam");
 
 
@@ -22,14 +26,34 @@
         var className = "background-variation" + option
         $("body").removeClass();
         $("body").addClass(className);
-        $("#tooltip").removeClass();
-        $("#tooltip").addClass("tooltip-active");
+
     });
 
+    $("#description-button").click(function () {
+        var panel = $("#description-panel");
+
+        if (panel.hasClass("tooltip-inactive")) {
+                panel.removeClass();
+                panel.addClass("tooltip-open");
+        } else {
+            panel.removeClass();
+            panel.addClass("tooltip-close");
+            panel.delay(1500).queue(function (next) {
+                panel.addClass("tooltip-inactive");
+                next();
+            });
+        }
+
+        $(this).toggleClass("description-button-spin");
+    });
+
+    $("#refresh-button").click(function () {
+        getRandomIdea();
+    })
 
     $(document).keypress(function (e) {
-        if (e.which == 13) {
-            //enter key pressed
+        if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
+            getRandomIdea();
         }
     });
 })();
