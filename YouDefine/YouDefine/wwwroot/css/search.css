@@ -24,6 +24,8 @@
     font-size: 60px;
     text-decoration: none;
     padding-left: 80px;
+
+    caret-color: hsl(0, 97%, 50%);
 }
 
     #search-input[value="define..."] {
@@ -52,7 +54,7 @@
     width: 900px;
     height: 40px;
     text-align: left;
-    padding-top: 0px;
+    padding: 0px;
 }
 
 #tooltip {
@@ -107,7 +109,9 @@
 }
 
 .refresh_small {
+    position: relative;
     font-size: 30px;
+    top: 6px;
 }
 
 @keyframes glow {

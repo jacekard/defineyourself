@@ -23,35 +23,41 @@ body {
     height: auto;
     background: linear-gradient(50deg, var(--bg-color-set1));
     background-position: 0% 0%;
-    -webkit-animation: animateBackground 60s infinite linear alternate backwards; /* Safari 4+ */
-    -moz-animation: animateBackground 60s infinite linear alternate backwards; /* Fx 5+ */
-    -o-animation: animateBackground 60s infinite linear alternate backwards; /* Opera 12+ */
-    animation: animateBackground 60s infinite linear alternate backwards; /* IE 10+, Fx 29+ */
-    background-size: 300%, 300%;
+    -webkit-animation: animateBackground 30s infinite linear alternate backwards; /* Safari 4+ */
+    -moz-animation: animateBackground 30s infinite linear alternate backwards; /* Fx 5+ */
+    -o-animation: animateBackground 30s infinite linear alternate backwards; /* Opera 12+ */
+    animation: animateBackground 30s infinite linear alternate backwards; /* IE 10+, Fx 29+ */
+    background-size: 100%, 100%;
     -webkit-transition: background-size 10s;
     transition: background-size 10s;
 }
 
     body:hover {
-        background-size: 1500%, 1500%;
+        background-size: 10%;
     }
 
-.background-variation1 {
-    background: linear-gradient(-50deg, var(--bg-color-set2));
+.background-variation2 {
+    background: linear-gradient(0deg, var(--bg-color-set1));
     background-position: 80% 20%;
-    background-size: 1500%, 1500%;
+    background-size: 100%, 100%;
 }
 
 .background-variation2 {
-    background: linear-gradient(250deg, var(--bg-color-set3));
-    background-position: 10% 50%;
-    background-size: 1500%, 50%;
+    background: linear-gradient(-50deg, var(--bg-color-set2));
+    background-position: 80% 20%;
+    background-size: 100%, 100%;
 }
 
-.background-variation3 {
-    background: linear-gradient(250deg, var(--bg-color-set4));
+.background-variation2 {
+    background: linear-gradient(360deg, var(--bg-color-set3));
+    background-position: 10% 50%;
+    background-size: 100%, 100%;
+}
+
+.background-variation2 {
+    background: linear-gradient(-250deg, var(--bg-color-set4));
     background-position: 100% 50%;
-    background-size: 2000%, 2000%;
+    background-size: 100%, 100%;
 }
 
 .body-content {
