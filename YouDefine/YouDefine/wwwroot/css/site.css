@@ -3,48 +3,54 @@
     margin: 0;
 }
 
-/*zrobic trzy zestawy kolorow*/
-
 :root {
-    --bg-colors1: #ff9a9e, #fad0c4, #ffecd2, #fcb69f, #ff9a9e, #fecfef, #a1c4fd, #c2e9fb, #cfd9df, #e2ebf0, #89f7fe, #66a6ff, #93a5cf, #e4efe9, #ff758c, #ff7eb3, #96deda, #50c9c3, #ffc3a0, #ffafbd, #4568dc, #b06ab3, #ec6f66, #f3a183, #3a1c71, #d76d77, #ffaf7b, #ed4264, #ffedbc, #c471f5, #fa71cd, #e9defa, #fbfcdb, #9795f0, #fbc8d4,#f83600, #f9d423, #b721ff, #21d4fd, #abecd6, #fbed96, #ff5858, #f09819, #4481eb, #04befe, #e6b980, #eacda3, #209cff, #68e0cf, #FFE29F, #FFA99F, #FF719A;
-
+    --bg-color-set1: #ff9a9e, #fad0c4, #ffecd2, #fcb69f, #ee9ca7, #ffdde1;
+    --bg-color-set2: #89f7fe, #66a6ff, #accbee, #e7f0fd, #9795f0, #fbc8d4, #4facfe,#00f2fe, #ffc3a0, #ffafbd;
+    --bg-color-set3: #ffecd2, #fcb69f, #ff9a9e, #fecfef, #feada6, #f5efef, #ff758c, #ff7eb3;
+    --bg-color-set4: #93a5cf, #e4efe9, #93a5cf, #e4efe9, #f5f7fa, #c3cfe2, #a1c4fd, #c2e9fb
+    /*#ff9a9e, #fecfef, #a1c4fd, #c2e9fb, #cfd9df, #e2ebf0, #89f7fe, #66a6ff, #93a5cf, #e4efe9, #ff758c, #ff7eb3, #96deda, #50c9c3, #ffc3a0, #ffafbd, #4568dc, #b06ab3, #ec6f66, #f3a183, #3a1c71, #d76d77, #ffaf7b, #ed4264, #ffedbc, #c471f5, #fa71cd, #e9defa, #fbfcdb, #9795f0, #fbc8d4,#f83600, #f9d423, #b721ff, #21d4fd, #abecd6, #fbed96, #ff5858, #f09819, #4481eb, #04befe, #e6b980, #eacda3, #209cff, #68e0cf, #FFE29F, #FFA99F, #FF719A;*/
 }
 
 html {
     width: 100%;
-    height: 900px;
+    height: 100%;
 }
 
 body {
+    will-change: background;
+    will-change: background-position;
     width: 100%;
-    height: 600px;
-    background: linear-gradient(50deg, var(--bg-colors1));
+    height: auto;
+    background: linear-gradient(50deg, var(--bg-color-set1));
     background-position: 0% 0%;
-    -webkit-animation: animateBackground 60s infinite linear forwards; /* Safari 4+ */
-    -moz-animation: animateBackground 60s infinite linear forwards; /* Fx 5+ */
-    -o-animation: animateBackground 60s infinite linear forwards; /* Opera 12+ */
-    animation: animateBackground 300s infinite linear forwards; /* IE 10+, Fx 29+ */
+    -webkit-animation: animateBackground 60s infinite linear alternate backwards; /* Safari 4+ */
+    -moz-animation: animateBackground 60s infinite linear alternate backwards; /* Fx 5+ */
+    -o-animation: animateBackground 60s infinite linear alternate backwards; /* Opera 12+ */
+    animation: animateBackground 60s infinite linear alternate backwards; /* IE 10+, Fx 29+ */
+    background-size: 300%, 300%;
+    -webkit-transition: background-size 10s;
+    transition: background-size 10s;
+}
+
+    body:hover {
+        background-size: 1500%, 1500%;
+    }
+
+.background-variation1 {
+    background: linear-gradient(-50deg, var(--bg-color-set2));
+    background-position: 80% 20%;
     background-size: 1500%, 1500%;
 }
 
-.background-variation1 {
-    background: linear-gradient(54deg, var(--bg-colors1));
-    background-position: 80% 20%;
-   
-    background-size: 1800%, 1800%;
-}
-
 .background-variation2 {
-    background: linear-gradient(53deg, var(--bg-colors1));
+    background: linear-gradient(250deg, var(--bg-color-set3));
     background-position: 10% 50%;
-   
     background-size: 1500%, 50%;
 }
 
 .background-variation3 {
-    background: linear-gradient(52deg, var(--bg-colors1));
+    background: linear-gradient(250deg, var(--bg-color-set4));
     background-position: 100% 50%;
-    
     background-size: 2000%, 2000%;
 }
 
@@ -98,5 +104,28 @@ body {
         opacity: 1;
     }
 }
+
+::-moz-selection { /* Code for Firefox */
+    color: #30cfd0;
+    background: #f5f7fa;
+}
+
+::selection {
+    color: #30cfd0;
+    background: #f5f7fa;
+}
+
+.material-icons {
+    opacity: 0.5;
+    color: lightslategrey;
+    -webkit-transition: opacity 0.5s;
+    transition: opacity 0.5s;
+}
+
+.material-icons:hover {
+    opacity: 1;
+}
+
+
 
 /* Add responsive design for smaller devices! */

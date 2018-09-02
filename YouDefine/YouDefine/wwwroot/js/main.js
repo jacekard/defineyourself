@@ -20,8 +20,16 @@
     $("#search-input").click(function () {
         var option = String(Math.floor((Math.random() * 3) + 1));
         var className = "background-variation" + option
-        console.log(className);
         $("body").removeClass();
         $("body").addClass(className);
+        $("#tooltip").removeClass();
+        $("#tooltip").addClass("tooltip-active");
+    });
+
+
+    $(document).keypress(function (e) {
+        if (e.which == 13) {
+            //enter key pressed
+        }
     });
 })();
