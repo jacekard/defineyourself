@@ -33,7 +33,15 @@ namespace YouDefine.Controllers
         [Route("")]
         public IActionResult GetIdeas()
         {
-            return Ok(_context.Ideas);
+            try
+            {
+                var ideas = _context.Ideas.Include(x => x.Definitions).ToList();
+                return Ok(ideas);
+            }
+            catch
+            {
+                return NotFound();
+            }
         }
 
         [HttpGet]
@@ -53,7 +61,7 @@ namespace YouDefine.Controllers
             var random = new Random().Next(0, count - 1);
             var idea = _context.Ideas.Skip(random).Single();
 
-            return Ok(idea);
+            return RedirectToAction("GetIdea", idea.Title);
         }
 
         [HttpGet]
@@ -62,24 +70,24 @@ namespace YouDefine.Controllers
         {
             try
             {
-                var idea = _context.Ideas.SingleOrDefault(m => m.Title == title);
+                var idea = _context.Ideas.Where(m => m.Title == title).Include(x => x.Definitions).ToList();
                 return Ok(idea);
 
             }
             catch
             {
-                return Json("Not found");
+                return NotFound();
             }
         }
 
         [HttpGet]
-        [Route("{title:required:alpha:length(3,18)}/likes")]
+        [Route("{title:alpha}/likes")]
         public IActionResult GetIdeaLikes([FromRoute] string title)
         {
             try
             {
                 var idea = _context.Ideas.SingleOrDefault(m => m.Title == title);
-                return Ok(idea.CountLikes());
+                return Ok(new { Likes = idea.CountLikes() });
 
             }
             catch
@@ -103,7 +111,6 @@ namespace YouDefine.Controllers
                         IdeaId = idea.IdeaId
                     };
                     idea.Definitions.Add(definition);
-                    _context.Definitions.Add(definition);
                 }
                 _context.SaveChanges();
             }
@@ -120,14 +127,16 @@ namespace YouDefine.Controllers
         public IActionResult PostIdea(string title, string text)
         {
 
-            var idea = new Idea(title);
+            var idea = new Idea(title)
+            {
+                Definitions = new List<Definition>()
+            };
             var definition = new Definition(text)
             {
                 IdeaId = idea.IdeaId
             };
             idea.Definitions.Add(definition);
             _context.Ideas.Add(idea);
-            _context.Definitions.Add(definition);
             _context.SaveChanges();
 
             return Ok(idea);

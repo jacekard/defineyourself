@@ -23,6 +23,8 @@ TODO LIST:
    -> typer effect
    -> random font colors when visiting
    -> styling caret
+   -> Autocompletion by jQueryUI
+   -> AJAX calls
 
 
 6. Create Ideas View provided by DataBase source and backend using API
@@ -33,7 +35,7 @@ TODO LIST:
    a) if there are already some: show it to them in IdeasView and option for adding new one
    b) if not: only options for adding new one with special alert that has been created
 	  -> redirect to "Home"
-
+   c) create method providing random idea from db in IdeasController.cs
 
 7. Create Administration Panel
    -> Using Authentication and login/password authorization
@@ -43,7 +45,7 @@ TODO LIST:
 	  -> and more...
 
 
-8. Create simple statistics with ChartFramework:
+8. Create simple statistics with ChartFramework (probably in Python):
    -> how many ideas indices are in database
    -> how many characters in total description
    -> how often does user add ideas (history of adding)
