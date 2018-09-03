@@ -103,7 +103,7 @@
         font-size: 40px;
     }
 
-.description-button-spin {
+.button-spin {
     -webkit-transform: rotate(180deg);
     transform: rotate(180deg);
 }
@@ -123,13 +123,6 @@
     to {
         opacity: 1;
         color: black;
-    }
-}
-
-@keyframes spin {
-    50% {
-        -webkit-transform: rotateY(90deg);
-        transform: rotateY(90deg);
     }
 }
 

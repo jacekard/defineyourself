@@ -138,8 +138,15 @@ body {
     font-size: 45px;
     bottom: 15px;
     right: 15px;
+    transition: box-shadow 2s;
 }
 
+    .footer-icon:hover {
+        font-size: 55px;
+        -webkit-box-shadow: 3px 10px 68px 21px rgba(0,0,0,0.2);
+        -moz-box-shadow: 3px 10px 68px 21px rgba(0,0,0,0.2);
+        box-shadow: 3px 10px 68px 21px rgba(0,0,0,0.2);
+    }
 
 
 /* Add responsive design for smaller devices! */

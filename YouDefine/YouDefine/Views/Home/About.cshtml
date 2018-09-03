@@ -4,6 +4,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link rel="stylesheet" href="@Url.Content("~/css/about.css")" type="text/css" />
-<div class="center">
-    <h1 class="center__text glitch is-glitching" data-text="about youDefine">about youDefine</h1>
-</div>
+
+
+<form  method="POST" action="~/api/ideas">
+    <h2 >Idea</h2>
+    <input type="text" required name="title" placeholder="idea:">
+    <input  type="text" required name="definition" placeholder="definition">
+    <button  type="submit">Add new</button>
+</form>

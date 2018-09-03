@@ -17,7 +17,12 @@ namespace YouDefine.Models
 
         public List<Definition> Definitions { get; set; }
 
-        public List<Author> Authors { get; set; }
+        //public List<Author> Authors { get; set; }
 
+        public Idea()
+        {
+            CreationDate = DateTime.Now;
+            LastModifiedDate = DateTime.Now;
+        }
     }
 }

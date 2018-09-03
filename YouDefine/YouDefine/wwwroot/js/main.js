@@ -47,8 +47,12 @@ function getRandomIdea() {
             });
         }
 
-        $(this).toggleClass("description-button-spin");
+        $(this).toggleClass("button-spin");
     });
+
+    $("#description-button").hover(function () {
+        $(this).toggleClass("button-spin");
+    })
 
     $("#refresh-button").click(function () {
         getRandomIdea();
