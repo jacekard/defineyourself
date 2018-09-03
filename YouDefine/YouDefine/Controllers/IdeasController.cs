@@ -37,13 +37,12 @@ namespace YouDefine.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
+        [Route("{id:int}")]
         public ActionResult GetIdea(long id)
         {
-            var idea = _context.Ideas.SingleOrDefault(m => m.Id == id);
+            var idea = _context.Ideas.SingleOrDefault(m => m.IdeaId == id);
 
             return Ok(idea);
-
         }
 
         [HttpGet]
@@ -58,12 +57,12 @@ namespace YouDefine.Controllers
         }
 
         [HttpGet]
-        [Route("{title:required:alpha:length(3,18)}")]
-        public async Task<IActionResult> GetIdea([FromRoute] string title)
+        [Route("{title:alpha}")]
+        public IActionResult GetIdea([FromRoute] string title)
         {
             try
             {
-                var idea = await _context.Ideas.SingleOrDefaultAsync(m => m.Title == title);
+                var idea = _context.Ideas.SingleOrDefault(m => m.Title == title);
                 return Ok(idea);
 
             }
@@ -75,11 +74,11 @@ namespace YouDefine.Controllers
 
         [HttpGet]
         [Route("{title:required:alpha:length(3,18)}/likes")]
-        public async Task<IActionResult> GetIdeaLikes([FromRoute] string title)
+        public IActionResult GetIdeaLikes([FromRoute] string title)
         {
             try
             {
-                var idea = await _context.Ideas.SingleOrDefaultAsync(m => m.Title == title);
+                var idea = _context.Ideas.SingleOrDefault(m => m.Title == title);
                 return Ok(idea.CountLikes());
 
             }
@@ -90,81 +89,89 @@ namespace YouDefine.Controllers
         }
 
         [HttpPut]
-        [Route("{title}/{definition}")]
-        public async Task<IActionResult> PutIdea(string title, string definition)
+        [Route("{title}/{text}")]
+        public IActionResult PutIdea(string title, string text)
         {
+            Idea idea;
             try
             {
-                var idea = await _context.Ideas.SingleAsync(x => x.Title == title);
+                idea = _context.Ideas.Single(x => x.Title == title);
                 if (idea != null)
                 {
-                    idea.Append(new Definition(definition));
-                    idea.UpdateLastModifiedDate();
+                    var definition = new Definition(text)
+                    {
+                        IdeaId = idea.IdeaId
+                    };
+                    idea.Definitions.Add(definition);
+                    _context.Definitions.Add(definition);
                 }
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
             }
             catch
             {
                 return NotFound();
             }
 
-            return CreatedAtAction("GetIdea", title);
+            return Ok(idea);
         }
 
         [HttpPost]
         [Route("{title}/{text}")]
-        public async Task<IActionResult> PostIdea(string title, string text)
+        public IActionResult PostIdea(string title, string text)
         {
 
             var idea = new Idea(title);
-            var definition = new Definition(text);
-            _context.Definitions.Add(definition);
-            idea.Append(definition);
+            var definition = new Definition(text)
+            {
+                IdeaId = idea.IdeaId
+            };
+            idea.Definitions.Add(definition);
             _context.Ideas.Add(idea);
-            await _context.SaveChangesAsync();
+            _context.Definitions.Add(definition);
+            _context.SaveChanges();
 
             return Ok(idea);
         }
 
         [HttpDelete]
         [Route(("{id}"))]
-        public async Task<IActionResult> DeleteIdeaById([FromRoute] long id)
+        public IActionResult DeleteIdeaById([FromRoute] long id)
         {
 
-            var idea = await _context.Ideas.SingleOrDefaultAsync(m => m.Id == id);
+            var idea = _context.Ideas.SingleOrDefault(m => m.IdeaId == id);
             if (idea == null)
             {
                 return NotFound();
             }
 
             _context.Ideas.Remove(idea);
-            await _context.SaveChangesAsync();
+            _context.SaveChangesAsync();
 
             return Ok();
         }
 
         [Route(("{title}"))]
-        public async Task<IActionResult> DeleteIdeaByTitle([FromRoute] string title)
+        public IActionResult DeleteIdeaByTitle([FromRoute] string title)
         {
 
-            var idea = await _context.Ideas.SingleOrDefaultAsync(m => m.Title == title);
+            var idea = _context.Ideas.SingleOrDefault(m => m.Title == title);
             if (idea == null)
             {
                 return NotFound();
             }
 
             _context.Ideas.Remove(idea);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
 
             return Ok();
         }
 
         [HttpDelete]
         [Route("destroy")]
-        public async Task<IActionResult> DeleteIdeas([FromRoute] long id, [FromRoute] string title)
+        public IActionResult DeleteIdeas([FromRoute] long id, [FromRoute] string title)
         {
             _context.Ideas.RemoveRange(_context.Ideas);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
 
             return Ok();
         }

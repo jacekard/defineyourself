@@ -13,7 +13,7 @@ function getIdea() {
             console.log(data);
         },
         fail: function (data) {
-            console.log("no i sie zjebalo");
+            console.log("fail!");
         }
 
     });
@@ -28,8 +28,6 @@ function getRandomIdea() {
 (function () {
     "use strict";
     console.log("dzialam");
-
-    getIdea();
 
     $("#search-input").on('click', 'input', function () {
         var input = $(this);

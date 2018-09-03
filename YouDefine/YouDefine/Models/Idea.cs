@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,7 +8,8 @@ namespace YouDefine.Models
 {
     public class Idea
     {
-        public long Id { get; set; }
+        [Key]
+        public long IdeaId { get; set; }
 
         public string Title { get; set; }
 
@@ -15,36 +17,32 @@ namespace YouDefine.Models
 
         public DateTime LastModifiedDate { get; set; }
 
-        public List<Definition> Definitions { get; set; }
+        public virtual ICollection<Definition> Definitions { get; set; }
 
         public int Likes { get; set; }
 
         public Idea()
         {
-            Definitions = new List<Definition>();
             CreationDate = DateTime.Now;
             LastModifiedDate = DateTime.Now;
             Likes = 0;
+            Definitions = new List<Definition>();
         }
 
-        public Idea(string title, Definition definition = null)
+        public Idea(string title)
         {
             Title = title;
-            Definitions = new List<Definition>();
-            if (definition != null)
-            {
-                Definitions.Add(definition);
-            }
             CreationDate = DateTime.Now;
             LastModifiedDate = DateTime.Now;
             Likes = 0;
+            Definitions = new List<Definition>();
         }
 
-        public void Append(Definition definition)
-        {
-            Definitions.Add(definition);
-            UpdateLastModifiedDate();
-        }
+        //public void Append(Definition definition)
+        //{
+        //    Definitions.Add(definition);
+        //    UpdateLastModifiedDate();
+        //}
 
         public int CountLikes()
         {
@@ -56,7 +54,7 @@ namespace YouDefine.Models
             return Likes;
         }
 
-        public void UpdateLastModifiedDate()
+        private void UpdateLastModifiedDate()
         {
             LastModifiedDate = DateTime.Now;
         }

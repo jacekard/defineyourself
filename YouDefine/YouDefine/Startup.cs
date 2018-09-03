@@ -27,6 +27,7 @@ namespace YouDefine
 
             services.AddDbContext<YouDefineContext>(opt =>
                 opt.UseInMemoryDatabase("IdeasList"));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

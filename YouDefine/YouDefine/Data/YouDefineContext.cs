@@ -14,10 +14,16 @@ namespace YouDefine.Models
         {
         }
 
-        public DbSet<YouDefine.Models.Definition> Definitions { get; set; }
+        public DbSet<Idea> Ideas { get; set; }
 
-        public DbSet<YouDefine.Models.Author> Authors { get; set; }
+        public DbSet<Definition> Definitions { get; set; }
 
-        public DbSet<YouDefine.Models.Idea> Ideas { get; set; }
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<Idea>()
+        //        .HasMany(c => c.Definitions)
+        //        .WithOne(e => e.Idea)
+        //        .OnDelete(DeleteBehavior.Cascade);
+        //}
     }
 }
