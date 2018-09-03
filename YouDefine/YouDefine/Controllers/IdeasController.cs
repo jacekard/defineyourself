@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 
 namespace YouDefine.Controllers
 {
-    [Produces("appliation/json")]
+    [Produces("application/json")]
     [Route("api/ideas")]
     public class IdeasController : Controller
     {
@@ -19,108 +19,167 @@ namespace YouDefine.Controllers
         public IdeasController(YouDefineContext context)
         {
             _context = context;
+
+            //if (_context.Ideas.Count() == 0)
+            //{
+            //    var idea = new Idea("Love", new Definition("love is all we need"));
+            //    _context.Ideas.Add(idea);
+            //    _context.SaveChanges();
+            //}
+
         }
 
-        // GET: api/Ideas
         [HttpGet]
-        public IEnumerable<Idea> GetIdea()
+        [Route("")]
+        public IActionResult GetIdeas()
         {
-            return _context.Idea;
+            return Ok(_context.Ideas);
         }
 
-        // GET: api/Ideas/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetIdea([FromRoute] long id)
+        [HttpGet]
+        [Route("{id}")]
+        public ActionResult GetIdea(long id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            var idea = _context.Ideas.SingleOrDefault(m => m.Id == id);
 
-            var idea = await _context.Idea.SingleOrDefaultAsync(m => m.Id == id);
+            return Ok(idea);
 
-            if (idea == null)
-            {
-                return NotFound();
-            }
+        }
+
+        [HttpGet]
+        [Route("random")]
+        public IActionResult GetRandomIdea()
+        {
+            var count = _context.Ideas.Count();
+            var random = new Random().Next(0, count - 1);
+            var idea = _context.Ideas.Skip(random).Single();
 
             return Ok(idea);
         }
 
-        // PUT: api/Ideas/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutIdea([FromRoute] long id, [FromBody] Idea idea)
+        [HttpGet]
+        [Route("{title:required:alpha:length(3,18)}")]
+        public async Task<IActionResult> GetIdea([FromRoute] string title)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != idea.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(idea).State = EntityState.Modified;
-
             try
             {
+                var idea = await _context.Ideas.SingleOrDefaultAsync(m => m.Title == title);
+                return Ok(idea);
+
+            }
+            catch
+            {
+                return Json("Not found");
+            }
+        }
+
+        [HttpGet]
+        [Route("{title:required:alpha:length(3,18)}/likes")]
+        public async Task<IActionResult> GetIdeaLikes([FromRoute] string title)
+        {
+            try
+            {
+                var idea = await _context.Ideas.SingleOrDefaultAsync(m => m.Title == title);
+                return Ok(idea.CountLikes());
+
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpPut]
+        [Route("{title}/{definition}")]
+        public async Task<IActionResult> PutIdea(string title, string definition)
+        {
+            try
+            {
+                var idea = await _context.Ideas.SingleAsync(x => x.Title == title);
+                if (idea != null)
+                {
+                    idea.Append(new Definition(definition));
+                    idea.UpdateLastModifiedDate();
+                }
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!IdeaExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/ideas
-        [HttpPost]
-        public async Task<IActionResult> PostIdea([FromBody] Idea idea)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            _context.Idea.Add(idea);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetIdea", new { id = idea.Id }, idea);
-        }
-
-        // DELETE: api/Ideas/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteIdea([FromRoute] long id)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var idea = await _context.Idea.SingleOrDefaultAsync(m => m.Id == id);
-            if (idea == null)
+            catch
             {
                 return NotFound();
             }
 
-            _context.Idea.Remove(idea);
+            return CreatedAtAction("GetIdea", title);
+        }
+
+        [HttpPost]
+        [Route("{title}/{text}")]
+        public async Task<IActionResult> PostIdea(string title, string text)
+        {
+
+            var idea = new Idea(title);
+            var definition = new Definition(text);
+            _context.Definitions.Add(definition);
+            idea.Append(definition);
+            _context.Ideas.Add(idea);
             await _context.SaveChangesAsync();
 
             return Ok(idea);
         }
 
-        private bool IdeaExists(long id)
+        [HttpDelete]
+        [Route(("{id}"))]
+        public async Task<IActionResult> DeleteIdeaById([FromRoute] long id)
         {
-            return _context.Idea.Any(e => e.Id == id);
+
+            var idea = await _context.Ideas.SingleOrDefaultAsync(m => m.Id == id);
+            if (idea == null)
+            {
+                return NotFound();
+            }
+
+            _context.Ideas.Remove(idea);
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
+        [Route(("{title}"))]
+        public async Task<IActionResult> DeleteIdeaByTitle([FromRoute] string title)
+        {
+
+            var idea = await _context.Ideas.SingleOrDefaultAsync(m => m.Title == title);
+            if (idea == null)
+            {
+                return NotFound();
+            }
+
+            _context.Ideas.Remove(idea);
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
+        [HttpDelete]
+        [Route("destroy")]
+        public async Task<IActionResult> DeleteIdeas([FromRoute] long id, [FromRoute] string title)
+        {
+            _context.Ideas.RemoveRange(_context.Ideas);
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
+        [HttpGet]
+        [Route("info")]
+        public IActionResult GetInfo()
+        {
+
+            return Ok(_context.Database.ProviderName);
+        }
+
+        private bool IdeaExists(string title)
+        {
+            return _context.Ideas.Any(e => e.Title == title);
         }
     }
 }

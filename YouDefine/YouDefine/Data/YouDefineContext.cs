@@ -14,10 +14,10 @@ namespace YouDefine.Models
         {
         }
 
-        public DbSet<YouDefine.Models.Definition> Definition { get; set; }
+        public DbSet<YouDefine.Models.Definition> Definitions { get; set; }
 
-        public DbSet<YouDefine.Models.Author> Author { get; set; }
+        public DbSet<YouDefine.Models.Author> Authors { get; set; }
 
-        public DbSet<YouDefine.Models.Idea> Idea { get; set; }
+        public DbSet<YouDefine.Models.Idea> Ideas { get; set; }
     }
 }

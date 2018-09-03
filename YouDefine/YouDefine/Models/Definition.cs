@@ -13,10 +13,17 @@ namespace YouDefine.Models
 
         public DateTime CreationDate { get; set; }
 
-        //public Definition(string text = null)
-        //{
-        //    Text = text;
-        //    CreationDate = DateTime.Now;
-        //}
-    }
+        public int Likes { get; set; }
+
+        public Definition()
+        {
+        }
+        
+        public Definition(string text)
+        {
+            Text = text;
+            Likes = 0;
+            CreationDate = DateTime.Now;
+        }
+    }     
 }

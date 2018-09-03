@@ -25,8 +25,8 @@ namespace YouDefine
         {
             services.AddMvc();
 
-            services.AddDbContext<YouDefineContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("YouDefineContext")));
+            services.AddDbContext<YouDefineContext>(opt =>
+                opt.UseInMemoryDatabase("IdeasList"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,7 +43,7 @@ namespace YouDefine
             }
 
             app.UseStaticFiles();
-
+            app.UseDefaultFiles();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

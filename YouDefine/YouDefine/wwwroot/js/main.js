@@ -2,15 +2,24 @@
 
 //})();
 
-//$.ajax({
-//    url: "/api/getWeather",
-//    data: {
-//        zipcode: 97201
-//    },
-//    success: function (result) {
-//        $("#weather-temp").html("<strong>" + result + "</strong> degrees");
-//    }
-//});
+var uri = 'api/ideas';
+var idea = null;
+
+function getIdea() {
+    $.ajax({
+        type: 'GET',
+        url: uri,
+        success: function (data) {
+            console.log(data);
+        },
+        fail: function (data) {
+            console.log("no i sie zjebalo");
+        }
+
+    });
+}
+
+
 
 function getRandomIdea() {
     console.log("random idea");
@@ -20,6 +29,13 @@ function getRandomIdea() {
     "use strict";
     console.log("dzialam");
 
+    getIdea();
+
+    $("#search-input").on('click', 'input', function () {
+        var input = $(this);
+        console.log(input.text());
+        //getIdea();
+    });
 
     $("#search-input").click(function () {
         var b = $("body");
