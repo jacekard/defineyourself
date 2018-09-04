@@ -4,7 +4,7 @@ TODO LIST:
 
 --------------------------
 
-1. Create Model.Idea that corresponds to EF Core
+1. Create Model.Idea that corresponds to EF Core -->  DONE
 
 
 2. Create Index View and simple input dialog for users
@@ -12,7 +12,8 @@ TODO LIST:
 
 3. Choose Database and create CRUD Methods
    -> Test if ideas are adding
-
+   -> in IdeasController create method which calculates when was the last update in day/month/year format
+   -> API should return objects which are safe and easy to understand by javascript
 
 4. Create Validation for user's input
    -> Swear Filtering
@@ -55,11 +56,13 @@ TODO LIST:
 		and is saving entry to db
    }
 
+9. Create mail alerting using Hangfire Framework for jobs!
 
-9. Deploy web app with database and scripts
+
+10. Deploy web app with database and scripts
 
 
-10. Learn about security issues in Web Application and try to implement some of them
+11. Learn about security issues in Web Application and try to implement some of them
 	for better and more secure app.
 
 --------------------------------------------

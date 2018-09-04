@@ -2,8 +2,10 @@
 
 //})();
 
-var uri = 'api/ideas';
-var idea = null;
+function log(message) {
+    $("<div>").text(message).prependTo("#log");
+    $("#log").scrollTop(0);
+}
 
 function getIdea() {
     $.ajax({
@@ -15,19 +17,63 @@ function getIdea() {
         fail: function (data) {
             console.log("fail!");
         }
-
     });
 }
-
-
 
 function getRandomIdea() {
     console.log("random idea");
 }
 
+var availableTags = [
+    "ActionScript",
+    "AppleScript",
+    "Asp",
+    "BASIC",
+    "C",
+    "C++",
+    "Clojure",
+    "COBOL",
+    "ColdFusion",
+    "Erlang",
+    "Fortran",
+    "Groovy",
+    "Haskell",
+    "Java",
+    "JavaScript",
+    "Lisp",
+    "Perl",
+    "PHP",
+    "Python",
+    "Ruby",
+    "Scala",
+    "Scheme"
+];
+
 (function () {
     "use strict";
     console.log("dzialam");
+
+    $("#search-input").autocomplete({
+        source: function (request, response) {
+            var uri = 'api/ideas/';
+            uri += request.term;
+            console.log(uri);
+            $.ajax({
+                url: uri,
+                dataType: "json",
+                success: function (data) {
+                    response(data);
+                    console.log(data);
+                }
+            });
+        },
+        minLength: 2,
+        delay: 100,
+        response: function (event, ui) {
+            //console.log(ui.content);
+        }
+    });
+
 
     $("#search-input").on('click', 'input', function () {
         var input = $(this);
