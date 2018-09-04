@@ -70,8 +70,14 @@ namespace YouDefine.Controllers
         {
             try
             {
-                var idea = _context.Ideas.Where(m => m.Title == title).Include(x => x.Definitions).ToList();
-                return Ok(idea);
+                var idea = _context.Ideas.Where(m => m.Title == title).Include(x => x.Definitions).Single();
+                var definitions = from d in idea.Definitions
+                                  orderby d.Likes
+                                  select new { d.Text, d.Likes };
+
+                return Ok(new { idea.Title, idea.LastModifiedDate, definitions });
+                //write extension to DateTime class that formats date of last modified based on today's date.
+                // return Ok(new { idea.Title, idea.LastModifiedDate idea.Definitions });
 
             }
             catch
@@ -86,7 +92,7 @@ namespace YouDefine.Controllers
         {
             try
             {
-                var idea = _context.Ideas.SingleOrDefault(m => m.Title == title);
+                var idea = _context.Ideas.Where(m => m.Title == title).Include(x => x.Definitions).Single();
                 return Ok(new { Likes = idea.CountLikes() });
 
             }
@@ -197,5 +203,13 @@ namespace YouDefine.Controllers
         {
             return _context.Ideas.Any(e => e.Title == title);
         }
+
+        //private string FormatLastModifiedDate(DateTime date)
+        //{
+        //    var time = date - DateTime.Now;
+
+
+        //    return "";
+        //}
     }
 }
