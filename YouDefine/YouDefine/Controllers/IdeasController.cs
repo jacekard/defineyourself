@@ -23,14 +23,52 @@ namespace YouDefine.Services
         }
 
         [HttpGet]
-        [Route("")]
-        public IActionResult GetIdeas()
+        [Route("all")]
+        public IActionResult GetAll()
         {
             var ideas = _provider.GetAll();
             if (ideas == null)
             {
                 return NotFound();
             }
+
+            return Ok(ideas);
+        }
+
+        [HttpGet]
+        [Route("")]
+        public IActionResult GetTitles()
+        {
+            var ideas = _provider.GetTitles();
+            if (ideas == null)
+            {
+                return NotFound();
+            }
+    //        String[] obj = {
+    //"ActionScript",
+    //"AppleScript",
+    //"Asp",
+    //"BASIC",
+    //"C",
+    //"C++",
+    //"Clojure",
+    //"COBOL",
+    //"ColdFusion",
+    //"Erlang",
+    //"Fortran",
+    //"Groovy",
+    //"Haskell",
+    //"Java",
+    //"JavaScript",
+    //"Lisp",
+    //"Perl",
+    //"PHP",
+    //"Python",
+    //"Ruby",
+    //"Scala",
+    //"Scheme"
+    //        };
+
 
             return Ok(ideas);
         }
@@ -54,7 +92,7 @@ namespace YouDefine.Services
             var idea = _provider.GetSpecified(title);
             if (idea == null)
             {
-                return NotFound();
+                return Ok(String.Empty);
             }
             return Ok(idea);
 
@@ -71,11 +109,11 @@ namespace YouDefine.Services
             return RedirectToAction("GetIdea", idea.Title);
         }
 
-        [HttpGet]
-        [Route("like/{id}")]
-        public IActionResult GetIdeaLikes([FromRoute] long id)
+        [HttpPut]
+        [Route("like/{title}/{text}")]
+        public IActionResult LikeDefinition([FromRoute] string title, string text)
         {
-            var likes = _provider.LikeDefinition(id);
+            var likes = _provider.LikeDefinition(title, text);
             if (likes != -1)
             {
                 return Ok(likes);
@@ -84,7 +122,6 @@ namespace YouDefine.Services
             {
                 return BadRequest();
             }
-            
         }
 
         [HttpPut]
@@ -140,7 +177,7 @@ namespace YouDefine.Services
 
         [HttpDelete]
         [Route("destroy")]
-        public IActionResult DeleteIdeas([FromRoute] long id, [FromRoute] string title)
+        public IActionResult DeleteAll([FromRoute] long id, [FromRoute] string title)
         {
             _context.Ideas.RemoveRange(_context.Ideas);
             _context.SaveChanges();

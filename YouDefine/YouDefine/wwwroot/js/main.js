@@ -50,27 +50,39 @@ var availableTags = [
 ];
 
 (function () {
+    function log(message) {
+        $("<div>").text(message).prependTo("#log");
+        $("#log").scrollTop(0);
+    }
+
     "use strict";
     console.log("dzialam");
 
     $("#search-input").autocomplete({
-        source: function (request, response) {
-            var uri = 'api/ideas/';
-            uri += request.term;
-            console.log(uri);
-            $.ajax({
-                url: uri,
-                dataType: "json",
-                success: function (data) {
-                    response(data);
-                    console.log(data);
-                }
-            });
-        },
+        source: 'api/ideas/'
+            //function (request, response) {
+            //var uri = 'api/ideas/';
+            ////request.term;
+            ////console.log(uri);
+            //$.ajax({
+            //    url: uri,
+            //    dataType: "json",
+            //    success: function (data) {
+            //        response(data);
+            //        console.log(data);
+            //    },
+            //    fail: function () {
+            //        console.log("fail");
+            //    }
+            //});
+        //}
+        ,
+        //autoFocus: true,
         minLength: 2,
-        delay: 100,
-        response: function (event, ui) {
-            //console.log(ui.content);
+        delay: 500,
+        select: function (event, ui) {
+            console.log(ui.item);
+            log("Selected: " + ui.item.value + " aka " + ui.item.id);
         }
     });
 

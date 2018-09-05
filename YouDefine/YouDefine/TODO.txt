@@ -11,15 +11,15 @@ TODO LIST:
 	lastModifiedDate: string (using formatDate extension method from DateTime class),
 	definitions: []   --> DONE
 
-	-> Create Hangfire BackgroundJob that calculates Likes for all ideas.
 
-2. Create Index View and simple input dialog for users
+2. Create Index View and simple input dialog for users  --> DONE
 
 
 3. Choose Database and create CRUD Methods
-   -> Test if ideas are adding
-   -> in IdeasController create method which calculates when was the last update in day/month/year format
+   -> Test if ideas are adding  --> DONE
+   -> in Mapper create method which calculates when was the last update in day/month/year format  --> DONE
    -> API should return objects which are safe and easy to understand by javascript
+
 
 4. Create Validation for user's input
    -> Swear Filtering
@@ -27,11 +27,13 @@ TODO LIST:
 
 
 5. Create Javascript and Styles responsible for input dialog
-   -> typer effect
    -> random font colors when visiting
    -> styling caret
    -> Autocompletion by jQueryUI
+	  -> Styling suggestions
+	  -> Displaying "likes" near the definition
    -> AJAX calls
+
 
 
 6. Create Ideas View provided by DataBase source and backend using API
@@ -58,11 +60,13 @@ TODO LIST:
    -> how often does user add ideas (history of adding)
    -> how many visitors on-site 
    {
-		when user visits site, script is determining date and time
-		and is saving entry to db
+		USE GOOGLE ANALYTICS!!!
    }
 
-9. Create mail alerting using Hangfire Framework for jobs!
+9. Add Hangfire framework dependency for background jobs:
+   	-> Create BackgroundJob that calculates Likes for all ideas.
+	-> Create BackgroundJob that alerts administrator with e-mail notification
+	about new visitor and new ideas added.
 
 
 10. Deploy web app with database and scripts
