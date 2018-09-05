@@ -4,11 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using YouDefine.Models;
-using Newtonsoft.Json;
+using YouDefine.Data;
 
-namespace YouDefine.Controllers
+namespace YouDefine.Services
 {
     [Produces("application/json")]
     [Route("api/ideas")]
@@ -16,41 +14,50 @@ namespace YouDefine.Controllers
     {
         private readonly YouDefineContext _context;
 
-        public IdeasController(YouDefineContext context)
+        private readonly IProviderIdeas _provider;
+
+        public IdeasController(YouDefineContext context, IProviderIdeas provider)
         {
             _context = context;
-
-            //if (_context.Ideas.Count() == 0)
-            //{
-            //    var idea = new Idea("Love", new Definition("love is all we need"));
-            //    _context.Ideas.Add(idea);
-            //    _context.SaveChanges();
-            //}
-
+            _provider = provider;
         }
 
         [HttpGet]
         [Route("")]
         public IActionResult GetIdeas()
         {
-            try
-            {
-                var ideas = _context.Ideas.Include(x => x.Definitions).ToList();
-                return Ok(ideas);
-            }
-            catch
+            var ideas = _provider.GetAll();
+            if (ideas == null)
             {
                 return NotFound();
             }
+
+            return Ok(ideas);
         }
 
         [HttpGet]
         [Route("{id:int}")]
         public ActionResult GetIdea(long id)
         {
-            var idea = _context.Ideas.SingleOrDefault(m => m.IdeaId == id);
-
+            var idea = _provider.GetSpecified(id);
+            if (idea == null)
+            {
+                return NotFound();
+            }
             return Ok(idea);
+        }
+
+        [HttpGet]
+        [Route("{title:alpha}")]
+        public IActionResult GetIdea([FromRoute] string title)
+        {
+            var idea = _provider.GetSpecified(title);
+            if (idea == null)
+            {
+                return NotFound();
+            }
+            return Ok(idea);
+
         }
 
         [HttpGet]
@@ -65,85 +72,35 @@ namespace YouDefine.Controllers
         }
 
         [HttpGet]
-        [Route("{title:alpha}")]
-        public IActionResult GetIdea([FromRoute] string title)
+        [Route("like/{id}")]
+        public IActionResult GetIdeaLikes([FromRoute] long id)
         {
-            try
+            var likes = _provider.LikeDefinition(id);
+            if (likes != -1)
             {
-                var idea = _context.Ideas.Where(m => m.Title == title).Include(x => x.Definitions).Single();
-                var definitions = from d in idea.Definitions
-                                  orderby d.Likes
-                                  select new { d.Text, d.Likes };
-
-                return Ok(new { idea.Title, idea.LastModifiedDate, definitions });
-                //write extension to DateTime class that formats date of last modified based on today's date.
-                // return Ok(new { idea.Title, idea.LastModifiedDate idea.Definitions });
-
+                return Ok(likes);
             }
-            catch
+            else
             {
-                return NotFound();
+                return BadRequest();
             }
-        }
-
-        [HttpGet]
-        [Route("{title:alpha}/likes")]
-        public IActionResult GetIdeaLikes([FromRoute] string title)
-        {
-            try
-            {
-                var idea = _context.Ideas.Where(m => m.Title == title).Include(x => x.Definitions).Single();
-                return Ok(new { Likes = idea.CountLikes() });
-
-            }
-            catch
-            {
-                return NotFound();
-            }
+            
         }
 
         [HttpPut]
         [Route("{title}/{text}")]
-        public IActionResult PutIdea(string title, string text)
+        public IActionResult Put(string title, string text)
         {
-            Idea idea;
-            try
-            {
-                idea = _context.Ideas.Single(x => x.Title == title);
-                if (idea != null)
-                {
-                    var definition = new Definition(text)
-                    {
-                        IdeaId = idea.IdeaId
-                    };
-                    idea.Definitions.Add(definition);
-                }
-                _context.SaveChanges();
-            }
-            catch
-            {
-                return NotFound();
-            }
+            var idea = _provider.Update(title, text);
 
             return Ok(idea);
         }
 
         [HttpPost]
         [Route("{title}/{text}")]
-        public IActionResult PostIdea(string title, string text)
+        public IActionResult Post(string title, string text)
         {
-
-            var idea = new Idea(title)
-            {
-                Definitions = new List<Definition>()
-            };
-            var definition = new Definition(text)
-            {
-                IdeaId = idea.IdeaId
-            };
-            idea.Definitions.Add(definition);
-            _context.Ideas.Add(idea);
-            _context.SaveChanges();
+            var idea = _provider.Add(title, text);
 
             return Ok(idea);
         }
@@ -201,15 +158,8 @@ namespace YouDefine.Controllers
 
         private bool IdeaExists(string title)
         {
+
             return _context.Ideas.Any(e => e.Title == title);
         }
-
-        //private string FormatLastModifiedDate(DateTime date)
-        //{
-        //    var time = date - DateTime.Now;
-
-
-        //    return "";
-        //}
     }
 }

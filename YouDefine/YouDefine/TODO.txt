@@ -5,11 +5,13 @@ TODO LIST:
 --------------------------
 
 1. Create Model.Idea that corresponds to EF Core -->  DONE
-	-> Create extra additional model as an API call result
+	-> Create extra additional model as an API call result 
 	sth like IdeaResult that contains:
 	title: string,
 	lastModifiedDate: string (using formatDate extension method from DateTime class),
-	definitions: []
+	definitions: []   --> DONE
+
+	-> Create Hangfire BackgroundJob that calculates Likes for all ideas.
 
 2. Create Index View and simple input dialog for users
 

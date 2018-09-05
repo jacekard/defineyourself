@@ -1,6 +1,6 @@
 using System;
 
-namespace YouDefine.Models
+namespace YouDefine.Data
 {
     public class ErrorViewModel
     {

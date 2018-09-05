@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 
-namespace YouDefine.Models
+namespace YouDefine.Data
 {
     public class Definition
     {

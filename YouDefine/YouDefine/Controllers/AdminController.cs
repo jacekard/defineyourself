@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace YouDefine.Controllers
+namespace YouDefine.Services
 {
     public class AdminController : Controller
     {

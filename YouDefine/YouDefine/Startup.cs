@@ -7,7 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
-using YouDefine.Models;
+using YouDefine.Data;
+using YouDefine.Services;
 
 namespace YouDefine
 {
@@ -24,10 +25,10 @@ namespace YouDefine
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-
+            services.AddScoped<IMapper, Mapper>();
+            services.AddScoped<IProviderIdeas, ProviderIdeas>();
             services.AddDbContext<YouDefineContext>(opt =>
                 opt.UseInMemoryDatabase("IdeasList"));
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,8 +46,7 @@ namespace YouDefine
 
             app.UseStaticFiles();
             app.UseDefaultFiles();
-            app.UseMvc(routes =>
-            {
+            app.UseMvc(routes => {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");

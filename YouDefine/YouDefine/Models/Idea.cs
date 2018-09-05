@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace YouDefine.Models
+namespace YouDefine.Data
 {
     public class Idea
     {
@@ -38,12 +38,6 @@ namespace YouDefine.Models
             Definitions = new List<Definition>();
         }
 
-        //public void Append(Definition definition)
-        //{
-        //    Definitions.Add(definition);
-        //    UpdateLastModifiedDate();
-        //}
-
         public int CountLikes()
         {
             foreach (var def in Definitions)
@@ -54,7 +48,7 @@ namespace YouDefine.Models
             return Likes;
         }
 
-        private void UpdateLastModifiedDate()
+        public void UpdateLastModifiedDate()
         {
             LastModifiedDate = DateTime.Now;
         }

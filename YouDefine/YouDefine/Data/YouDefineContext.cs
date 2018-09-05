@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using YouDefine.Models;
+﻿using Microsoft.EntityFrameworkCore;
 
-namespace YouDefine.Models
+namespace YouDefine.Data
 {
     public class YouDefineContext : DbContext
     {
