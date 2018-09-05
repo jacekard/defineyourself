@@ -110,18 +110,15 @@ namespace YouDefine.Services
         }
 
         [HttpPut]
-        [Route("like/{title}/{text}")]
-        public IActionResult LikeDefinition([FromRoute] string title, string text)
+        [Route("likeDefinition/{title}/{id}")]
+        public IActionResult LikeDefinition([FromRoute] string title, long id)
         {
-            var likes = _provider.LikeDefinition(title, text);
-            if (likes != -1)
-            {
-                return Ok(likes);
-            }
-            else
+            var result = _provider.LikeDefinition(title, id);
+            if(result == -1)
             {
                 return BadRequest();
             }
+            return Ok(); 
         }
 
         [HttpPut]

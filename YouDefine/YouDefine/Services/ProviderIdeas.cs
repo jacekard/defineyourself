@@ -129,15 +129,26 @@ namespace YouDefine.Services
             return _mapper.Map(idea);
         }
 
-        public void LikeDefinition(string title, string text)
+        public int LikeDefinition(string title, long id)
         {
-            var idea = _DBcontext.Ideas
-                .Where(m => m.Title == title)
-                .Include(x => x.Definitions)
-                .Single();
+            try
+            {
+                var idea = _DBcontext.Ideas
+                    .Where(m => m.Title == title)
+                    .Include(m => m.Definitions)
+                    .Single();
 
-            idea.Likes = idea.Likes + 1;
-            idea.Definitions.Where(x => x.Text == text).Select(x => x.Text + 1);
+                idea.Likes++;
+                var likes = ++idea.Definitions.Where(x => x.DefinitionId == id).Single().Likes;
+                _DBcontext.SaveChanges();
+
+                return likes;
+            }
+            catch
+            {
+
+                return -1;
+            }
         }
     }
 }

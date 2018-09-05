@@ -20,6 +20,7 @@ namespace YouDefine.Services
             {
                 Title = idea.Title,
                 LastModifiedDate = date,
+                Likes = idea.Likes,
                 Definitions = definitions
             };
 

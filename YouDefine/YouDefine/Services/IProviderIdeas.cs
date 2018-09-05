@@ -18,6 +18,6 @@ namespace YouDefine.Services
 
         IdeaResult Update(string title, string text);
 
-        void LikeDefinition(string title, string text);
+        int LikeDefinition(string title, long id);
     }
 }
