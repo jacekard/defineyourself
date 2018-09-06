@@ -2,17 +2,66 @@
 
 //})();
 
+var uri = 'api/ideas/';
+
 function log(message) {
-    $("<div>").text(message).prependTo("#log");
+    $("#log").text(message);
     $("#log").scrollTop(0);
+
 }
 
-function getIdea() {
+function getSpecifiedIdea(title) {
+    $.ajax({
+        type: 'GET',
+        url: uri + title,
+        success: function (data) {
+            console.log(data);
+            log(data.title + "  " + data.likes + " + ");
+            data.definitions.forEach(function (definition) {
+                log(definition.text + "  " + definition.likes + " + ");
+            });
+        },
+        fail: function (data) {
+            console.log("fail!");
+        }
+    });
+}
+
+function autocomplete(data) {
+    $("#search-input").autocomplete({
+        source: data
+        //function (request, response) {
+        //var uri = 'api/ideas/';
+        ////request.term;
+        ////console.log(uri);
+        //$.ajax({
+        //    url: uri,
+        //    dataType: "json",
+        //    success: function (data) {
+        //        response(data);
+        //        console.log(data);
+        //    },
+        //    fail: function () {
+        //        console.log("fail");
+        //    }
+        //});
+        //}
+        ,
+        autoFocus: true,
+        minLength: 2,
+        delay: 500,
+        select: function (event, ui) {
+            getSpecifiedIdea(ui.item.value);
+        }
+    });
+}
+
+function getIdeas() {
     $.ajax({
         type: 'GET',
         url: uri,
         success: function (data) {
-            console.log(data);
+            autocomplete(data);
         },
         fail: function (data) {
             console.log("fail!");
@@ -21,76 +70,26 @@ function getIdea() {
 }
 
 function getRandomIdea() {
-    console.log("random idea");
-}
-
-var availableTags = [
-    "ActionScript",
-    "AppleScript",
-    "Asp",
-    "BASIC",
-    "C",
-    "C++",
-    "Clojure",
-    "COBOL",
-    "ColdFusion",
-    "Erlang",
-    "Fortran",
-    "Groovy",
-    "Haskell",
-    "Java",
-    "JavaScript",
-    "Lisp",
-    "Perl",
-    "PHP",
-    "Python",
-    "Ruby",
-    "Scala",
-    "Scheme"
-];
-
-(function () {
-    function log(message) {
-        $("<div>").text(message).prependTo("#log");
-        $("#log").scrollTop(0);
-    }
-
-    "use strict";
-    console.log("dzialam");
-
-    $("#search-input").autocomplete({
-        source: 'api/ideas/'
-            //function (request, response) {
-            //var uri = 'api/ideas/';
-            ////request.term;
-            ////console.log(uri);
-            //$.ajax({
-            //    url: uri,
-            //    dataType: "json",
-            //    success: function (data) {
-            //        response(data);
-            //        console.log(data);
-            //    },
-            //    fail: function () {
-            //        console.log("fail");
-            //    }
-            //});
-        //}
-        ,
-        //autoFocus: true,
-        minLength: 2,
-        delay: 500,
-        select: function (event, ui) {
-            console.log(ui.item);
-            log("Selected: " + ui.item.value + " aka " + ui.item.id);
+    $.ajax({
+        type: 'GET',
+        url: uri,
+        success: function (data) {
+            var rand = Math.floor(Math.random() * data.length);
+            console.log(data[rand]);
+        },
+        fail: function (data) {
+            console.log("fail!");
         }
     });
+}
 
+(function () {
+    "use strict";
+    console.log("dzialam");
+    getIdeas();
 
-    $("#search-input").on('click', 'input', function () {
-        var input = $(this);
-        console.log(input.text());
-        //getIdea();
+    $("#search-input").on('change keyup paste', function () {
+        $(this).val($(this).val().toLowerCase());
     });
 
     $("#search-input").click(function () {

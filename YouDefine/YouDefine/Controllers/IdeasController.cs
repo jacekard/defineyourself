@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+using Hangfire;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using YouDefine.Data;
@@ -68,9 +70,7 @@ namespace YouDefine.Services
     //"Scala",
     //"Scheme"
     //        };
-
-
-            return Ok(ideas);
+            return Ok(ideas.ToArray());
         }
 
         [HttpGet]
