@@ -2,7 +2,7 @@
     display: block;
     align-items: center;
     justify-content: center;
-    max-width: 500px;
+    max-width: 600px;
     min-width: 200px;
     height: 500px;
     font-family: 'Roboto Slab', serif;
@@ -10,32 +10,35 @@
 }
 
 .search-container {
-    margin-top: 250px;
-    width: auto;
-    height: auto;
+    position: relative;
+    top: 50%;
+    left: 25%;
 }
 
 #search-input {
     background-color: transparent;
-    /*background-color: aquamarine;*/
+    mix-blend-mode: color-burn;
+    color: navy;
     border: 0px solid;
-    max-width: 500px;
+    max-width: 400px;
     height: 80px;
     font-size: 60px;
     text-decoration: none;
+    font-weight: 500;
     caret-color: lightslategray;
 }
 
     #search-input[value="define..."] {
         color: red;
         text-decoration-color: transparent;
+        mix-blend-mode: color-burn;
     }
 
     #search-input::placeholder {
         color: lightslategray;
         text-decoration-color: transparent;
         text-align: left;
-        padding-left: 80px;
+        padding-left: 10px;
     }
 
     #search-input:focus {
@@ -43,12 +46,30 @@
         border: none;
     }
 
-.result-container {
-    margin-top: 25px;
-    width: auto;
-    height: auto;
+.ui-autocomplete {
+    list-style-type: none;
+    font-size: 3vw;
+    font-weight: 600;
     font-family: 'Roboto Slab', serif;
-    font-size: 30px;
+}
+
+ul > li {
+    display: inline-flex;
+    margin: 10px;
+    zoom: 1;
+    *display: inline;
+}
+
+.ui-menu-item {
+    background: red;
+    mix-blend-mode: overlay;
+    position: relative;
+    top: 50px;
+    right: 100px;
+    color: white;
+}
+
+#result-container {
 }
 
 #log {
@@ -67,8 +88,8 @@
     border-radius: 5px;
     background-color: snow;
     z-index: 5;
-    width: 900px;
-    height: 40px;
+    width: 850px;
+    height: 42px;
     text-align: left;
     padding: 0px;
 }
@@ -107,7 +128,7 @@
 
 #description-button {
     position: absolute;
-    top: 14px;
+    top: 11px;
     left: 5px;
     z-index: 10;
     font-size: 36px;
@@ -116,6 +137,7 @@
     transition: width 2s, height 2s, transform 2s, font-size 0.2s, opacity ease-out 2s;
     transition-delay: 0.3s;
 }
+
     #description-button:hover {
         font-size: 40px;
     }

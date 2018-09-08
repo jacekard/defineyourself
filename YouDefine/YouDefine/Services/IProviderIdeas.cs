@@ -6,9 +6,9 @@ namespace YouDefine.Services
     public interface IProviderIdeas
     {
 
-        List<IdeaResult> GetAll();
+        IEnumerable<IdeaResult> GetAll();
 
-        List<string> GetTitles();
+        IEnumerable<string> GetTitles();
 
         IdeaResult GetSpecified(string title);
 

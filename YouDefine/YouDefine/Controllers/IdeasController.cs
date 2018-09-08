@@ -46,31 +46,32 @@ namespace YouDefine.Services
             {
                 return NotFound();
             }
-    //        String[] obj = {
-    //"ActionScript",
-    //"AppleScript",
-    //"Asp",
-    //"BASIC",
-    //"C",
-    //"C++",
-    //"Clojure",
-    //"COBOL",
-    //"ColdFusion",
-    //"Erlang",
-    //"Fortran",
-    //"Groovy",
-    //"Haskell",
-    //"Java",
-    //"JavaScript",
-    //"Lisp",
-    //"Perl",
-    //"PHP",
-    //"Python",
-    //"Ruby",
-    //"Scala",
-    //"Scheme"
-    //        };
+            //        String[] obj = {
+            //"ActionScript",
+            //"AppleScript",
+            //"Asp",
+            //"BASIC",
+            //"C",
+            //"C++",
+            //"Clojure",
+            //"COBOL",
+            //"ColdFusion",
+            //"Erlang",
+            //"Fortran",
+            //"Groovy",
+            //"Haskell",
+            //"Java",
+            //"JavaScript",
+            //"Lisp",
+            //"Perl",
+            //"PHP",
+            //"Python",
+            //"Ruby",
+            //"Scala",
+            //"Scheme"
+            //        };
             return Ok(ideas.ToArray());
+
         }
 
         [HttpGet]
@@ -92,7 +93,7 @@ namespace YouDefine.Services
             var idea = _provider.GetSpecified(title);
             if (idea == null)
             {
-                return Ok(String.Empty);
+                return NoContent();
             }
             return Ok(idea);
 

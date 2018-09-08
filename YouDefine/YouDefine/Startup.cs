@@ -9,8 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using YouDefine.Data;
 using YouDefine.Services;
-using Hangfire;
 using System.Data.SqlClient;
+//using Hangfire;
 
 namespace YouDefine
 {
@@ -29,9 +29,11 @@ namespace YouDefine
             services.AddMvc();
             services.AddScoped<IMapper, Mapper>();
             services.AddScoped<IProviderIdeas, ProviderIdeas>();
-            services.AddDbContext<YouDefineContext>(opt =>
-                opt.UseInMemoryDatabase("YouDefineContext"));
-            services.AddHangfire(x => x.UseSqlServerStorage("Server=(LocalDB)\\MSSQLLocalDB;Integrated Security=true;"));
+            services.AddDbContext<YouDefineContext>(
+                opt => opt.UseInMemoryDatabase("YouDefineContext")
+            );
+            //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            //services.AddHangfire(x => x.UseSqlServerStorage("HangfireConnection"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,8 +49,8 @@ namespace YouDefine
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            app.UseHangfireServer();
-            app.UseHangfireDashboard();
+            //app.UseHangfireServer();
+            //app.UseHangfireDashboard();
             app.UseStaticFiles();
             app.UseDefaultFiles();
             app.UseMvc(routes => {

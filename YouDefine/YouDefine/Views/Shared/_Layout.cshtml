@@ -6,16 +6,15 @@
     <title>@ViewData["Title"]</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    @*<link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+    <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
         asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-        asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />*@
+        asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
     <link rel="stylesheet" href="@Url.Content("~/css/site.css")" type="text/css" />
     <link rel="stylesheet" href="@Url.Content("~/css/search.css")" type="text/css" />
     <link rel="stylesheet" href="@Url.Content("~/css/noscript.css")" type="text/css" />
-    <link rel="stylesheet" href="@Url.Content("~/lib/jquery-ui/jquery-ui.css")" type="text/css" />
 </head>
 <body>
-    <div class="container body-content">
+    <div class="container">
         @RenderBody()
     </div>
 

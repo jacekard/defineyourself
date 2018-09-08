@@ -17,7 +17,7 @@ namespace YouDefine.Services
             _mapper = mapper;
         }
 
-        public List<IdeaResult> GetAll()
+        public IEnumerable<IdeaResult> GetAll()
         {
             try
             {
@@ -30,7 +30,7 @@ namespace YouDefine.Services
             }
         }
 
-        public List<string> GetTitles()
+        public IEnumerable<string> GetTitles()
         {
             try
             {
@@ -38,7 +38,7 @@ namespace YouDefine.Services
                     .OrderBy(x => x.Title)
                     .GroupBy(x => x.Title)
                     .Select(x => x.Key)
-                    .ToList();
+                    .ToArray();
 
                 return ideas;
             }
