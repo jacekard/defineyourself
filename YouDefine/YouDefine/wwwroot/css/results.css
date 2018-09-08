@@ -1,0 +1,37 @@
+﻿#idea-likes-icon {
+    position: relative;
+    font-size: 35px;
+    top: 21px;
+    right: 10px;
+    float: right;
+    opacity: 1;
+    transition: display linear 2s, opacity 2s linear;
+}
+
+#idea-likes-count {
+    position: relative;
+    top: 10px;
+    left: -15px;
+    opacity: 1;
+    font-size: 35px;
+    color: lightslategrey;
+    margin: 3px;
+    font-weight: 600;
+    float: right;
+}
+
+#idea-info {
+    display: none;
+    box-shadow: lightslategrey, 10px, 10px;
+    width: 150px;
+    height: 60px;
+    padding: 5px;
+    margin-right: 15px;
+    -webkit-transition: all ease-in 10s;
+    transition: all ease-in 10s;
+    opacity: 0;
+}
+
+    #idea-info:hover {
+        mix-blend-mode: color-burn;
+    }

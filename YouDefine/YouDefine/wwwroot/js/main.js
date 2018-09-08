@@ -17,6 +17,21 @@ function specifiedIdea(idea) {
     idea.definitions.forEach(function (def) {
         console.log(def.id + ": " + def.text + "  " + def.likes);
     });
+    $("#search-input").autocomplete("search", "");
+    $(".search-container").addClass("search-input-hidden");
+    $("#idea-likes-count").text(likes);
+    $("#idea-info").css({
+        "display": "inline-block",
+        "opacity": "1"
+    });
+}
+
+function searchAgain() {
+    $("#idea-likes-count").text("");
+    $("#idea-likes-icon").toggle();
+
+    $(".search-container").removeClass("search-input-hidden");
+    $(".search-container").addClass("search-input-active");
 }
 
 function postNewIdea() {
@@ -27,21 +42,24 @@ function putNewIdea() {
 
 }
 
+function likeDefinition(title, id) {
+    var url = uri + "likeDefinition/" + title + "/" + id;
+    $.ajax({
+        type: 'PUT',
+        url: url,
+        success: function (data) {
+            // display incremented upvotes count by one
+        },
+    });
+}
+
 function getSpecifiedIdea(title) {
     if (title.length < 2) {
         return;
     }
-
     $.ajax({
         type: 'GET',
         url: uri + title,
-        //success: function (data) {
-        //    console.log(data);
-        //    //log(data.title + "  " + data.likes + " + ");
-        //    //data.definitions.forEach(function (definition) {
-        //    //    log(definition.text + "  " + definition.likes + " + ");
-        //    //});
-        //},
         statusCode: {
             204: function () {
                 console.log("no one defined " + title + " yet.");
@@ -72,9 +90,10 @@ function autocomplete() {
         delay: 1200,
         autoFocus: true,
         select: function (event, ui) {
-            getSpecifiedIdea($("#search-input").val());
+            getSpecifiedIdea(ui.item.value);
         },
         search: function (event, ui) {
+            $("#search-input").autocomplete("close");
             getSpecifiedIdea($("#search-input").val());
         },
         messages: {
@@ -152,7 +171,7 @@ function getRandomIdea() {
 
     $(document).keypress(function (e) {
         if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
-            getSpecifiedIdea(title);
+            //getSpecifiedIdea(title);
 
             //getRandomIdea();
         }

@@ -24,16 +24,18 @@ TODO LIST:
 4. Create Validation for user's input
    -> Swear Filtering
    -> Min and Max character length
-
+   -> Show messages with errors client-side!
 
 5. Create Javascript and Styles responsible for input dialog
-   -> random font colors when visiting
-   -> styling caret
+   -> styling caret (Optional)
+   -> Rewrite animations for Mozilla and Opera browsers so they'd actually work.
    -> Autocompletion by jQueryUI
-	  -> Styling suggestions
+	  -> Styling suggestions  --> DONE
 	  -> Displaying "likes" near the definition
    -> AJAX calls
-
+		-> Add new idea with definition
+		-> update idea with definition
+		-> like a definition
 
 
 6. Create Ideas View provided by DataBase source and backend using API
@@ -73,6 +75,9 @@ TODO LIST:
 
 
 11. Learn about security issues in Web Application and try to implement some of them
-	for better and more secure app.
+	for better and more secure app:
+	  -> Endpoints urls should be somehow hidden, for example fetched from .config file
+	     or a javascript class and passed to methods by a variable.
+
 
 --------------------------------------------

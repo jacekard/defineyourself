@@ -46,6 +46,10 @@
         border: none;
     }
 
+.search-input-hidden {
+    animation: hideSearchInput 1s 1 ease-in-out forwards, glow 5s infinite alternate;
+}
+
 .ui-autocomplete {
     list-style-type: none;
     font-size: 3vw;
@@ -67,6 +71,11 @@ ul > li {
     top: 50px;
     right: 100px;
     color: white;
+    cursor: default;
+}
+
+.ui-helper-hidden-accessible {
+    display: none;
 }
 
 #result-container {
@@ -197,5 +206,26 @@ ul > li {
         left: -600px;
         opacity: 0;
         visibility: hidden;
+    }
+}
+
+
+@keyframes hideSearchInput {
+    0% {
+    }
+
+    100% {
+        top: 1%;
+        left: -22%;
+    }
+}
+
+@keyframes showSearchInput {
+    0% {
+    }
+
+    100% {
+        top: 50%;
+        left: 25%;
     }
 }
