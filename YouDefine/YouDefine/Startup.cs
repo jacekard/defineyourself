@@ -29,10 +29,11 @@ namespace YouDefine
             services.AddMvc();
             services.AddScoped<IMapper, Mapper>();
             services.AddScoped<IProviderIdeas, ProviderIdeas>();
-            services.AddDbContext<YouDefineContext>(
-                opt => opt.UseInMemoryDatabase("YouDefineContext")
-            );
-            //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            //services.AddDbContext<YouDefineContext>(
+            //    opt => opt.UseInMemoryDatabase("YouDefineContext")
+            //);
+            services.AddDbContext<YouDefineContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             //services.AddHangfire(x => x.UseSqlServerStorage("HangfireConnection"));
         }
 
