@@ -29,7 +29,7 @@ function specifiedIdea(idea) {
     var likes = idea.likes;
     var date = idea.lastModifiedDate;
     idea.definitions.forEach(function (def) {
-        console.log(def.id + ": " + def.text + "  " + def.likes);
+        //console.log(def.id + ": " + def.text + "  " + def.likes);
     });
 
     $("#search-input").autocomplete("search", "");
@@ -41,7 +41,7 @@ function specifiedIdea(idea) {
     $("#idea-date").text(date);
     $(".idea-info").addClass("show-element");
     $(".add-new-panel").removeClass("show-element");
-    
+
 }
 
 function searchAgain() {
@@ -63,7 +63,10 @@ function showNewIdeaPanel(title) {
 }
 
 function postNewIdea(title, text) {
-    var url = uri + title + "/" + id;
+    var url = uri + title + "/" + text;
+
+    console.log(title, text);
+
     $.ajax({
         type: 'POST',
         url: url,
@@ -136,7 +139,7 @@ function autocomplete() {
             getSpecifiedIdea($("#search-input").val());
             if (ideaMatched) {
                 $("ui-autocomplete").css("display", "none");
-                $(".ui-menu-item").css("display", none);
+                $(".ui-menu-item").css("display", "none");
             }
         },
         messages: {
@@ -166,7 +169,11 @@ function getRandomIdea() {
         url: uri,
         success: function (data) {
             var rand = Math.floor(Math.random() * data.length);
-            console.log(data[rand]);
+            if (!data[rand]) {
+                return;
+            }
+            $("#search-input").val(data[rand]);
+            getSpecifiedIdea(data[rand]);
         },
         fail: function (data) {
             console.log("fail!");
@@ -214,23 +221,28 @@ function getRandomIdea() {
 
     $("#description-button").hover(function () {
         $(this).toggleClass("button-spin");
-    })
+    });
 
     $("#refresh-button").click(function () {
         getRandomIdea();
-    })
+    });
 
     $(".add-new-icon").click(function () {
         $("#definition-input").css("display", "inline-block");
         $(".add-new-panel").removeClass("show-element");
-        postNewIdea();
-    })
+    });
+
+    $(".add-idea-button").click(function () {
+        var title = $("#search-input").val();
+        var text = $("#definition-input").val();
+        if (title != "" && text != "") {
+            postNewIdea(title, text);
+        }
+    });
 
     $(document).keypress(function (e) {
         if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
-            //getSpecifiedIdea(title);
-
-            //getRandomIdea();
+            getRandomIdea();
         }
     });
 
