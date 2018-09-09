@@ -17,10 +17,7 @@ var messages = [
 var isSearchAgain = false;
 var ideaMatched = false;
 
-function log(message) {
-    $("#log").text(message);
-    $("#log").scrollTop(0);
-}
+
 
 function specifiedIdea(idea) {
     isSearchAgain = true;
@@ -59,14 +56,17 @@ function showNewIdeaPanel(title) {
     $("#new-idea").html(title + ", ");
     $("#new-idea").fadeOut();
     $("#new-idea").fadeIn();
+}
 
+function newIdeaSuccessfullyPosted() {
+    $(".add-idea-button").fadeOut();
+    $("#definition-input").fadeOut();
+    $("#definition-input").css("display", "none");
+    $(".add-idea-button").css("display", "none");
 }
 
 function postNewIdea(title, text) {
     var url = uri + title + "/" + text;
-
-    console.log(title, text);
-
     $.ajax({
         type: 'POST',
         url: url,
@@ -124,7 +124,7 @@ function autocomplete() {
 
     $("#search-input").autocomplete({
         source: ideas,
-        minLength: 2,
+        minLength: 1,
         classes: {
             "ui-autocomplete": "ui-autocomplete"
         },
@@ -193,6 +193,7 @@ function getRandomIdea() {
         $(this).val(val.toLowerCase());
         if (val.length < 3) {
             $("#definition-input").css("display", "none");
+            $(".add-idea-button").css("display", "none");
             $(".add-new-panel").removeClass("show-element");
         }
         if (val == "" && isSearchAgain) {
@@ -228,7 +229,10 @@ function getRandomIdea() {
     });
 
     $(".add-new-icon").click(function () {
+        $(".add-idea-button").fadeIn();
+        $("#definition-input").fadeIn();
         $("#definition-input").css("display", "inline-block");
+        $(".add-idea-button").css("display", "inline-block");
         $(".add-new-panel").removeClass("show-element");
     });
 
