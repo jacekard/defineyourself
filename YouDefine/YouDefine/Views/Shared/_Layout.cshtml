@@ -5,6 +5,7 @@
     <meta name="viewport" content="initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cousine" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
           asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
@@ -13,17 +14,16 @@
     <link rel="stylesheet" href="@Url.Content("~/css/search.css")" type="text/css" />
     <link rel="stylesheet" href="@Url.Content("~/css/results.css")" type="text/css" />
     <link rel="stylesheet" href="@Url.Content("~/css/noscript.css")" type="text/css" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-ui/jquery-ui.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/js/storage.js"></script>
 </head>
 <body>
     <div class="container">
         @RenderBody()
     </div>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/jquery-ui/jquery-ui.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="~/js/storage.js"></script>
-    <script src="~/js/main.js"></script>
     <noscript>
         <div class="noscript">
             <span class="noscript-message">

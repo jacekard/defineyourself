@@ -11,8 +11,8 @@
 
 .search-container {
     position: relative;
-    top: 50%;
-    left: 25%;
+    top: 45%;
+    left: -5%;
 }
 
 #search-input {
@@ -38,7 +38,7 @@
         color: lightslategray;
         text-decoration-color: transparent;
         text-align: left;
-        padding-left: 10px;
+        padding-left: 30px;
     }
 
     #search-input:focus {
@@ -46,11 +46,10 @@
         border: none;
     }
 
-.search-input-hidden {
-    animation: hideSearchInput 1s 1 ease-in-out forwards, glow 5s infinite alternate;
-}
-
 .ui-autocomplete {
+    position: relative;
+    left: 0%;
+    top: 0%;
     list-style-type: none;
     font-size: 3vw;
     font-weight: 600;
@@ -206,26 +205,5 @@ ul > li {
         left: -600px;
         opacity: 0;
         visibility: hidden;
-    }
-}
-
-
-@keyframes hideSearchInput {
-    0% {
-    }
-
-    100% {
-        top: 1%;
-        left: -22%;
-    }
-}
-
-@keyframes showSearchInput {
-    0% {
-    }
-
-    100% {
-        top: 50%;
-        left: 25%;
     }
 }

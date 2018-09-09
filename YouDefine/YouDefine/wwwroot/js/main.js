@@ -4,6 +4,18 @@
 
 var uri = 'api/ideas/';
 var ideas = new Array();
+var messages = [
+    "you can define it!",
+    "maybe it's your turn?",
+    "what do you have in mind?",
+    "tell us what you think.",
+    "is it even a word?",
+    "define it, please",
+    "press + to add it.",
+    "add this to our dict"
+];
+var isSearchAgain = false;
+var ideaMatched = false;
 
 function log(message) {
     $("#log").text(message);
@@ -11,31 +23,57 @@ function log(message) {
 }
 
 function specifiedIdea(idea) {
+    isSearchAgain = true;
+
     var title = idea.title;
     var likes = idea.likes;
     var date = idea.lastModifiedDate;
     idea.definitions.forEach(function (def) {
         console.log(def.id + ": " + def.text + "  " + def.likes);
     });
+
     $("#search-input").autocomplete("search", "");
+    if ($(".search-container").hasClass("search-input-active")) {
+        $(".search-container").removeClass("search-input-active");
+    }
     $(".search-container").addClass("search-input-hidden");
     $("#idea-likes-count").text(likes);
-    $("#idea-info").css({
-        "display": "inline-block",
-        "opacity": "1"
-    });
+    $("#idea-date").text(date);
+    $(".idea-info").addClass("show-element");
+    $(".add-new-panel").removeClass("show-element");
+    
 }
 
 function searchAgain() {
-    $("#idea-likes-count").text("");
-    $("#idea-likes-icon").toggle();
-
+    $(".idea-info").removeClass("show-element");
     $(".search-container").removeClass("search-input-hidden");
     $(".search-container").addClass("search-input-active");
 }
 
-function postNewIdea() {
+function showNewIdeaPanel(title) {
+    var message = messages[Math.floor(Math.random() * messages.length)];
+    var titleMsg = "We haven't found";
+    $(".add-new-panel").addClass("show-element");
+    $("#new-idea-title").text(titleMsg);
+    $("#new-idea-message").text(message);
+    $("#new-idea").html(title + ", ");
+    $("#new-idea").fadeOut();
+    $("#new-idea").fadeIn();
 
+}
+
+function postNewIdea(title, text) {
+    var url = uri + title + "/" + id;
+    $.ajax({
+        type: 'POST',
+        url: url,
+        success: function (data) {
+            console.log("added new idea!");
+        },
+        fail: function (data) {
+            console.log("there was some problem");
+        }
+    });
 }
 
 function putNewIdea() {
@@ -62,14 +100,15 @@ function getSpecifiedIdea(title) {
         url: uri + title,
         statusCode: {
             204: function () {
-                console.log("no one defined " + title + " yet.");
+                ideaMatched = false;
+                showNewIdeaPanel(title);
             },
             200: function (data) {
+                ideaMatched = true;
                 specifiedIdea(data);
             }
         },
         complete: function (xhr, status) {
-           // console.log(xhr + "  " + status);
         }
     });
 }
@@ -82,19 +121,23 @@ function autocomplete() {
 
     $("#search-input").autocomplete({
         source: ideas,
-        minLength: 1,
+        minLength: 2,
         classes: {
             "ui-autocomplete": "ui-autocomplete"
         },
         appendTo: "#result-container",
-        delay: 1200,
+        delay: 400,
         autoFocus: true,
         select: function (event, ui) {
             getSpecifiedIdea(ui.item.value);
         },
         search: function (event, ui) {
-            $("#search-input").autocomplete("close");
+            $(this).autocomplete("close");
             getSpecifiedIdea($("#search-input").val());
+            if (ideaMatched) {
+                $("ui-autocomplete").css("display", "none");
+                $(".ui-menu-item").css("display", none);
+            }
         },
         messages: {
             noResults: '',
@@ -138,9 +181,17 @@ function getRandomIdea() {
     getIdeas();
     autocomplete();
 
-
     $("#search-input").on('change keyup paste', function () {
-        $(this).val($(this).val().toLowerCase());
+        var val = $(this).val();
+        $(this).val(val.toLowerCase());
+        if (val.length < 3) {
+            $("#definition-input").css("display", "none");
+            $(".add-new-panel").removeClass("show-element");
+        }
+        if (val == "" && isSearchAgain) {
+            isSearchAgain = false;
+            searchAgain();
+        }
     });
 
     $("#description-button").click(function () {
@@ -167,6 +218,12 @@ function getRandomIdea() {
 
     $("#refresh-button").click(function () {
         getRandomIdea();
+    })
+
+    $(".add-new-icon").click(function () {
+        $("#definition-input").css("display", "inline-block");
+        $(".add-new-panel").removeClass("show-element");
+        postNewIdea();
     })
 
     $(document).keypress(function (e) {

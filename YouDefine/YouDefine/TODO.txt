@@ -24,6 +24,7 @@ TODO LIST:
 4. Create Validation for user's input
    -> Swear Filtering
    -> Min and Max character length
+   -> Before adding, search if the word makes sense.
    -> Show messages with errors client-side!
 
 5. Create Javascript and Styles responsible for input dialog
@@ -38,17 +39,30 @@ TODO LIST:
 		-> like a definition
 
 
-6. Create Ideas View provided by DataBase source and backend using API
+6. Create accounts and display <private> definitions specified only for author.
+	-> make login and password authorization for distinct author.
+	-> make e-mail notification for confirming an account.
+	-> create Bug Report Section with input for posting bugs.
+	-> create new account window for adding new users and validation.
+	
+
+
+7. Create Ideas View provided by DataBase source and backend using API
    Integrate p5.js with main page -> responsible for showing text as particles
    which can move and slightly rotate.
-   
+
+   A. Create user's setting for <SPLASH MODE> which is stored in LocalStorage,
+	   -> in <NORMAL MODE> definitions are displayed by side as list.
+	   -> in <SPLASH MODE> definitions are displayed in fancy way.
+
    -> user wants to search in database for particular idea and then:
    a) if there are already some: show it to them in IdeasView and option for adding new one
    b) if not: only options for adding new one with special alert that has been created
 	  -> redirect to "Home"
    c) create method providing random idea from db in IdeasController.cs
 
-7. Create Administration Panel
+
+8. Create Administration Panel
    -> Using Authentication and login/password authorization
    -> Create simple Admin View
    -> Option settings
@@ -60,15 +74,17 @@ TODO LIST:
    -> how many ideas indices are in database
    -> how many characters in total description
    -> how often does user add ideas (history of adding)
+   -> how many distinct authors (accounts)
+   -> how often and when their account was created.
+   -> max/min average count of definitions by author
    -> how many visitors on-site 
    {
 		USE GOOGLE ANALYTICS!!!
    }
 
 9. Add Hangfire framework dependency for background jobs:
-   	-> Create BackgroundJob that calculates Likes for all ideas.
 	-> Create BackgroundJob that alerts administrator with e-mail notification
-	about new visitor and new ideas added.
+	about new author created.
 
 
 10. Deploy web app with database and scripts
@@ -78,6 +94,6 @@ TODO LIST:
 	for better and more secure app:
 	  -> Endpoints urls should be somehow hidden, for example fetched from .config file
 	     or a javascript class and passed to methods by a variable.
-
+	  -> Create SSL Certificate and learn how it works
 
 --------------------------------------------

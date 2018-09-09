@@ -5,10 +5,73 @@
 }
 <link rel="stylesheet" href="@Url.Content("~/css/about.css")" type="text/css" />
 
+<a href="~/">
+    <div class="go-back">GO BACK</div>
+</a>
 
-<form  method="POST" action="~/api/ideas">
-    <h2 >Idea</h2>
-    <input type="text" required name="title" placeholder="idea:">
-    <input  type="text" required name="definition" placeholder="definition">
-    <button  type="submit">Add new</button>
-</form>
+@*<a href="~/">
+    <i class="material-icons">bug_report</i>
+    <div class="bug-report">BUG REPORT</div>
+</a>
+
+<a href="~/">
+    <i class="material-icons">bug_report</i>
+    <div class="bug-report">BE AN AUTHOR</div>
+</a>
+
+<a href="~/">
+    <i class="material-icons">settings</i>
+    <div class="bug-report">SETTINGS</div>
+</a>*@
+
+<div class="about-container">
+    <div class="about-section">
+        <h1>
+            <i class="material-icons about-icon">notes</i>
+            Hello
+        </h1>
+        <hr />
+        <p>
+            Welcome on youDefine, a web experience in which you can create new ideas,
+            explore existing, define them in your own words and come back everytime you need them.
+        </p>
+        <p>
+            Everyone has their different way of approaching reality and with youDefine you can learn
+            how particular ideas are seen by others.
+        </p>
+
+        <br />
+
+        <h1>
+            <i class="material-icons about-icon">mail_outline</i>
+            Contact
+        </h1>
+        <hr />
+        <p> email: jacekard &commat; gmail.com </p>
+    </div>
+
+    <div class="about-section">
+        <br />
+        <h1>
+            <i class="material-icons about-icon">school</i>
+            Dictionary
+        </h1>
+        <hr />
+        <p>
+            youDefine is also a notebook and can be a dictionary for your learning purposes.
+            Feel free to create an account and become an Author.
+        </p>
+
+        <br />
+        <h1>
+            <i class="material-icons about-icon">people</i>
+            eLearning
+        </h1>
+        <hr />
+        <p>
+            Creating free account and becoming the Author gives access to 'splash' mode.
+            As an Author you will see definitions added only by you and will be able to manage them.
+        </p>
+
+    </div>
+</div>

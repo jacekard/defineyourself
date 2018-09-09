@@ -1,11 +1,18 @@
-﻿#idea-likes-icon {
+﻿.search-input-hidden {
+    animation: hideSearchInput 3s 1 cubic-bezier(.43,-0.07,0,1.46) forwards, glow 5s infinite alternate;
+}
+
+.search-input-active {
+    animation: showSearchInput 4s 1 cubic-bezier(.43,-0.07,0,1.46) forwards, glow 5s infinite alternate;
+}
+
+#idea-likes-icon {
     position: relative;
     font-size: 35px;
     top: 21px;
     right: 10px;
     float: right;
     opacity: 1;
-    transition: display linear 2s, opacity 2s linear;
 }
 
 #idea-likes-count {
@@ -20,18 +27,130 @@
     float: right;
 }
 
-#idea-info {
-    display: none;
-    box-shadow: lightslategrey, 10px, 10px;
+.idea-info {
+    display: inline-block;
+    visibility: hidden;
+    opacity: 0;
     width: 150px;
     height: 60px;
     padding: 5px;
     margin-right: 15px;
-    -webkit-transition: all ease-in 10s;
-    transition: all ease-in 10s;
-    opacity: 0;
+    -webkit-transition: visibility 4s ease-in, opacity 4s ease-in;
+    transition: visibility 4s ease-in, opacity 4s ease-in;
 }
 
-    #idea-info:hover {
-        mix-blend-mode: color-burn;
+.show-element {
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.add-new-panel {
+    position: relative;
+    top: 160px;
+    left: 120px;
+    visibility: hidden;
+    opacity: 0;
+    font-size: 18px;
+    max-width: 700px;
+    display: inline;
+    margin: 0 auto;
+    align-content: center;
+    text-align: center;
+    font-family: Monaco, Consolas, "Courier New", monospace;
+    -webkit-transition: visibility 0.5s ease-in, opacity 0.5s ease-in;
+    transition: visibility 0.5s ease-in, opacity 0.5s ease-in;
+}
+
+.add-new-panel:hover {
+    text-shadow: 2px 2px 20px rgba(150, 150, 150, 0.5);
+}
+
+.add-new-icon {
+    position: relative;
+    top: 6px;
+    font-size: 25px;
+    margin-left: 15px;
+}
+
+#new-idea {
+    mix-blend-mode: color-burn;
+}
+
+#new-date {
+    position: relative;
+    height: 50px;
+    width: 250px;
+    padding-top: 500px;
+}
+
+#definition-input {
+    display: none;
+    background-color: transparent;
+    color: white;
+    border: 0px solid;
+    width: 600px;
+    margin-top: 40px;
+    height: 250px;
+    font-size: 35px;
+    text-decoration: none;
+    font-weight: 400;
+    caret-color: white;
+    font-family: Monaco, Consolas, "Courier New", monospace;
+}
+
+    #definition-input::placeholder {
+        color: whitesmoke;
+        text-decoration-color: transparent;
+        text-align: left;
+        padding-left: 80px;
     }
+
+    #definition-input:focus {
+        outline: none;
+        border: none;
+    }
+
+.add-idea-button {
+    width: 250px;
+    height: 50px;
+    border: 3px;
+    cursor: pointer;
+    -webkit-appearance: none;
+    background: rgba(255,255,255,0.15);
+    box-shadow: inset 0 0 0 0px #fff;
+    padding: 0.85em 3em 0.85em 3em;
+    color: #fff;
+    border-radius: 0.25em;
+    border-bottom-color: rgba(255,255,255,0.5);
+    -moz-transition: all 0.25s ease-in-out;
+    -webkit-transition: all 0.25s ease-in-out;
+    -o-transition: all 0.25s ease-in-out;
+    -ms-transition: all 0.25s ease-in-out;
+    transition: all 0.25s ease-in-out;
+}
+
+    .add-idea-button:hover {
+        background: rgba(255,255,255,0.35);
+    }
+
+@keyframes hideSearchInput {
+    0% {
+    }
+
+    100% {
+        top: 20%;
+        left: -300px;
+    }
+}
+
+@keyframes showSearchInput {
+    0% {
+        top: 20%;
+        left: -300px;
+    }
+
+    100% {
+        top: 50%;
+        left: 0%;
+    }
+}

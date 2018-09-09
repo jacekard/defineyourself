@@ -18,7 +18,7 @@ namespace YouDefine.Services
             return View();
         }
 
-        [Route("Home/About")]
+        [Route("about")]
         public IActionResult About()
         {
             ViewData["Message"] = "About youDefine";

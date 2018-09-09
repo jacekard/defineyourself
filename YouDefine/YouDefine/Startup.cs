@@ -53,6 +53,7 @@ namespace YouDefine
             //app.UseHangfireDashboard();
             app.UseStaticFiles();
             app.UseDefaultFiles();
+
             app.UseMvc(routes => {
                 routes.MapRoute(
                     name: "default",
