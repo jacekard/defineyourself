@@ -4,41 +4,34 @@
 }
 
 html {
-    background-color: lightcoral;
-    -webkit-text-size-adjust: 100%;
-    height: 100%;
     overflow: hidden;
+    min-height: 100%;
 }
 
 body {
-    height: 100%;
     width: 100%;
-    position: absolute;
-    overflow: hidden;
-    background: linear-gradient(50deg, #ff9a9e, #fad0c4, lightcoral, #fcb69f, #ff9a9e, #fecfef, #a1c4fd, #c2e9fb, #cfd9df, #e2ebf0, #89f7fe, #66a6ff, #93a5cf, #e4efe9, #ff758c, #ff7eb3, #96deda, #50c9c3, #ffc3a0, #ffafbd);
-    background-position: 0% 0%;
+    min-height: 100%;
+    background: linear-gradient(50deg, #ff9a9e, #fad0c4, lightcoral, #fcb69f, #ff9a9e, #fecfef, #a1c4fd, #c2e9fb, #cfd9df, #e2ebf0, #89f7fe, #66a6ff, #93a5cf, #e4efe9, #ff758c, #ff7eb3, #96deda, #50c9c3, #ffc3a0, #ffafbd) top right no-repeat;
+    background-repeat: no-repeat;
     -webkit-animation: animateBackground 60s infinite linear forwards;
     -moz-animation: animateBackground 260s infinite linear forwards;
     -o-animation: animateBackground 60s infinite linear forwards;
     animation: animateBackground 60s infinite linear forwards;
-    background-size: 5000%, 5000%;
+    background-size: 5000%;
 }
 
-.blend {
-    position: absolute;
-    bottom: 0%;
-    left: 0%;
-    width: 18%;
-    height: 12%;
-    background: green;
-    mix-blend-mode: screen;
-    font-size: 50px;
-    font-weight: 800;
+.container {
+    display: flex;
+    min-width: 90vw;
+    min-height: 100vh;
+    z-index: 1;
+    align-content: center;
+    justify-content: center;
 }
 
-::-moz-selection { /* Code for Firefox */
-    color: #30cfd0;
-    background: #f5f7fa;
+::-moz-selection {
+    color: dodgerblue;
+    background: white;
 }
 
 ::selection {

@@ -3,26 +3,24 @@
 }
 
 .about-container {
-    display: inline-flex;
-    align-items: center;
+    display: flex;
+    align-content: center;
     justify-content: center;
     max-width: 1200px;
     min-width: 300px;
     max-height: 2000px;
     min-height: 200px;
-    /*font-family: 'Roboto Slab', serif;*/
-    
+    margin-left: 15%;
 }
 
 .about-section {
-    margin-top: 20px;
-    margin-left: 4%;
-    background: rgba(255,255,255,0.05);
+    margin: 30px 25px 15px 15px;
+    background: rgba(255,255,255,0.1);
     box-shadow: inset 0 0 0 0px #fff;
     padding: 0.85em 3em 0.85em 3em;
     color: #fff;
     height: auto;
-    min-height: 400px;
+    width: auto;
     -moz-transition: all 0.25s ease-in-out;
     -webkit-transition: all 0.25s ease-in-out;
     -o-transition: all 0.25s ease-in-out;

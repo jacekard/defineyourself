@@ -12,35 +12,45 @@
     </span>
 </div>
 
-<div class="search-section">
+<div class="container">
 
-    <div class="add-new-panel">
-        <span id="new-idea-title"></span>
-        <span id="new-idea"></span><br />
-        <span id="new-idea-message"></span>
-        <i class="material-icons add-new-icon">add_circle_outline</i>
-    </div>
-
-    <span id="idea-date">you have to position date...</span>
-    
-    <div class="search-container">
-        <div class="idea-info">
-            <i id="idea-likes-icon" class="material-icons">loupe</i>
-            <span id="idea-likes-count"></span>
+    <div class="search-section">
+        <div class="add-new-panel">
+            <span id="new-idea-title"></span>
+            <span id="new-idea"></span><br />
+            <span id="new-idea-message"></span>
+            <i class="material-icons add-new-icon">add_circle_outline</i>
         </div>
 
-        <input id="search-input" placeholder="define..." name="search-input"
-               maxlength="28" autocomplete="off" inputmode="search" spellcheck="false" autofocus />
 
-        <textarea id="definition-input" placeholder="write your definition..." name="definition-input"
-                  maxlength="217" spellcheck="false"></textarea>
-        <input class="add-idea-button" type="button" value="add idea"/>
+        <div class="search-container">
+
+            <div class="idea-info">
+                <i id="idea-likes-icon" class="material-icons">loupe</i>
+                <span id="idea-likes-count"></span>
+            </div>
+
+            <div class="idea-date"></div>
+
+            <div class="idea-container">
+                <input id="search-input" placeholder="define..." name="search-input"
+                       maxlength="28" autocomplete="off" inputmode="search" spellcheck="false" autofocus />
+            </div>
+
+            <div id="result-container" class="ui-widget">
+                <div id="log" class="ui-widget-content"></div>
+            </div>
+
+            <textarea id="definition-input" placeholder="write your definition..." name="definition-input"
+                      maxlength="217" spellcheck="false"></textarea>
+            <input class="add-idea-button" type="button" value="add idea" />
+        </div>
     </div>
 
-    <div id="result-container" class="ui-widget">
-        <div id="log" class="ui-widget-content"></div>
-    </div>
 
+    <div class="search-section" style="display:none;">
+        <div class="definition-container"></div>
+    </div>
 </div>
 
 <footer>

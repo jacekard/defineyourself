@@ -1,18 +1,22 @@
 ﻿.search-section {
-    display: block;
-    align-items: center;
-    justify-content: center;
-    max-width: 600px;
-    min-width: 200px;
-    height: 500px;
-    font-family: 'Roboto Slab', serif;
     margin: 0 auto;
 }
 
 .search-container {
     position: relative;
-    top: 45%;
-    left: -5%;
+    top: 25%;
+    left: 0%;
+    width: 700px;
+    height: inherit;
+}
+
+.idea-container {
+    font-family: 'Roboto Slab', serif;
+    font-size: 4.3em;
+    font-weight: 500;
+    width: 500px;
+    height: 100px;
+    float:right;
 }
 
 #search-input {
@@ -20,19 +24,11 @@
     mix-blend-mode: color-burn;
     color: navy;
     border: 0px solid;
-    max-width: 400px;
+    width: 400px;
     height: 80px;
-    font-size: 60px;
     text-decoration: none;
-    font-weight: 500;
     caret-color: lightslategray;
 }
-
-    #search-input[value="define..."] {
-        color: red;
-        text-decoration-color: transparent;
-        mix-blend-mode: color-burn;
-    }
 
     #search-input::placeholder {
         color: lightslategray;
@@ -46,46 +42,44 @@
         border: none;
     }
 
+#result-container {
+    margin: 0 auto;
+    width: 80%;
+    height: auto;
+    max-height: 500px;
+    overflow: hidden;
+}
+
 .ui-autocomplete {
     position: relative;
-    left: 0%;
-    top: 0%;
+    left: 0 !important;
+    top: 0 !important;
     list-style-type: none;
     font-size: 3vw;
     font-weight: 600;
     font-family: 'Roboto Slab', serif;
+    overflow: hidden;
 }
 
 ul > li {
-    display: inline-flex;
+    display: inline-flex !important;
+    justify-content: space-around !important;
+    flex-flow: row wrap !important;
     margin: 10px;
     zoom: 1;
-    *display: inline;
 }
 
 .ui-menu-item {
     background: red;
     mix-blend-mode: overlay;
-    position: relative;
-    top: 50px;
-    right: 100px;
     color: white;
     cursor: default;
+    width: auto;
+    margin: 10px;
 }
 
 .ui-helper-hidden-accessible {
     display: none;
-}
-
-#result-container {
-}
-
-#log {
-    height: 60px;
-    width: 350px;
-    font-size: 25px;
-    text-decoration: none;
-    font-family: 'Roboto Slab', serif;
 }
 
 #description-panel {

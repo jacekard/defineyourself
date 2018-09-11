@@ -6,19 +6,29 @@
     animation: showSearchInput 3s 1 cubic-bezier(.43,-0.07,0,1.46) forwards, glow 5s infinite alternate;
 }
 
+.idea-info {
+    visibility: hidden;
+    float: left;
+    opacity: 0;
+    width: 200px;
+    height: 150px;
+    -webkit-transition: all 2s ease-in-out;
+    transition: all 2s ease-in-out;
+}
+
 #idea-likes-icon {
     position: relative;
     font-size: 35px;
-    top: 21px;
-    right: 10px;
+    top: 55px;
+    right: 25px;
     float: right;
     opacity: 1;
 }
 
 #idea-likes-count {
     position: relative;
-    top: 10px;
-    left: -15px;
+    top: 45px;
+    left: -35px;
     opacity: 1;
     font-size: 35px;
     color: lightslategrey;
@@ -27,16 +37,15 @@
     float: right;
 }
 
-.idea-info {
-    display: inline-block;
-    visibility: hidden;
+.idea-date {
     opacity: 0;
-    width: 150px;
-    height: 60px;
-    padding: 5px;
-    margin-right: 15px;
-    -webkit-transition: visibility 4s ease-in, opacity 4s ease-in;
-    transition: visibility 4s ease-in, opacity 4s ease-in;
+    visibility: hidden;
+    font-family: Monaco, Consolas, "Courier New", monospace;
+    font-size: 15px;
+    width: 500px;
+    height: 20px;
+    -webkit-transition: all 2s ease-in-out;
+    transition: all 2s ease-in-out;
 }
 
 .show-element {
@@ -47,7 +56,7 @@
 .add-new-panel {
     position: relative;
     top: 160px;
-    left: 120px;
+    left: 190px;
     visibility: hidden;
     opacity: 0;
     font-size: 18px;
@@ -57,39 +66,31 @@
     align-content: center;
     text-align: center;
     font-family: Monaco, Consolas, "Courier New", monospace;
-    -webkit-transition: visibility 0.5s ease-in, opacity 0.5s ease-in;
-    transition: visibility 0.5s ease-in, opacity 0.5s ease-in;
+    -webkit-transition: all 1s ease-in;
+    transition: all 1s ease-in;
 }
 
-.add-new-panel:hover {
-    text-shadow: 2px 2px 20px rgba(150, 150, 150, 0.5);
-}
+    .add-new-panel:hover {
+        text-shadow: 2px 2px 20px rgba(150, 150, 150, 0.5);
+    }
 
 .add-new-icon {
     position: relative;
     top: 6px;
     font-size: 25px;
-    margin-left: 15px;
+    margin-left: 5px;
 }
 
 #new-idea {
     mix-blend-mode: color-burn;
 }
 
-#new-date {
-    position: relative;
-    height: 50px;
-    width: 250px;
-    padding-top: 500px;
-}
-
 #definition-input {
     display: none;
-    background-color: transparent;
     color: white;
+    background-color: transparent;
     border: 0px solid;
     width: 600px;
-    margin-top: 40px;
     height: 250px;
     font-size: 35px;
     text-decoration: none;
@@ -151,7 +152,7 @@
     }
 
     100% {
-        top: 50%;
+        top: 25%;
         left: 0%;
     }
 }

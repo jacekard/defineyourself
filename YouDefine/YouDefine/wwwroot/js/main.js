@@ -35,14 +35,15 @@ function specifiedIdea(idea) {
     }
     $(".search-container").addClass("search-input-hidden");
     $("#idea-likes-count").text(likes);
-    $("#idea-date").text(date);
+    $(".idea-date").text(date);
+    $(".idea-date").addClass("show-element");
     $(".idea-info").addClass("show-element");
     $(".add-new-panel").removeClass("show-element");
-
 }
 
 function searchAgain() {
     $(".idea-info").removeClass("show-element");
+    $(".idea-date").removeClass("show-element");
     $(".search-container").removeClass("search-input-hidden");
     $(".search-container").addClass("search-input-active");
 }
@@ -135,7 +136,6 @@ function autocomplete() {
             getSpecifiedIdea(ui.item.value);
         },
         search: function (event, ui) {
-            $(this).autocomplete("close");
             getSpecifiedIdea($("#search-input").val());
             if (ideaMatched) {
                 $("ui-autocomplete").css("display", "none");
@@ -191,11 +191,24 @@ function getRandomIdea() {
     $("#search-input").on('change keyup paste', function () {
         var val = $(this).val();
         $(this).val(val.toLowerCase());
+
         if (val.length < 3) {
             $("#definition-input").css("display", "none");
             $(".add-idea-button").css("display", "none");
             $(".add-new-panel").removeClass("show-element");
         }
+
+        // ! ! ! ! NOT DONE YET (NEEDS A BETTER BOOLEAN VARIABLE)
+        // must define a state of being "on top" and then disable add-new-panel display
+        if (ideaMatched) {
+            $(".add-new-panel").removeClass("show-element");
+            //$("#search-input").autocomplete("disable");
+            //$("#search-input").autocomplete("enable");
+            
+        }
+        // ! ! ! !
+
+
         if (val == "" && isSearchAgain) {
             isSearchAgain = false;
             searchAgain();
