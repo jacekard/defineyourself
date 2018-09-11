@@ -14,7 +14,7 @@
 
 <div class="container">
 
-    <div class="search-section">
+    <div class="page-section">
         <div class="add-new-panel">
             <span id="new-idea-title"></span>
             <span id="new-idea"></span><br />
@@ -47,10 +47,17 @@
         </div>
     </div>
 
+    
+    @*  Create html and css for single definition and then
+        with jQuery create multiple divs in a loop.
+        
+        <div class="page-section">
+        <div class="definition-container">
+            <span id="definition-text"></span>
+            <i class="material-icons">thumb_up</i>
+        </div>
+    </div>*@
 
-    <div class="search-section" style="display:none;">
-        <div class="definition-container"></div>
-    </div>
 </div>
 
 <footer>
@@ -58,9 +65,5 @@
         <i class="material-icons footer-icon" id="footer-button">panorama_fish_eye</i>
     </a>
 </footer>
-
-@*<i class="material-icons">
-        thumb_up
-    </i>*@
 
 <script src="~/js/main.js"></script>
