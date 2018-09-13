@@ -141,22 +141,24 @@
 
 @keyframes hideSearchInput {
     0% {
+        opacity: 0;
     }
 
     100% {
+        opacity: 1;
         top: 20%;
-        left: -300px;
+        left: -20%;
     }
 }
 
 @keyframes showSearchInput {
     0% {
         top: 20%;
-        left: -300px;
+        left: -20%;
     }
 
     100% {
         top: 25%;
-        left: 0%;
+        left: 25%;
     }
 }

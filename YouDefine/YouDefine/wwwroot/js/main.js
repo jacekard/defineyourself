@@ -17,7 +17,44 @@ var messages = [
 var isSearchAgain = false;
 var ideaMatched = false;
 
+function createDefinitions(idea, def) {
+    var divId = 'def' + def.id;
+    var infoId = 'span' + def.id;
+    var iconId = 'thumb-up' + def.id;
+    var likesId = 'likes' + def.id;
 
+    jQuery('<div/>', {
+        class: 'single-definition ' + divId
+    }).appendTo("#definition-container");
+
+    jQuery('<div/>', {
+        class: 'definition-info ' + infoId
+    }).appendTo('.' + divId);
+
+    var likesCount = jQuery('<span/>', {
+        class: 'definition-likes-count ' + likesId,
+        text: def.likes
+    }).appendTo('.' + infoId);
+
+    jQuery('<i/>', {
+        class: 'material-icons definition-likes-icon ' + iconId,
+        text: 'thumb_up'
+    }).prependTo('.' + infoId).on('click', function () {
+        likeDefinition(idea, def, likesCount, this);
+    });
+
+
+    jQuery('<div/>', {
+        class: 'definition-text',
+        text: def.text
+    }).appendTo('.' + divId);
+
+    //has to add date from api controller and display it here:
+    //jQuery('<div/>', {
+    //    class: 'definition-date',
+    //    text: def.date
+    //}).appendTo('.' + divId);
+}
 
 function specifiedIdea(idea) {
     isSearchAgain = true;
@@ -26,7 +63,7 @@ function specifiedIdea(idea) {
     var likes = idea.likes;
     var date = idea.lastModifiedDate;
     idea.definitions.forEach(function (def) {
-        //console.log(def.id + ": " + def.text + "  " + def.likes);
+        createDefinitions(idea, def);
     });
 
     $("#search-input").autocomplete("search", "");
@@ -42,6 +79,9 @@ function specifiedIdea(idea) {
 }
 
 function searchAgain() {
+    //deletes div, should be animation and then empty();
+    $("#definition-container").empty();
+
     $(".idea-info").removeClass("show-element");
     $(".idea-date").removeClass("show-element");
     $(".search-container").removeClass("search-input-hidden");
@@ -84,13 +124,19 @@ function putNewIdea() {
 
 }
 
-function likeDefinition(title, id) {
-    var url = uri + "likeDefinition/" + title + "/" + id;
+function likeDefinition(idea, def, likesCount, icon) {
+    var url = uri + "likeDefinition/" + idea.title + "/" + def.id;
     $.ajax({
         type: 'PUT',
         url: url,
         success: function (data) {
             // display incremented upvotes count by one
+            // prevent user from liking it again!
+            $(likesCount).text(parseInt(def.likes) + 1);
+            $(likesCount).css('color', '#008000');
+            $("#idea-likes-count").text(parseInt(idea.likes) + 1);
+            $(icon).css('color', '#008000');
+            $(icon).off();
         },
     });
 }
@@ -204,7 +250,7 @@ function getRandomIdea() {
             $(".add-new-panel").removeClass("show-element");
             //$("#search-input").autocomplete("disable");
             //$("#search-input").autocomplete("enable");
-            
+
         }
         // ! ! ! !
 
