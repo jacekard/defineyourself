@@ -47,6 +47,8 @@ TODO LIST:
 	-> make e-mail notification for confirming an account.
 	-> create Bug Report Section with input for posting bugs.
 	-> create new account window for adding new users and validation.
+	-> create options for deleting definitions as an author (while logged in)
+	-> create sorting methods for better data displaying (while logged in)
 	
 
 7. Create Ideas View provided by DataBase source and backend using API
