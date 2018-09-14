@@ -14,8 +14,23 @@ var messages = [
     "press + to add it.",
     "add this to our dict"
 ];
+var storage = new Storage();
+storage.init();
 var isSearchAgain = false;
 var ideaMatched = false;
+
+function validateDefinitionsLS(id) {
+    var str = storage.get('ldefs');
+    var list = str.split(',');
+    var result = true;
+    list.forEach(function (i) {
+        if (i == id) {
+            result = false;
+        }
+    });
+
+    return result;
+}
 
 function createDefinitions(idea, def) {
     var divId = 'def' + def.id;
@@ -36,24 +51,31 @@ function createDefinitions(idea, def) {
         text: def.likes
     }).appendTo('.' + infoId);
 
-    jQuery('<i/>', {
+    var icon = jQuery('<i/>', {
         class: 'material-icons definition-likes-icon ' + iconId,
         text: 'thumb_up'
-    }).prependTo('.' + infoId).on('click', function () {
-        likeDefinition(idea, def, likesCount, this);
-    });
+    }).prependTo('.' + infoId);
 
+    if (validateDefinitionsLS(def.id)) {
+        icon.on('click', function () {
+            likeDefinition(idea, def, likesCount, this);
+        });
+    } else {
+        icon.on('click', function () {
+            unlikeDefinition(idea, def, likesCount, this);
+        });
+        colorIconLikesAndCount(true, likesCount, icon);
+    }
+
+    jQuery('<div/>', {
+        class: 'definition-date',
+        text: def.date
+    }).appendTo('.' + divId);
 
     jQuery('<div/>', {
         class: 'definition-text',
         text: def.text
     }).appendTo('.' + divId);
-
-    //has to add date from api controller and display it here:
-    //jQuery('<div/>', {
-    //    class: 'definition-date',
-    //    text: def.date
-    //}).appendTo('.' + divId);
 }
 
 function specifiedIdea(idea) {
@@ -125,20 +147,66 @@ function putNewIdea() {
 }
 
 function likeDefinition(idea, def, likesCount, icon) {
-    var url = uri + "likeDefinition/" + idea.title + "/" + def.id;
+    var url = uri + "like/" + idea.title + "/" + def.id;
     $.ajax({
         type: 'PUT',
         url: url,
         success: function (data) {
-            // display incremented upvotes count by one
-            // prevent user from liking it again!
-            $(likesCount).text(parseInt(def.likes) + 1);
-            $(likesCount).css('color', '#008000');
-            $("#idea-likes-count").text(parseInt(idea.likes) + 1);
-            $(icon).css('color', '#008000');
+            $(likesCount).text(data.defLikes);
+            $("#idea-likes-count").text(data.ideaLikes);
             $(icon).off();
+            $(icon).on('click', function () {
+                unlikeDefinition(idea, def, likesCount, icon);
+            });
+            colorIconLikesAndCount(true, likesCount, icon);
+            var str = storage.get('ldefs');
+            if (!str) {
+                storage.set('ldefs', def.id);
+            } else {
+                var list = str.split(',');
+                list.push(def.id);
+                storage.set('ldefs', list.toString());
+            }
         },
     });
+}
+
+function unlikeDefinition(idea, def, likesCount, icon) {
+    var url = uri + "unlike/" + idea.title + "/" + def.id;
+    $.ajax({
+        type: 'PUT',
+        url: url,
+        success: function (data) {
+            $(likesCount).text(data.defLikes);
+            $("#idea-likes-count").text(data.ideaLikes);
+            $(icon).off();
+            $(icon).on('click', function () {
+                likeDefinition(idea, def, likesCount, icon);
+            });
+            colorIconLikesAndCount(false, likesCount, icon);
+            var str = storage.get('ldefs');
+            if (str) {
+                var list = str.split(',');
+                var index = list.findIndex(function (i) {
+                    return i == def.id;
+                });
+                list.splice(index, 1);
+                storage.set('ldefs', list.toString());
+            }
+        },
+    });
+}
+
+//  true is green
+//  false is initial
+function colorIconLikesAndCount(option, likesCount, icon) {
+    if (option) {
+        $(likesCount).css('color', '#008000');
+        $(icon).css('color', '#008000');
+    } else {
+        $(likesCount).css('color', '#778899');
+        $(icon).css('color', '#778899');
+    }
 }
 
 function getSpecifiedIdea(title) {

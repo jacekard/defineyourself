@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using YouDefine.Data;
 
 namespace YouDefine.Services
@@ -18,6 +19,9 @@ namespace YouDefine.Services
 
         IdeaResult Update(string title, string text);
 
-        int LikeDefinition(string title, long id);
+        object LikeDefinition(string title, long id);
+
+        object UnlikeDefinition(string title, long id);
+
     }
 }

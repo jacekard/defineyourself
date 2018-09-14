@@ -111,15 +111,27 @@ namespace YouDefine.Services
         }
 
         [HttpPut]
-        [Route("likeDefinition/{title}/{id}")]
+        [Route("like/{title}/{id}")]
         public IActionResult LikeDefinition([FromRoute] string title, long id)
         {
             var result = _provider.LikeDefinition(title, id);
-            if(result == -1)
+            if(result == null)
             {
                 return BadRequest();
             }
-            return Ok(); 
+            return Ok(result); 
+        }
+
+        [HttpPut]
+        [Route("unlike/{title}/{id}")]
+        public IActionResult UnlikeDefinition([FromRoute] string title, long id)
+        {
+            var result = _provider.UnlikeDefinition(title, id);
+            if (result == null)
+            {
+                return BadRequest();
+            }
+            return Ok(result);
         }
 
         [HttpPut]

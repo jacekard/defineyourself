@@ -39,11 +39,14 @@ namespace YouDefine.Services
 
         public DefinitionResult Map(Definition definition)
         {
+            var date = FormatLastModifiedDate(definition.CreationDate);
+
             var definitionResult = new DefinitionResult()
             {
                 Id = definition.DefinitionId,
                 Text = definition.Text,
-                Likes = definition.Likes
+                Likes = definition.Likes,
+                Date = date
             };
 
             return definitionResult;

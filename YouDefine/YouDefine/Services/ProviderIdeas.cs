@@ -129,7 +129,7 @@ namespace YouDefine.Services
             return _mapper.Map(idea);
         }
 
-        public int LikeDefinition(string title, long id)
+        public object LikeDefinition(string title, long id)
         {
             try
             {
@@ -142,12 +142,34 @@ namespace YouDefine.Services
                 var likes = ++idea.Definitions.Where(x => x.DefinitionId == id).Single().Likes;
                 _DBcontext.SaveChanges();
 
-                return likes;
+                return new { ideaLikes = idea.Likes, defLikes = likes };
             }
             catch
             {
 
-                return -1;
+                return null;
+            }
+        }
+
+        public object UnlikeDefinition(string title, long id)
+        {
+            try
+            {
+                var idea = _DBcontext.Ideas
+                    .Where(m => m.Title == title)
+                    .Include(m => m.Definitions)
+                    .Single();
+
+                idea.Likes--;
+                var likes = --idea.Definitions.Where(x => x.DefinitionId == id).Single().Likes;
+                _DBcontext.SaveChanges();
+
+                return new { ideaLikes = idea.Likes, defLikes = likes };
+            }
+            catch
+            {
+
+                return null;
             }
         }
     }
