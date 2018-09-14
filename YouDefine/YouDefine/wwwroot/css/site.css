@@ -45,6 +45,10 @@ body {
     -webkit-transition: opacity 0.5s;
     transition: opacity 0.5s;
     cursor: default;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
     .material-icons:hover {

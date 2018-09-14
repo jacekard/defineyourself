@@ -7,8 +7,8 @@ TODO LIST:
 1. Create Model.Idea that corresponds to EF Core -->  DONE
 	-> Create extra additional model as an API call result 
 	sth like IdeaResult that contains:
-	title: string,
-	lastModifiedDate: string (using formatDate extension method from DateTime class),
+	title: string, --> DONE
+	lastModifiedDate: string (using formatDate extension method from DateTime class),  --> DONE
 	definitions: []   --> DONE
 
 
@@ -18,13 +18,16 @@ TODO LIST:
 3. Choose Database and create CRUD Methods
    -> Test if ideas are adding  --> DONE
    -> in Mapper create method which calculates when was the last update in day/month/year format  --> DONE
-   -> API should return objects which are safe and easy to understand by javascript
+   -> API should return objects which are safe and easy to understand by javascript --> DONE
 
 
 4. Create Validation for user's input
    -> Swear Filtering
-   -> Min and Max character length
-   -> Before adding, search if the word makes sense.
+   -> Min and Max character length:
+	  -> client-side --> DONE
+	  -> server-side
+   -> Before adding, search if the word makes sense 
+   (this is somehow impossible so probably leave it as it is)
    -> Show messages with errors client-side!
 
 5. Create Javascript and Styles responsible for input dialog
@@ -32,11 +35,11 @@ TODO LIST:
    -> Rewrite animations for Mozilla and Opera browsers so they'd actually work.
    -> Autocompletion by jQueryUI
 	  -> Styling suggestions  --> DONE
-	  -> Displaying "likes" near the definition
+	  -> Displaying "likes" near the definition --> DONE
    -> AJAX calls
-		-> Add new idea with definition
+		-> Add new idea with definition --> DONE
 		-> update idea with definition
-		-> like a definition
+		-> like a definition --> DONE
 
 
 6. Create accounts and display <private> definitions specified only for author.
@@ -45,7 +48,6 @@ TODO LIST:
 	-> create Bug Report Section with input for posting bugs.
 	-> create new account window for adding new users and validation.
 	
-
 
 7. Create Ideas View provided by DataBase source and backend using API
    Integrate p5.js with main page -> responsible for showing text as particles
@@ -58,13 +60,14 @@ TODO LIST:
    -> user wants to search in database for particular idea and then:
    a) if there are already some: show it to them in IdeasView and option for adding new one
    b) if not: only options for adding new one with special alert that has been created
-	  -> redirect to "Home"
+	  -> show success message and hide widgets responsible for adding definitions.
    c) create method providing random idea from db in IdeasController.cs
 
 
 8. Create Administration Panel
    -> Using Authentication and login/password authorization
    -> Create simple Admin View
+   -> Create bug tracker as to-do list with provided messages by users (/About.cshtml)
    -> Option settings
 	  -> enable/disable swearing filter
 	  -> and more...
@@ -77,6 +80,10 @@ TODO LIST:
    -> how many distinct authors (accounts)
    -> how often and when their account was created.
    -> max/min average count of definitions by author
+   {
+	    CREATE API CONTROLLER FOR STATISTICS THAT RETURNS DATA FROM DB.
+		ADD CORRESPONDING <RESULTS> MODELS
+   }
    -> how many visitors on-site 
    {
 		USE GOOGLE ANALYTICS!!!
@@ -86,14 +93,20 @@ TODO LIST:
 	-> Create BackgroundJob that alerts administrator with e-mail notification
 	about new author created.
 
+	Note: Hangfire is not necessary and probably useless in this case.
+	Re-think this option before taking any further steps.
 
 10. Deploy web app with database and scripts
+	-> http://www.youdefine.xyz (domain for 3 months)
 
 
 11. Learn about security issues in Web Application and try to implement some of them
 	for better and more secure app:
 	  -> Endpoints urls should be somehow hidden, for example fetched from .config file
-	     or a javascript class and passed to methods by a variable.
+	     or a javascript class and passed to methods by a variable
+		 Or API Proxy
 	  -> Create SSL Certificate and learn how it works
+	  -> SQL Injection and is it possible
+	  -> some client-side authorization preventing unwanted client-side scripts doing harm
 
 --------------------------------------------
