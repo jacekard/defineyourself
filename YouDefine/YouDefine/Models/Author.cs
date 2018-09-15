@@ -16,6 +16,8 @@
 
         public DateTime CreationDate { get; set; }
 
+        public DateTime LastVisitedDate { get; set; }
+
         public string AuthorizationRights { get; set; }
     }
 }

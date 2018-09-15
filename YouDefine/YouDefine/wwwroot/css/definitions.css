@@ -1,6 +1,6 @@
 ﻿#definition-container {
     position: absolute;
-    margin-top: 15px;
+    margin-top: 60px;
     display: flex;
     flex-direction: column;
     overflow-y: scroll;
@@ -72,18 +72,27 @@
 }
 
 .put-definition {
-    position: relative;
-    right: 3vw;
+    position: absolute;
+    top: 2vh;
+    right: 1.1vw;
     visibility: hidden;
     opacity: 0;
+    width: 600px;
     font-size: 18px;
+    padding: 4px;
     margin: 0 auto;
     align-content: center;
     text-align: center;
     font-family: Monaco, Consolas, "Courier New", monospace;
+    border-radius: 5px;
+    background-color: rgba(255,235,230,0.8);
     -webkit-transition: all 1s ease-in;
     transition: all 1s ease-in;
 }
+
+    .put-definition:hover {
+        background-color: rgba(255,255,250,1);
+    }
 
 @keyframes slideToLeft {
     0% {

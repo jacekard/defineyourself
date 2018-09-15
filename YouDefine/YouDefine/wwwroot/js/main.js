@@ -4,6 +4,7 @@
 
 var uri = 'api/ideas/';
 var ideas = new Array();
+var definitions = new Array();
 var messages = [
     "you can define it!",
     "maybe it's your turn?",
@@ -78,17 +79,24 @@ function createDefinitions(idea, def) {
     }).appendTo('.' + divId);
 }
 
+//when was found
 function specifiedIdea(idea) {
     isSearchAgain = true;
+    $("#search-input").autocomplete("disable");
 
     var title = idea.title;
     var likes = idea.likes;
     var date = idea.lastModifiedDate;
+
+    definitions.splice(0);
     idea.definitions.forEach(function (def) {
+        definitions.push(def);
         createDefinitions(idea, def);
     });
 
+    //probably to be removed
     $("#search-input").autocomplete("search", "");
+    //
     if ($(".search-container").hasClass("search-input-active")) {
         $(".search-container").removeClass("search-input-active");
     }
@@ -104,14 +112,19 @@ function specifiedIdea(idea) {
 function searchAgain() {
     //deletes div, should be animation and then empty();
     $("#definition-container").empty();
+    $("#search-input").autocomplete("enable");
 
     $(".idea-info").removeClass("show-element");
     $(".idea-date").removeClass("show-element");
     $(".search-container").removeClass("search-input-hidden");
     $(".search-container").addClass("search-input-active");
+    $(".put-definition").removeClass("show-element");
 }
 
+//when wasn't found
 function showNewIdeaPanel(title) {
+    if (isSearchAgain)
+        return;
     var message = messages[Math.floor(Math.random() * messages.length)];
     var titleMsg = "We haven't found";
     $(".add-new-panel").addClass("show-element");
@@ -120,6 +133,11 @@ function showNewIdeaPanel(title) {
     $("#new-idea").html(title + ", ");
     $("#new-idea").fadeOut();
     $("#new-idea").fadeIn();
+
+    //deletes div, should be animation and then empty();
+
+    $("#definition-container").empty();
+
 }
 
 function newIdeaSuccessfullyPosted() {
@@ -135,7 +153,8 @@ function postNewIdea(title, text) {
         type: 'POST',
         url: url,
         success: function (data) {
-            console.log("added new idea!");
+            getIdeas();
+            newIdeaSuccessfullyPosted()
         },
         fail: function (data) {
             console.log("there was some problem");
@@ -149,7 +168,10 @@ function putNewIdea(title, text) {
         type: 'PUT',
         url: url,
         success: function (data) {
-            console.log("added new definition!");
+            definitions.push(data);
+            location.reload();
+            //it should be added to definition array and displayed
+            //without reloading!
         },
         fail: function (data) {
             console.log("there was some problem");
@@ -178,7 +200,7 @@ function likeDefinition(idea, def, likesCount, icon) {
                 list.push(def.id);
                 storage.set('ldefs', list.toString());
             }
-        },
+        }
     });
 }
 
@@ -204,7 +226,7 @@ function unlikeDefinition(idea, def, likesCount, icon) {
                 list.splice(index, 1);
                 storage.set('ldefs', list.toString());
             }
-        },
+        }
     });
 }
 
@@ -243,7 +265,7 @@ function getSpecifiedIdea(title) {
 }
 
 function autocomplete() {
-    if (ideas.length == 0) {
+    if (ideas.length === 0) {
         setTimeout(autocomplete, 1);
         return;
     }
@@ -262,10 +284,6 @@ function autocomplete() {
         },
         search: function (event, ui) {
             getSpecifiedIdea($("#search-input").val());
-            if (ideaMatched) {
-                $("ui-autocomplete").css("display", "none");
-                $(".ui-menu-item").css("display", "none");
-            }
         },
         messages: {
             noResults: '',
@@ -284,7 +302,7 @@ function getIdeas() {
         url: uri,
         success: function (data) {
             assignData(data);
-        },
+        }
     });
 }
 
@@ -306,6 +324,21 @@ function getRandomIdea() {
     });
 }
 
+function addNewElementVisible() {
+    $(".add-idea-button").fadeIn();
+    $("#definition-input").fadeIn();
+    $("#definition-input").css("display", "inline-block");
+    $("#definition-input").val("");
+    $(".add-idea-button").css("display", "inline-block");
+    $(".add-new-panel").removeClass("show-element");
+
+    if (isSearchAgain) {
+        $(".add-idea-button").val("add definition");
+    } else {
+        $(".add-idea-button").val("add idea");
+    }
+}
+
 (function () {
     "use strict";
     console.log("dzialam");
@@ -325,16 +358,12 @@ function getRandomIdea() {
 
         // ! ! ! ! NOT DONE YET (NEEDS A BETTER BOOLEAN VARIABLE)
         // must define a state of being "on top" and then disable add-new-panel display
-        if (ideaMatched) {
-            $(".add-new-panel").removeClass("show-element");
-            //$("#search-input").autocomplete("disable");
-            //$("#search-input").autocomplete("enable");
+        //if (ideaMatched) {
 
-        }
+        //}
         // ! ! ! !
 
-
-        if (val == "" && isSearchAgain) {
+        if (val === "" && isSearchAgain) {
             isSearchAgain = false;
             searchAgain();
         }
@@ -367,26 +396,30 @@ function getRandomIdea() {
     });
 
     $(".add-new-icon").click(function () {
-        $(".add-idea-button").fadeIn();
-        $("#definition-input").fadeIn();
-        $("#definition-input").css("display", "inline-block");
-        $(".add-idea-button").css("display", "inline-block");
-        $(".add-new-panel").removeClass("show-element");
+        addNewElementVisible();
+    });
+
+    $(".put-definition").click(function () {
+        addNewElementVisible();
     });
 
     $(".add-idea-button").click(function () {
         var title = $("#search-input").val();
         var text = $("#definition-input").val();
-        if (title != "" && text != "") {
-            postNewIdea(title, text);
+        if (title !== "" && text !== "") {
+            if ($(".add-idea-button").val() === "add idea") {
+                postNewIdea(title, text);
+            } else {
+                putNewIdea(title, text);
+            }
         }
     });
 
-    $(document).keypress(function (e) {
-        if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
-            getRandomIdea();
-        }
-    });
+    //$(document).keypress(function (e) {
+    //    if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
+    //        getRandomIdea();
+    //    }
+    //});
 
     setInterval(getIdeas, 5000);
 })();

@@ -86,6 +86,7 @@
 
         [HttpGet]
         [Route("{title:alpha}")]
+        [ActionName("GetIdea")]
         public IActionResult GetIdea([FromRoute] string title)
         {
             var idea = _provider.GetSpecified(title);
@@ -117,6 +118,7 @@
             {
                 return BadRequest();
             }
+
             return Ok(result);
         }
 

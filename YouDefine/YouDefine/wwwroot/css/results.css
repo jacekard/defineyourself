@@ -56,13 +56,12 @@
 .add-new-panel {
     position: relative;
     top: 160px;
-    left: 190px;
+    left: 220px;
     visibility: hidden;
     opacity: 0;
     font-size: 18px;
     max-width: 700px;
     display: inline;
-    margin: 0 auto;
     align-content: center;
     text-align: center;
     font-family: Monaco, Consolas, "Courier New", monospace;
@@ -90,10 +89,11 @@
     color: white;
     background-color: transparent;
     border: 0px solid;
-    width: 600px;
-    height: 250px;
-    font-size: 35px;
+    width: 450px;
+    height: 200px;
+    font-size: 32px;
     text-decoration: none;
+    margin-left: 80px;
     font-weight: 400;
     caret-color: white;
     font-family: Monaco, Consolas, "Courier New", monospace;
@@ -102,8 +102,8 @@
     #definition-input::placeholder {
         color: whitesmoke;
         text-decoration-color: transparent;
-        text-align: left;
-        padding-left: 80px;
+        text-align: justify;
+        padding-left: 20px;
     }
 
     #definition-input:focus {
@@ -134,10 +134,6 @@
     .add-idea-button:hover {
         background: rgba(255,255,255,0.35);
     }
-
-.definition-container {
-
-}
 
 @keyframes hideSearchInput {
     0% {

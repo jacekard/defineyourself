@@ -131,6 +131,7 @@
             };
             idea.Definitions.Add(definition);
             _DBcontext.SaveChanges();
+
             return _mapper.Map(idea);
         }
 
