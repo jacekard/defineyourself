@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
-using YouDefine.Models;
-
-namespace YouDefine.Data
+﻿namespace YouDefine.Models
 {
+    using System.Collections.Generic;
+    
+    /// <summary>
+    /// IdeaResult Model
+    /// Passed as json result to client-side via provider
+    /// </summary>
     public class IdeaResult
     {
         public string Title { get; set; }

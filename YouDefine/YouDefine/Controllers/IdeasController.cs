@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Hangfire;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using YouDefine.Data;
-
-namespace YouDefine.Services
+﻿namespace YouDefine.Services
 {
+    using System;
+    using System.Linq;
+    using Microsoft.AspNetCore.Mvc;
+    using YouDefine.Data;
+
+    /// <summary>
+    /// IdeasController - API controller with CRUD methods
+    /// </summary>
     [Produces("application/json")]
     [Route("api/ideas")]
     public class IdeasController : Controller
@@ -115,11 +113,11 @@ namespace YouDefine.Services
         public IActionResult LikeDefinition([FromRoute] string title, long id)
         {
             var result = _provider.LikeDefinition(title, id);
-            if(result == null)
+            if (result == null)
             {
                 return BadRequest();
             }
-            return Ok(result); 
+            return Ok(result);
         }
 
         [HttpPut]

@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using YouDefine.Data;
-using YouDefine.Models;
-
-namespace YouDefine.Services
+﻿namespace YouDefine.Services
 {
+    using System;
+    using System.Collections.Generic;
+    using YouDefine.Models;
+
+    /// <summary>
+    /// Mapper Service maps entity models to result models
+    /// </summary>
     public class Mapper : IMapper
     {
         public IdeaResult Map(Idea idea)

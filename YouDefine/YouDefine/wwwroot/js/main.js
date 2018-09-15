@@ -98,6 +98,7 @@ function specifiedIdea(idea) {
     $(".idea-date").addClass("show-element");
     $(".idea-info").addClass("show-element");
     $(".add-new-panel").removeClass("show-element");
+    $(".put-definition").addClass("show-element");
 }
 
 function searchAgain() {
@@ -142,8 +143,18 @@ function postNewIdea(title, text) {
     });
 }
 
-function putNewIdea() {
-
+function putNewIdea(title, text) {
+    var url = uri + title + "/" + text;
+    $.ajax({
+        type: 'PUT',
+        url: url,
+        success: function (data) {
+            console.log("added new definition!");
+        },
+        fail: function (data) {
+            console.log("there was some problem");
+        }
+    });
 }
 
 function likeDefinition(idea, def, likesCount, icon) {

@@ -1,11 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace YouDefine.Data
+﻿namespace YouDefine.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
+    /// <summary>
+    /// Idea Model Entity
+    /// used along with Definition Model
+    /// </summary>
     public class Idea
     {
         [Key]

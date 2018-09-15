@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using YouDefine.Data;
-
-namespace YouDefine.Services
+﻿namespace YouDefine.Services
 {
+    using System.Diagnostics;
+    using Microsoft.AspNetCore.Mvc;
+    using YouDefine.Data;
+
+    /// <summary>
+    /// Home Controller used for returning corresponding views
+    /// </summary>
     public class HomeController : Controller
     {
         [Route("")]

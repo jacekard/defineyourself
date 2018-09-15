@@ -1,10 +1,15 @@
-﻿using System.Linq;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-using YouDefine.Data;
-
-namespace YouDefine.Services
+﻿namespace YouDefine.Services
 {
+    using System.Linq;
+    using System.Collections.Generic;
+    using Microsoft.EntityFrameworkCore;
+    using YouDefine.Data;
+    using YouDefine.Models;
+
+    /// <summary>
+    /// ProviderIdeas Service
+    /// provides data using DBcontext
+    /// </summary>
     public class ProviderIdeas : IProviderIdeas
     {
         private readonly YouDefineContext _DBcontext;
@@ -129,7 +134,7 @@ namespace YouDefine.Services
             return _mapper.Map(idea);
         }
 
-        public object LikeDefinition(string title, long id)
+        public LikesResult LikeDefinition(string title, long id)
         {
             try
             {
@@ -142,7 +147,7 @@ namespace YouDefine.Services
                 var likes = ++idea.Definitions.Where(x => x.DefinitionId == id).Single().Likes;
                 _DBcontext.SaveChanges();
 
-                return new { ideaLikes = idea.Likes, defLikes = likes };
+                return new LikesResult { IdeaLikes = idea.Likes, DefLikes = likes };
             }
             catch
             {
@@ -151,7 +156,7 @@ namespace YouDefine.Services
             }
         }
 
-        public object UnlikeDefinition(string title, long id)
+        public LikesResult UnlikeDefinition(string title, long id)
         {
             try
             {
@@ -164,7 +169,7 @@ namespace YouDefine.Services
                 var likes = --idea.Definitions.Where(x => x.DefinitionId == id).Single().Likes;
                 _DBcontext.SaveChanges();
 
-                return new { ideaLikes = idea.Likes, defLikes = likes };
+                return new LikesResult { IdeaLikes = idea.Likes, DefLikes = likes };
             }
             catch
             {

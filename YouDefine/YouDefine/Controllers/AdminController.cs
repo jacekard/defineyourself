@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-
-namespace YouDefine.Services
+﻿namespace YouDefine.Services
 {
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
+
+    /// <summary>
+    /// Admin Controller used for returning corresponding views
+    /// </summary>
     public class AdminController : Controller
     {
         [Route("Admin")]

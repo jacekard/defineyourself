@@ -1,9 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using YouDefine.Data;
-
-namespace YouDefine.Services
+﻿namespace YouDefine.Services
 {
+    using System.Collections.Generic;
+    using YouDefine.Models;
+
+    /// <summary>
+    /// IProviderIdeas interface
+    /// providing methods for ProviderIdeas Service
+    /// </summary>
     public interface IProviderIdeas
     {
 
@@ -19,9 +22,9 @@ namespace YouDefine.Services
 
         IdeaResult Update(string title, string text);
 
-        object LikeDefinition(string title, long id);
+        LikesResult LikeDefinition(string title, long id);
 
-        object UnlikeDefinition(string title, long id);
+        LikesResult UnlikeDefinition(string title, long id);
 
     }
 }

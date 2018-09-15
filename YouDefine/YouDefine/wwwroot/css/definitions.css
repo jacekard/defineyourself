@@ -71,6 +71,20 @@
     font-size: 20px;
 }
 
+.put-definition {
+    position: relative;
+    right: 3vw;
+    visibility: hidden;
+    opacity: 0;
+    font-size: 18px;
+    margin: 0 auto;
+    align-content: center;
+    text-align: center;
+    font-family: Monaco, Consolas, "Courier New", monospace;
+    -webkit-transition: all 1s ease-in;
+    transition: all 1s ease-in;
+}
+
 @keyframes slideToLeft {
     0% {
         position: relative;

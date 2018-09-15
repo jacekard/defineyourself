@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using YouDefine.Data;
-using YouDefine.Models;
-
-namespace YouDefine.Services
+﻿namespace YouDefine.Services
 {
+    using System;
+    using System.Collections.Generic;
+    using YouDefine.Models;
+
+    /// <summary>
+    /// IMapper interface
+    /// providing methods for Mapper Service
+    /// </summary>
     public interface IMapper
     {
 

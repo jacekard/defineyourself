@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-
-
-namespace YouDefine.Data
+﻿namespace YouDefine.Models
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
+
+    /// <summary>
+    /// Definiton Model Entity
+    /// Used along with Idea Model
+    /// </summary>
     public class Definition
     {
         [Key]
@@ -23,12 +23,12 @@ namespace YouDefine.Data
         public Definition()
         {
         }
-        
+
         public Definition(string text)
         {
             Text = text;
             Likes = 0;
             CreationDate = DateTime.Now;
         }
-    }     
+    }
 }

@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace YouDefine.Models
+﻿namespace YouDefine.Models
 {
+    /// <summary>
+    /// DefinitionResult Model
+    /// Passed as json result to client-side via provider
+    /// </summary>
     public class DefinitionResult
     {
         public long Id { get; set; }
