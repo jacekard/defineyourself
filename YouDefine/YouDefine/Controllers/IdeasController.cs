@@ -139,6 +139,10 @@
         public IActionResult Put(string title, string text)
         {
             var idea = _provider.Update(title, text);
+            if(idea == null)
+            {
+                return BadRequest();
+            }
 
             return Ok(idea);
         }

@@ -44,28 +44,27 @@ p {
     color: white;
 }
 
-.go-back {
+.about-button {
     position: absolute;
     top: 1%;
     left: 1%;
-    width: 200px;
-    height: 80px;
+    width: 150px;
+    height: 60px;
     padding: 5px 0 5px 0;
     background: white;
     mix-blend-mode: screen;
     -ms-transform: rotate(3deg); /* IE 9 */
     -webkit-transform: rotate(3deg); /* Safari */
     transform: rotate(3deg); /* Standard syntax */
-    font-size: 50px;
+    font-size: 35px;
     font-weight: 800;
     font-family: Consolas, "Courier New", monospace;
     color: black;
 }
 
-    /*.go-back:hover {
-        background-color: lawngreen;
-        mix-blend-mode: exclusion;
-    }*/
+    .about-button:hover {
+        mix-blend-mode: saturation;
+    }
 
 a {
     color: black;
@@ -78,4 +77,18 @@ a {
     text-align: left;
     padding: 5px;
     color: white;
+}
+
+.bug-report {
+    top: 13%;
+    height: 80px;
+    font-size: 28px;
+    padding: 2px 1px 2px 25px;
+    line-height: 35px;
+    padding-top: 7px;
+}
+
+.bug-report-icon {
+    padding: 5px 10px 0px 0px;
+    float:left;
 }

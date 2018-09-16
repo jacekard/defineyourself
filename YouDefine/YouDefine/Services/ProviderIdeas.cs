@@ -92,24 +92,30 @@
 
         public IdeaResult Add(string title, string text)
         {
-            var idea = new Idea(title)
+            try
             {
-                Definitions = new List<Definition>()
-            };
-            var definition = new Definition(text)
+                var idea = new Idea(title)
+                {
+                    Definitions = new List<Definition>()
+                };
+                var definition = new Definition(text)
+                {
+                    IdeaId = idea.IdeaId
+                };
+
+                idea.Definitions.Add(definition);
+                _DBcontext.Ideas.Add(idea);
+                _DBcontext.SaveChanges();
+
+                return _mapper.Map(idea);
+            }
+            catch
             {
-                IdeaId = idea.IdeaId
-            };
-
-            idea.Definitions.Add(definition);
-            _DBcontext.Ideas.Add(idea);
-            _DBcontext.SaveChanges();
-
-            return _mapper.Map(idea);
+                return null;
+            }
         }
 
-
-        public IdeaResult Update(string title, string text)
+        public DefinitionResult Update(string title, string text)
         {
             Idea idea = null;
             try
@@ -122,7 +128,7 @@
             }
             catch
             {
-                return Add(title, text);
+                return null;
             }
 
             var definition = new Definition(text)
@@ -132,7 +138,7 @@
             idea.Definitions.Add(definition);
             _DBcontext.SaveChanges();
 
-            return _mapper.Map(idea);
+            return _mapper.Map(definition);
         }
 
         public LikesResult LikeDefinition(string title, long id)

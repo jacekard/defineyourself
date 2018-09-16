@@ -4,7 +4,6 @@
 
 var uri = 'api/ideas/';
 var ideas = new Array();
-var definitions = new Array();
 var messages = [
     "you can define it!",
     "maybe it's your turn?",
@@ -19,6 +18,7 @@ var storage = new Storage();
 storage.init();
 var isSearchAgain = false;
 var ideaMatched = false;
+var currentIdea;
 
 function validateDefinitionsLS(id) {
     var str = storage.get('ldefs');
@@ -33,15 +33,21 @@ function validateDefinitionsLS(id) {
     return result;
 }
 
-function createDefinitions(idea, def) {
+function createDefinitions(idea, def, prepend) {
     var divId = 'def' + def.id;
     var infoId = 'span' + def.id;
     var iconId = 'thumb-up' + def.id;
     var likesId = 'likes' + def.id;
 
-    jQuery('<div/>', {
+    var div = jQuery('<div/>', {
         class: 'single-definition ' + divId
-    }).appendTo("#definition-container");
+    });
+
+    if (prepend === true) {
+        div.prependTo("#definition-container");
+    } else {
+        div.appendTo("#definition-container");
+    }
 
     jQuery('<div/>', {
         class: 'definition-info ' + infoId
@@ -77,21 +83,22 @@ function createDefinitions(idea, def) {
         class: 'definition-text',
         text: def.text
     }).appendTo('.' + divId);
+
+    $('.' + divId).toggleClass("slideToLeft-animation");
 }
 
 //when was found
 function specifiedIdea(idea) {
     isSearchAgain = true;
     $("#search-input").autocomplete("disable");
+    $("#definition-container").empty();
 
     var title = idea.title;
     var likes = idea.likes;
     var date = idea.lastModifiedDate;
 
-    definitions.splice(0);
     idea.definitions.forEach(function (def) {
-        definitions.push(def);
-        createDefinitions(idea, def);
+        createDefinitions(idea, def, false);
     });
 
     //probably to be removed
@@ -108,6 +115,7 @@ function specifiedIdea(idea) {
     $(".add-new-panel").removeClass("show-element");
     $(".put-definition").addClass("show-element");
 }
+
 
 function searchAgain() {
     //deletes div, should be animation and then empty();
@@ -135,16 +143,22 @@ function showNewIdeaPanel(title) {
     $("#new-idea").fadeIn();
 
     //deletes div, should be animation and then empty();
-
     $("#definition-container").empty();
-
 }
 
-function newIdeaSuccessfullyPosted() {
+function newIdeaSuccessfullyPosted(showDefs) {
     $(".add-idea-button").fadeOut();
     $("#definition-input").fadeOut();
     $("#definition-input").css("display", "none");
     $(".add-idea-button").css("display", "none");
+    $(".success-message").addClass("message-animation");
+    setTimeout(function () {
+        $(".success-message").removeClass("message-animation");
+    }, 4000);
+
+    if (showDefs === true) {
+        specifiedIdea(currentIdea);
+    }
 }
 
 function postNewIdea(title, text) {
@@ -153,11 +167,12 @@ function postNewIdea(title, text) {
         type: 'POST',
         url: url,
         success: function (data) {
+            currentIdea = idea;
             getIdeas();
-            newIdeaSuccessfullyPosted()
+            newIdeaSuccessfullyPosted(true);
         },
         fail: function (data) {
-            console.log("there was some problem");
+            $(".failure-message").addClass("message-animation");
         }
     });
 }
@@ -168,13 +183,11 @@ function putNewIdea(title, text) {
         type: 'PUT',
         url: url,
         success: function (data) {
-            definitions.push(data);
-            location.reload();
-            //it should be added to definition array and displayed
-            //without reloading!
+            createDefinitions(currentIdea, data, true);
+            newIdeaSuccessfullyPosted(false);
         },
         fail: function (data) {
-            console.log("there was some problem");
+            $(".failure-message").addClass("message-animation");
         }
     });
 }
@@ -256,6 +269,7 @@ function getSpecifiedIdea(title) {
             },
             200: function (data) {
                 ideaMatched = true;
+                currentIdea = data;
                 specifiedIdea(data);
             }
         },
@@ -277,7 +291,7 @@ function autocomplete() {
             "ui-autocomplete": "ui-autocomplete"
         },
         appendTo: "#result-container",
-        delay: 400,
+        delay: 1000,
         autoFocus: true,
         select: function (event, ui) {
             getSpecifiedIdea(ui.item.value);
@@ -339,10 +353,23 @@ function addNewElementVisible() {
     }
 }
 
+function welcomeMessage() {
+    var isFirstTime = storage.get('visited');
+    if (!isFirstTime) {
+        $(".welcome-message").addClass('welcome-message-animation');
+
+        setTimeout(function () {
+            $(".welcome-message").remove();
+        }, 10000);
+        storage.set('visited', true);
+    }
+}
+
 (function () {
     "use strict";
     console.log("dzialam");
 
+    welcomeMessage();
     getIdeas();
     autocomplete();
 

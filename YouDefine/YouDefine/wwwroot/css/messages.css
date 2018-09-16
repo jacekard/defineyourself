@@ -1,0 +1,91 @@
+﻿.welcome-message {
+    position: absolute;
+    top: -10vh;
+    left: 30vw;
+    opacity: 0;
+    display: inline-block;
+    width: 600px;
+    font-size: 18px;
+    padding: 20px 10px 20px 10px;
+    margin: 0 auto;
+    text-align: center;
+    font-family: 'Roboto Slab', serif;
+    border-radius: 5px;
+    background-color: rgba(255,235,230,0.8);
+    -webkit-transition: all 1s ease-in;
+    transition: all 1s ease-in;
+}
+
+    .welcome-message:hover {
+        background-color: rgba(255,255,250,1);
+    }
+
+.welcome-message-icon {
+    float: right;
+    margin-top: -10px;
+}
+
+.welcome-message-title {
+}
+
+.welcome-message-link {
+    margin: 20px;
+}
+
+.success-message {
+    position: absolute;
+    top: -15vh;
+    left: 0vw;
+    color: seagreen;
+    visibility: visible;
+    opacity: 1;
+    width: 300px;
+}
+
+.failure-message {
+    position: absolute;
+    top: -15vh;
+    left: 0vw;
+    color: indianred;
+    visibility: visible;
+    opacity: 1;
+    width: 400px;
+}
+
+.message-animation {
+    animation: showMessage 4s 1 linear forwards;
+}
+
+.welcome-message-animation {
+    animation: showWelcomeMessage 1s 1 linear forwards;
+}
+
+@keyframes showMessage {
+    0% {
+        top: -10vh;
+        opacity: 0;
+    }
+
+    20%, 70% {
+        top: 2vh;
+        opacity: 1;
+    }
+
+    100% {
+        top: -10vh;
+        opacity: 0;
+    }
+}
+
+
+@keyframes showWelcomeMessage {
+    0% {
+        top: -10vh;
+        opacity: 0;
+    }
+
+    100% {
+        top: 5vh;
+        opacity: 1;
+    }
+}

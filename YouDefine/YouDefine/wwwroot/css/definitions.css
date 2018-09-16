@@ -21,7 +21,6 @@
 }
 
 .single-definition {
-    animation: slideToLeft 2s 1 cubic-bezier(.43,-0.02,.19,1.15) forwards;
     width: 600px;
     height: auto;
     margin: 10px;
@@ -35,10 +34,14 @@
     transition: all 0.5s linear;
 }
 
-    .single-definition:hover {
-        background-color: rgba(255,255,255,0.6);
-        -webkit-box-shadow: 0 0 1px rgba(255,255,255,1);
-    }
+.slideToLeft-animation {
+    animation: slideToLeft 2s 1 cubic-bezier(.43,-0.02,.19,1.15) forwards;
+}
+
+.single-definition:hover {
+    background-color: rgba(255,255,255,0.6);
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,1);
+}
 
 .definition-info {
     display: inline-block;
@@ -69,6 +72,8 @@
 .definition-text {
     color: black;
     font-size: 20px;
+    width: auto;
+    word-break: break-word;
 }
 
 .put-definition {

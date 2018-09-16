@@ -20,7 +20,7 @@
 
         IdeaResult Add(string title, string text);
 
-        IdeaResult Update(string title, string text);
+        DefinitionResult Update(string title, string text);
 
         LikesResult LikeDefinition(string title, long id);
 
