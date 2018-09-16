@@ -25,6 +25,14 @@
             return View();
         }
 
+        [Route("reportBugs")]
+        public IActionResult ReportBugs()
+        {
+            ViewData["Message"] = "Report bugs";
+
+            return View();
+        }
+
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

@@ -162,12 +162,15 @@ function newIdeaSuccessfullyPosted(showDefs) {
 }
 
 function postNewIdea(title, text) {
-    var url = uri + title + "/" + text;
     $.ajax({
         type: 'POST',
-        url: url,
+        url: uri,
+        data: {
+            'title': title,
+            'text': text
+        },
         success: function (data) {
-            currentIdea = idea;
+            currentIdea = data;
             getIdeas();
             newIdeaSuccessfullyPosted(true);
         },
@@ -178,10 +181,13 @@ function postNewIdea(title, text) {
 }
 
 function putNewIdea(title, text) {
-    var url = uri + title + "/" + text;
     $.ajax({
         type: 'PUT',
-        url: url,
+        url: uri,
+        data: {
+            'title': title,
+            'text': text
+        },
         success: function (data) {
             createDefinitions(currentIdea, data, true);
             newIdeaSuccessfullyPosted(false);
@@ -193,10 +199,14 @@ function putNewIdea(title, text) {
 }
 
 function likeDefinition(idea, def, likesCount, icon) {
-    var url = uri + "like/" + idea.title + "/" + def.id;
+    var url = uri + "like";
     $.ajax({
         type: 'PUT',
         url: url,
+        data: {
+            'title': idea.title,
+            'id': def.id
+        },
         success: function (data) {
             $(likesCount).text(data.defLikes);
             $("#idea-likes-count").text(data.ideaLikes);
@@ -218,10 +228,14 @@ function likeDefinition(idea, def, likesCount, icon) {
 }
 
 function unlikeDefinition(idea, def, likesCount, icon) {
-    var url = uri + "unlike/" + idea.title + "/" + def.id;
+    var url = uri + "unlike";
     $.ajax({
         type: 'PUT',
         url: url,
+        data: {
+            'title': idea.title,
+            'id': def.id
+        },
         success: function (data) {
             $(likesCount).text(data.defLikes);
             $("#idea-likes-count").text(data.ideaLikes);
@@ -259,15 +273,20 @@ function getSpecifiedIdea(title) {
     if (title.length < 2) {
         return;
     }
+
     $.ajax({
         type: 'GET',
-        url: uri + title,
+        url: uri,
+        data: {
+            'title': title
+        },
         statusCode: {
             204: function () {
                 ideaMatched = false;
                 showNewIdeaPanel(title);
             },
             200: function (data) {
+                console.log(data);
                 ideaMatched = true;
                 currentIdea = data;
                 specifiedIdea(data);
@@ -313,7 +332,7 @@ function assignData(data) {
 function getIdeas() {
     $.ajax({
         type: 'GET',
-        url: uri,
+        url: uri + 'titles',
         success: function (data) {
             assignData(data);
         }

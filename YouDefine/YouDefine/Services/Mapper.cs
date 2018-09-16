@@ -18,6 +18,8 @@
                 definitions.Add(Map(def));
             }
 
+            definitions.Sort((a, b) => a.Likes.CompareTo(b.Likes));
+
             var ideaResult = new IdeaResult()
             {
                 Title = idea.Title,

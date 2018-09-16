@@ -12,7 +12,7 @@
     /// Bugs Controller - API controller with EF CRUD methods
     /// </summary>
     [Produces("application/json")]
-    [Route("api/Bugs")]
+    [Route("api/bugs")]
     public class BugsController : Controller
     {
         private readonly YouDefineContext _context;
@@ -85,7 +85,7 @@
 
         // POST: api/Bugs
         [HttpPost]
-        public async Task<IActionResult> PostBug([FromBody] Bug bug)
+        public async Task<IActionResult> PostBug([FromForm]Bug bug)
         {
             if (!ModelState.IsValid)
             {

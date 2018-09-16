@@ -29,6 +29,7 @@ TODO LIST:
    -> Before adding, search if the word makes sense 
    (this is somehow impossible so probably leave it as it is)
    -> Show messages with errors client-side!
+	  -> for example: idea exists, definition exists, something went wrong with server/database...
 
 5. Create Javascript and Styles responsible for input dialog
    -> styling caret (Optional)

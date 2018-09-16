@@ -36,7 +36,7 @@
         }
 
         [HttpGet]
-        [Route("")]
+        [Route("titles")]
         public IActionResult GetTitles()
         {
             var ideas = _provider.GetTitles();
@@ -85,9 +85,9 @@
         }
 
         [HttpGet]
-        [Route("{title:alpha}")]
+        [Route("")]
         [ActionName("GetIdea")]
-        public IActionResult GetIdea([FromRoute] string title)
+        public IActionResult GetIdea(string title)
         {
             var idea = _provider.GetSpecified(title);
             if (idea == null)
@@ -98,20 +98,9 @@
 
         }
 
-        [HttpGet]
-        [Route("random")]
-        public IActionResult GetRandomIdea()
-        {
-            var count = _context.Ideas.Count();
-            var random = new Random().Next(0, count - 1);
-            var idea = _context.Ideas.Skip(random).Single();
-
-            return RedirectToAction("GetIdea", idea.Title);
-        }
-
         [HttpPut]
-        [Route("like/{title}/{id}")]
-        public IActionResult LikeDefinition([FromRoute] string title, long id)
+        [Route("like")]
+        public IActionResult LikeDefinition(string title, long id)
         {
             var result = _provider.LikeDefinition(title, id);
             if (result == null)
@@ -123,8 +112,8 @@
         }
 
         [HttpPut]
-        [Route("unlike/{title}/{id}")]
-        public IActionResult UnlikeDefinition([FromRoute] string title, long id)
+        [Route("unlike")]
+        public IActionResult UnlikeDefinition(string title, long id)
         {
             var result = _provider.UnlikeDefinition(title, id);
             if (result == null)
@@ -135,7 +124,7 @@
         }
 
         [HttpPut]
-        [Route("{title}/{text}")]
+        [Route("")]
         public IActionResult Put(string title, string text)
         {
             var idea = _provider.Update(title, text);
@@ -148,10 +137,14 @@
         }
 
         [HttpPost]
-        [Route("{title}/{text}")]
+        [Route("")]
         public IActionResult Post(string title, string text)
         {
             var idea = _provider.Add(title, text);
+            if(idea == null)
+            {
+                return BadRequest();
+            }
 
             return Ok(idea);
         }

@@ -5,6 +5,7 @@
     using Microsoft.EntityFrameworkCore;
     using YouDefine.Data;
     using YouDefine.Models;
+    using System;
 
     /// <summary>
     /// ProviderIdeas Service
@@ -92,8 +93,26 @@
 
         public IdeaResult Add(string title, string text)
         {
+            bool ideaExist = true;
             try
             {
+                var ideaPromise = _DBcontext.Ideas
+                    .Where(m => m.Title == title)
+                    .Single();
+            }
+            catch
+            {
+                ideaExist = false;
+            }
+
+            try
+            {
+                if (ideaExist == true)
+                {
+
+                    return null;
+                }
+
                 var idea = new Idea(title)
                 {
                     Definitions = new List<Definition>()
@@ -117,6 +136,7 @@
 
         public DefinitionResult Update(string title, string text)
         {
+            bool definitionPromise = true;
             Idea idea = null;
             try
             {
@@ -131,10 +151,26 @@
                 return null;
             }
 
+            try
+            {
+                var def = idea.Definitions.Where(x => x.Text.Equals(text)).Single();
+            }
+            catch
+            {
+                definitionPromise = false;
+            }
+
+            if (definitionPromise == true)
+            {
+
+                return null;
+            }
+
             var definition = new Definition(text)
             {
                 IdeaId = idea.IdeaId
             };
+
             idea.Definitions.Add(definition);
             _DBcontext.SaveChanges();
 

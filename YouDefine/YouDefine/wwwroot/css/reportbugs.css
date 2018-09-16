@@ -1,0 +1,25 @@
+﻿.bug-report-page {
+    padding: 15px;
+    display: flex;
+    width: 500px;
+    margin: 0 auto;
+    flex-direction: column;
+    align-items: center;
+    float: left;
+}
+
+#bug-report-text {
+    width: 450px;
+    height: 500px;
+    font-size: 25px;
+    margin: 10px;
+    text-align: justify;
+    padding: 15px;
+}
+
+#bug-submit {
+    font-size: 30px;
+    margin: 10px;
+    width: 150px;
+    height: 60px;
+}

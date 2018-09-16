@@ -21,6 +21,7 @@
         public Bug()
         {
             ReportDate = DateTime.Now;
+            IsFixed = false;
         }
     }
 }
