@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cousine" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+          asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+          asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+    <link rel="stylesheet" href="@Url.Content("~/css/admin/_admin.css")" type="text/css" />
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-ui/jquery-ui.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/Admin/youdefine">Administrator Control Panel</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="youdefine-page"><a href="@Url.Action("", "Home")">youDefine</a></li>
+                <li class="home-page"><a href="@Url.Action("Index")">Home</a></li>
+                <li class="settings-page"><a href="@Url.Action("Settings")">Settings</a></li>
+                <li class="stats-page"><a href="@Url.Action("Statistics")">Statistics</a></li>
+                <li class="users-page"><a href="@Url.Action("Users")">Users</a></li>
+                <li class="bugreports-page"><a href="@Url.Action("BugReports")">Bug Reports</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    @RenderBody()
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -26,8 +26,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\statistics\" />
     <Folder Include="wwwroot\images\" />
     <Folder Include="wwwroot\lib\jquery-ui\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\statistics\plot.html" />
+    <None Include="wwwroot\statistics\plot.py" />
   </ItemGroup>
 
 </Project>

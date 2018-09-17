@@ -1,0 +1,92 @@
+﻿@{
+    ViewData["Title"] = "youDefine";
+}
+
+<i id="description-button" class="material-icons">filter_vintage</i>
+<div id="description-panel" class="tooltip-inactive">
+    <div id="tooltip">
+        <div class="user-settings">
+            become an author
+            <div class="onoffswitch">
+                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
+                <label class="onoffswitch-label" for="myonoffswitch"></label>
+            </div>
+        </div>
+
+        <div class="user-settings">
+            log in as author
+            <div class="onoffswitch">
+                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
+                <label class="onoffswitch-label" for="myonoffswitch"></label>
+            </div>
+        </div>
+
+        <div class="user-settings">
+            on/off background gradient
+            <div class="onoffswitch">
+                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
+                <label class="onoffswitch-label" for="myonoffswitch"></label>
+            </div>
+        </div>
+        @*Hello, type your own idea or click
+            <i id="refresh-button" class="material-icons refresh-icon-small">refresh</i>
+            to get a random one.*@
+    </div>
+</div>
+
+<div class="welcome-message">
+    <i class="material-icons welcome-message-icon">highlight_off</i>
+    <span class="welcome-message-title">Welcome to youDefine!</span><br />
+    If it's your first visit, please read a short memo about our idea.<br /><br />
+    <a href="~/about" class="welcome-message-link">Read now</a>
+</div>
+
+<div class="container">
+
+    <div class="page-section">
+        <div class="add-new-panel">
+            <span id="new-idea-title"></span>
+            <span id="new-idea"></span><br />
+            <span id="new-idea-message"></span>
+            <i class="material-icons add-new-icon">add_circle_outline</i>
+        </div>
+
+
+        <div class="search-container">
+
+            <div class="idea-info">
+                <i id="idea-likes-icon" class="material-icons">loupe</i>
+                <span id="idea-likes-count"></span>
+            </div>
+
+            <div class="idea-date"></div>
+
+            <div class="idea-container">
+                <input id="search-input" placeholder="define..." name="search-input"
+                       maxlength="28" autocomplete="off" inputmode="search" spellcheck="false" autofocus />
+            </div>
+
+            <div id="result-container" class="ui-widget">
+                <div id="log" class="ui-widget-content"></div>
+            </div>
+
+            <textarea id="definition-input" placeholder="write your definition..." name="definition-input"
+                      maxlength="500" spellcheck="false"></textarea>
+            <input class="add-idea-button" type="button" value="add idea" />
+        </div>
+    </div>
+
+    <span class="put-definition">add your own definition <i class="material-icons add-new-icon">add_circle_outline</i></span>
+    <span class="put-definition success-message">Idea added successfully!</span>
+    <span class="put-definition failure-message">There was some problem...</span>
+
+    <div id="definition-container" class="page-section"></div>
+</div>
+
+<footer>
+    <a href="~/about">
+        <i class="material-icons footer-icon" id="footer-button">help_outline</i>
+    </a>
+</footer>
+
+<script src="~/js/main.js"></script>

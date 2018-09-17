@@ -1,0 +1,78 @@
+﻿@{
+    ViewData["Title"] = "Administrator Panel";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<link rel="stylesheet" href="@Url.Content("~/css/admin/admin-stats.css")" type="text/css" />
+
+<body data-spy="scroll" data-target="#myScrollspy" data-offset="50">
+
+
+
+    <div class="container">
+        <div class="row">
+            <nav class="col-sm-3" id="myScrollspy">
+                <ul class="nav nav-pills nav-stacked" data-spy="affix" data-offset-top="0">
+                    <li><a href="#section1">Section 1</a></li>
+                    <li><a href="#section2">Section 2</a></li>
+                    <li><a href="#section3">Section 3</a></li>
+                    <li><a href="#section4">Section 4</a></li>
+                    <li><a href="#section5">Section 5</a></li>
+                </ul>
+            </nav>
+            <div class="col-sm-9">
+                <div id="section1" class="plot-section">
+                    <h1>Wykres 1</h1>
+                    <object data="@Url.Content("~/statistics/plot.html")" width="1000" height="500">
+                        Error: Embedded data could not be displayed.
+                    </object>
+                </div>
+                <div id="section2" class="plot-section">
+                    <h1>Wykres 1</h1>
+                    <object data="@Url.Content("~/statistics/plot.html")" width="1000" height="500">
+                        Error: Embedded data could not be displayed.
+                    </object>
+                </div>
+                <div id="section3" class="plot-section">
+                    <h1>Section 3</h1>
+                    <p>Nam ut nulla sed ante ipsum ante, sagittis mi. Nullam suscipit quis, eleifend in, dui. Cras consectetuer lacus. Nulla eu wisi. Suspendisse ac quam at orci luctus et malesuada ultricies lacinia lacus.</p>
+                </div>
+                <div id="section4" class="plot-section">
+                    <h1>Section 4</h1>
+                    <p>Pellentesque tempus orci interdum dui quis suscipit wisi. Suspendisse vitae turpis. Cras at nunc ac imperdiet sit amet neque tristique lorem.</p>
+                </div>
+                <div id="section5" class="plot-section">
+                    <h1>Section 5</h1>
+                    <p>In arcu iaculis ante, elementum vel, viverra arcu, rutrum ac, laoreet viverra auctor, egestas quam sed quam eu bibendum leo nec tincidunt vehicula, fringilla elementum dui. Morbi sit amet ligula. Sed et turpis.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<script>
+    $(".stats-page").addClass("active");
+
+    //$("#nav a").on('click', function (event) {
+    //    // Make sure this.hash has a value before overriding default behavior
+    //    if (this.hash !== "") {
+    //        // Prevent default anchor click behavior
+    //        event.preventDefault();
+
+    //        // Store hash
+    //        var hash = this.hash;
+
+    //        // Using jQuery's animate() method to add smooth page scroll
+    //        // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+    //        $('html, body').animate({
+    //            scrollTop: $(hash).offset().top
+    //        }, 800, function () {
+
+    //            // Add hash (#) to URL when done scrolling (default click behavior)
+    //            window.location.hash = hash;
+    //        });
+    //    }  // End if
+    //});
+</script>
+

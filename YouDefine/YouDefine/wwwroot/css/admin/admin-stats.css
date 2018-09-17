@@ -1,0 +1,40 @@
+﻿body {
+    position: relative;
+}
+
+.affix {
+    top: 114px;
+    z-index: 9999 !important;
+}
+
+.nav-pills {
+    margin-top: 5vh;
+    margin-left: 5vw;
+    font-size: 20px;
+}
+
+.container {
+    margin-top: 15vh;
+    width: 191.5vh;
+}
+
+div.col-sm-9 div {
+    height: 600px;
+    font-size: 15px;
+}
+
+.plot-section {
+    color: black;
+    background-color: rgba(200, 200, 200, 0.1);
+    border-radius: 5px;
+    padding: 5px;
+    margin: 15px;
+    font-size: 15px;
+}
+
+
+@media screen and (max-width: 810px) {
+    #section1, #section2, #section3, #section4, #section5 {
+        margin-left: 150px;
+    }
+}

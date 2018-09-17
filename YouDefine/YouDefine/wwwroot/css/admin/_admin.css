@@ -1,0 +1,38 @@
+﻿.navbar {
+    border-radius: 0px;
+}
+
+.navbar-inverse {
+    background-color: rgb(102,166,255);
+    border: 0px;
+    color: black;
+    zoom: 1.2;
+    font-family: 'Cousine', monospace;
+}
+
+    .navbar-inverse .navbar-brand {
+        color: black;
+    }
+
+    .navbar-inverse .navbar-nav > li > a {
+        color: black;
+    }
+
+    .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:focus, .navbar-inverse .navbar-nav > .active > a:hover {
+        background-color: #ba5370;
+    }
+
+    .navbar-nav {
+        margin-left: 70px;
+    }
+
+
+.navbar > .container .navbar-brand, .navbar > .container-fluid .navbar-brand {
+    margin-left: 12px;
+    background-color: #ba5370;
+    color: white;
+}
+
+.youdefine-page {
+    background-color: #feada6;
+}

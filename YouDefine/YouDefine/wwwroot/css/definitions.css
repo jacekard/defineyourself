@@ -7,6 +7,7 @@
     overflow-x: hidden;
     height: 95vh;
     right: 0vw;
+    padding-bottom: 60px;
 }
 
 ::-webkit-scrollbar {

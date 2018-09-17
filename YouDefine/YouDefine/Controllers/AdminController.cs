@@ -8,74 +8,37 @@
     /// </summary>
     public class AdminController : Controller
     {
-        [Route("Admin")]
-        [Route("Admin/Index")]
+        [Route("Admin/youdefine")]
         public ActionResult Index()
         {
+            //User.IsInRole("Admin");
+            //User.Identity.IsAuthenticated
+
             return View();
         }
 
-        // POST: Admin/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Admin/Edit/5
-        public ActionResult Edit(int id)
+        [Route("Admin/youdefine/stats")]
+        public ActionResult Statistics()
         {
             return View();
         }
 
-        // POST: Admin/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Admin/Delete/5
-        public ActionResult Delete(int id)
+        [Route("Admin/youdefine/settings")]
+        public ActionResult Settings()
         {
             return View();
         }
 
-        // POST: Admin/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        [Route("Admin/youdefine/users")]
+        public ActionResult Users()
         {
-            try
-            {
-                // TODO: Add delete logic here
+            return View();
+        }
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+        [Route("Admin/youdefine/bugs")]
+        public ActionResult BugReports()
+        {
+            return View();
         }
     }
 }

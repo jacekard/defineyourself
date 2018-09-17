@@ -1,0 +1,14 @@
+﻿.home-page-container {
+    position: relative;
+    top: 10vh;
+    height: 50vh;
+    display: flex;
+}
+.panel {
+    width: 30vw;
+    margin: auto;
+}
+
+.panel-heading {
+    text-align: center;
+}
