@@ -1,5 +1,6 @@
 ﻿namespace YouDefine.Controllers
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -24,63 +25,82 @@
 
         // GET: api/Bugs
         [HttpGet]
+        [Route("")]
         public IEnumerable<Bug> GetBugs()
         {
             return _context.Bugs;
         }
 
-        // GET: api/Bugs/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetBug([FromRoute] long id)
+        [HttpGet]
+        [Route("active")]
+        public IEnumerable<Bug> GetActiveBugs()
         {
-            if (!ModelState.IsValid)
+
+            return _context.Bugs.Where(x => x.IsFixed.Equals(false));
+        }
+
+        [HttpGet]
+        [Route("completed")]
+        public IEnumerable<Bug> GetCompletedBugs()
+        {
+            return _context.Bugs.Where(x => x.IsFixed.Equals(true));
+        }
+
+        [HttpGet]
+        [Route("progress")]
+        public IActionResult GetCalculatedProgress()
+        {
+            if(GetBugs().Count() == 0)
             {
-                return BadRequest(ModelState);
+
+                return Json(new { Success = -1, Failure = -1 });
             }
 
-            var bug = await _context.Bugs.SingleOrDefaultAsync(m => m.Id == id);
+            var completed = GetCompletedBugs();
+            var active = GetActiveBugs();
 
-            if (bug == null)
+            var sum = completed.Count() + active.Count();
+            var success = Math.Round((decimal)completed.Count() / sum * 100);
+            var failure = 100 - success;
+
+            return Json(new { Success = success, Failure = failure});
+        }
+
+        [HttpPut]
+        [Route("ok/{id}")]
+        public IActionResult CompletedBug([FromRoute] long id)
+        {
+            try
+            {
+                var bug = _context.Bugs.Where(x => x.Id.Equals(id)).Single();
+                bug.IsFixed = true;
+                _context.SaveChanges();
+
+                return Ok();
+            }
+            catch
             {
                 return NotFound();
             }
 
-            return Ok(bug);
         }
 
-        // PUT: api/Bugs/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutBug([FromRoute] long id, [FromBody] Bug bug)
+        [HttpPut]
+        [Route("no/{id}")]
+        public IActionResult UncompletedBug([FromRoute] long id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != bug.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(bug).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!BugExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+                var bug = _context.Bugs.Where(x => x.Id.Equals(id)).Single();
+                bug.IsFixed = false;
+                _context.SaveChanges();
 
-            return NoContent();
+                return Ok();
+            }
+            catch
+            {
+                return NotFound();
+            }
         }
 
         // POST: api/Bugs
@@ -95,33 +115,7 @@
             _context.Bugs.Add(bug);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetBug", new { id = bug.Id }, bug);
-        }
-
-        // DELETE: api/Bugs/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteBug([FromRoute] long id)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var bug = await _context.Bugs.SingleOrDefaultAsync(m => m.Id == id);
-            if (bug == null)
-            {
-                return NotFound();
-            }
-
-            _context.Bugs.Remove(bug);
-            await _context.SaveChangesAsync();
-
-            return Ok(bug);
-        }
-
-        private bool BugExists(long id)
-        {
-            return _context.Bugs.Any(e => e.Id == id);
+            return Ok();
         }
     }
 }

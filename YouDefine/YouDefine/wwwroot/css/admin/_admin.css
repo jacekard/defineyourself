@@ -28,11 +28,19 @@
 
 
 .navbar > .container .navbar-brand, .navbar > .container-fluid .navbar-brand {
-    margin-left: 12px;
     background-color: #ba5370;
     color: white;
 }
 
 .youdefine-page {
-    background-color: #feada6;
+    background-color: dodgerblue;
+}
+
+.page-icon {
+    position: absolute;
+    top: 10vh;
+    left: 1%;
+    font-size: 60px;
+    color: lightslategray;
+    z-index: 9999 !important;
 }

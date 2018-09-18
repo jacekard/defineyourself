@@ -2,6 +2,11 @@
 {
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
+    using System.Collections.Generic;
+    using System.Linq;
+    using YouDefine.Controllers;
+    using YouDefine.Data;
+    using YouDefine.Models;
 
     /// <summary>
     /// Admin Controller used for returning corresponding views
@@ -20,24 +25,28 @@
         [Route("Admin/youdefine/stats")]
         public ActionResult Statistics()
         {
+
             return View();
         }
 
         [Route("Admin/youdefine/settings")]
         public ActionResult Settings()
         {
+
             return View();
         }
 
         [Route("Admin/youdefine/users")]
         public ActionResult Users()
         {
+
             return View();
         }
 
         [Route("Admin/youdefine/bugs")]
         public ActionResult BugReports()
         {
+
             return View();
         }
     }

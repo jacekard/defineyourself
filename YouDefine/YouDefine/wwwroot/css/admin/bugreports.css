@@ -1,0 +1,30 @@
+﻿.panel-default {
+    position: relative;
+    top: 12vh;
+    width: 92vw;
+    padding: 0px;
+    margin: 0 auto;
+}
+
+.sort-section {
+    display: inline-flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.sort-option {
+    color: dodgerblue;
+}
+
+.dropdown {
+    top: 17px;
+    margin-right: 24px;
+}
+
+.table-container {
+    padding-right: 45px;
+}
+
+.table {
+    margin-top: 15px;
+}
