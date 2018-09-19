@@ -49,5 +49,11 @@
 
             return View();
         }
+
+        [Route("Admin/youdefine/info")]
+        public IActionResult Info()
+        {
+            return Json(HttpContext.User.Identity);
+        }
     }
 }

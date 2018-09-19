@@ -40,6 +40,9 @@ namespace YouDefine
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+
+            //env.EnvironmentName = EnvironmentName.Production;
+
             if (env.IsDevelopment())
             {
                 app.UseBrowserLink();
@@ -47,9 +50,10 @@ namespace YouDefine
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Error");
             }
 
+            //app.UseStatusCodePages("text/plain", "Status code page, status code: {0}");
             //app.UseHangfireServer();
             //app.UseHangfireDashboard();
             app.UseStaticFiles();
