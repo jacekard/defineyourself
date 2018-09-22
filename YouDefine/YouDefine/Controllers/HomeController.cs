@@ -27,11 +27,11 @@
         }
 
         [Route("reportBugs")]
-        public IActionResult ReportBugs()
+        public IActionResult BugReports()
         {
             ViewData["Message"] = "Report bugs";
 
-            return View();
+            return View("BugReports");
         }
 
         [AllowAnonymous]
