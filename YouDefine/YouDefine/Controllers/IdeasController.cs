@@ -1,9 +1,7 @@
 ﻿namespace YouDefine.Services
 {
-    using System;
     using System.Linq;
     using Microsoft.AspNetCore.Mvc;
-    using YouDefine.Data;
 
     /// <summary>
     /// IdeasController - API controller with CRUD methods
@@ -12,13 +10,10 @@
     [Route("api/ideas")]
     public class IdeasController : Controller
     {
-        private readonly YouDefineContext _context;
-
         private readonly IProviderIdeas _provider;
 
-        public IdeasController(YouDefineContext context, IProviderIdeas provider)
+        public IdeasController(IProviderIdeas provider)
         {
-            _context = context;
             _provider = provider;
         }
 
@@ -149,61 +144,61 @@
             return Ok(idea);
         }
 
-        [HttpDelete]
-        [Route(("{id}"))]
-        public IActionResult DeleteIdeaById([FromRoute] long id)
-        {
+        //[HttpDelete]
+        //[Route(("{id}"))]
+        //public IActionResult DeleteIdeaById([FromRoute] long id)
+        //{
 
-            var idea = _context.Ideas.SingleOrDefault(m => m.IdeaId == id);
-            if (idea == null)
-            {
-                return NotFound();
-            }
+        //    var idea = _context.Ideas.SingleOrDefault(m => m.IdeaId == id);
+        //    if (idea == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            _context.Ideas.Remove(idea);
-            _context.SaveChangesAsync();
+        //    _context.Ideas.Remove(idea);
+        //    _context.SaveChangesAsync();
 
-            return Ok();
-        }
+        //    return Ok();
+        //}
 
-        [Route(("{title}"))]
-        public IActionResult DeleteIdeaByTitle([FromRoute] string title)
-        {
+        //[Route(("{title}"))]
+        //public IActionResult DeleteIdeaByTitle([FromRoute] string title)
+        //{
 
-            var idea = _context.Ideas.SingleOrDefault(m => m.Title == title);
-            if (idea == null)
-            {
-                return NotFound();
-            }
+        //    var idea = _context.Ideas.SingleOrDefault(m => m.Title == title);
+        //    if (idea == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            _context.Ideas.Remove(idea);
-            _context.SaveChanges();
+        //    _context.Ideas.Remove(idea);
+        //    _context.SaveChanges();
 
-            return Ok();
-        }
+        //    return Ok();
+        //}
 
-        [HttpDelete]
-        [Route("destroy")]
-        public IActionResult DeleteAll([FromRoute] long id, [FromRoute] string title)
-        {
-            _context.Ideas.RemoveRange(_context.Ideas);
-            _context.SaveChanges();
+        //[HttpDelete]
+        //[Route("destroy")]
+        //public IActionResult DeleteAll([FromRoute] long id, [FromRoute] string title)
+        //{
+        //    _context.Ideas.RemoveRange(_context.Ideas);
+        //    _context.SaveChanges();
 
-            return Ok();
-        }
+        //    return Ok();
+        //}
 
-        [HttpGet]
-        [Route("info")]
-        public IActionResult GetInfo()
-        {
+        //[HttpGet]
+        //[Route("info")]
+        //public IActionResult GetInfo()
+        //{
 
-            return Ok(_context.Database.ProviderName);
-        }
+        //    return Ok(_context.Database.ProviderName);
+        //}
 
-        private bool IdeaExists(string title)
-        {
+        //private bool IdeaExists(string title)
+        //{
 
-            return _context.Ideas.Any(e => e.Title == title);
-        }
+        //    return _context.Ideas.Any(e => e.Title == title);
+        //}
     }
 }

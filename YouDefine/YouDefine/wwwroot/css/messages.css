@@ -35,7 +35,7 @@
 .success-message {
     position: absolute;
     top: -15vh;
-    left: 0vw;
+    left: -30vw;
     color: seagreen;
     visibility: visible;
     opacity: 1;
@@ -45,7 +45,7 @@
 .failure-message {
     position: absolute;
     top: -15vh;
-    left: 0vw;
+    left: -30vw;
     color: indianred;
     visibility: visible;
     opacity: 1;

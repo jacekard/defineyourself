@@ -5,10 +5,10 @@
     using YouDefine.Models;
 
     /// <summary>
-    /// IMapper interface
-    /// providing methods for Mapper Service
+    /// IIdeasMapper interface
+    /// providing methods for Ideas Mapper Service
     /// </summary>
-    public interface IMapper
+    public interface IIdeasMapper
     {
 
         IdeaResult Map(Idea idea);

@@ -7,7 +7,7 @@
     /// <summary>
     /// Mapper Service maps entity models to result models
     /// </summary>
-    public class Mapper : IMapper
+    public class IdeasMapper : IIdeasMapper
     {
         public IdeaResult Map(Idea idea)
         {

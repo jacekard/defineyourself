@@ -9,7 +9,7 @@ function updateProgressBar() {
         type: 'GET',
         url: url,
         success: function (data) {
-            if (data.success == -1) {
+            if (data.success === -1) {
                 $(".progress-bar-success").text("No bug reports");
                 $(".progress-bar-success").css("width", "100%");
                 $(".progress-bar-warning").text("");

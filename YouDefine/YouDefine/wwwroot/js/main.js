@@ -25,7 +25,7 @@ function validateDefinitionsLS(id) {
     var list = str.split(',');
     var result = true;
     list.forEach(function (i) {
-        if (i == id) {
+        if (i === id) {
             result = false;
         }
     });
@@ -174,7 +174,7 @@ function postNewIdea(title, text) {
             getIdeas();
             newIdeaSuccessfullyPosted(true);
         },
-        fail: function (data) {
+        error: function (data) {
             $(".failure-message").addClass("message-animation");
         }
     });
@@ -192,7 +192,7 @@ function putNewIdea(title, text) {
             createDefinitions(currentIdea, data, true);
             newIdeaSuccessfullyPosted(false);
         },
-        fail: function (data) {
+        error: function (data) {
             $(".failure-message").addClass("message-animation");
         }
     });
@@ -248,7 +248,7 @@ function unlikeDefinition(idea, def, likesCount, icon) {
             if (str) {
                 var list = str.split(',');
                 var index = list.findIndex(function (i) {
-                    return i == def.id;
+                    return i === def.id;
                 });
                 list.splice(index, 1);
                 storage.set('ldefs', list.toString());
@@ -286,7 +286,6 @@ function getSpecifiedIdea(title) {
                 showNewIdeaPanel(title);
             },
             200: function (data) {
-                console.log(data);
                 ideaMatched = true;
                 currentIdea = data;
                 specifiedIdea(data);
@@ -351,8 +350,8 @@ function getRandomIdea() {
             $("#search-input").val(data[rand]);
             getSpecifiedIdea(data[rand]);
         },
-        fail: function (data) {
-            console.log("fail!");
+        error: function (data) {
+            $(".failure-message").addClass("message-animation");
         }
     });
 }
@@ -401,13 +400,6 @@ function welcomeMessage() {
             $(".add-idea-button").css("display", "none");
             $(".add-new-panel").removeClass("show-element");
         }
-
-        // ! ! ! ! NOT DONE YET (NEEDS A BETTER BOOLEAN VARIABLE)
-        // must define a state of being "on top" and then disable add-new-panel display
-        //if (ideaMatched) {
-
-        //}
-        // ! ! ! !
 
         if (val === "" && isSearchAgain) {
             isSearchAgain = false;
@@ -467,5 +459,6 @@ function welcomeMessage() {
     //    }
     //});
 
-    setInterval(getIdeas, 5000);
+    //signalR should be used in here
+    //setInterval(getIdeas, 5000);
 })();

@@ -11,13 +11,13 @@
     /// ProviderIdeas Service
     /// provides data using DBcontext
     /// </summary>
-    public class ProviderIdeas : IProviderIdeas
+    public class IdeasProvider : IProviderIdeas
     {
         private readonly YouDefineContext _DBcontext;
 
-        private readonly IMapper _mapper;
+        private readonly IIdeasMapper _mapper;
 
-        public ProviderIdeas(YouDefineContext DBcontext, IMapper mapper)
+        public IdeasProvider(YouDefineContext DBcontext, IIdeasMapper mapper)
         {
             _DBcontext = DBcontext;
             _mapper = mapper;

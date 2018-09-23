@@ -27,8 +27,13 @@ namespace YouDefine
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddScoped<IMapper, Mapper>();
-            services.AddScoped<IProviderIdeas, ProviderIdeas>();
+            services.AddScoped<IIdeasMapper, IdeasMapper>();
+            services.AddScoped<IProviderIdeas, IdeasProvider>();
+            services.AddScoped<IStatisticsProvider, StatisticsProvider>();
+            services.AddScoped<IStatisticsService, StatisticsService>();
+            services.AddScoped<IAuthorsProvider, AuthorsProvider>();
+
+            
             //services.AddDbContext<YouDefineContext>(
             //    opt => opt.UseInMemoryDatabase("YouDefineContext")
             //);
@@ -38,7 +43,7 @@ namespace YouDefine
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IStatisticsService statistics)
         {
 
             //env.EnvironmentName = EnvironmentName.Production;
@@ -58,6 +63,8 @@ namespace YouDefine
             //app.UseHangfireDashboard();
             app.UseStaticFiles();
             app.UseDefaultFiles();
+
+            statistics.InitializeStatistics();
 
             app.UseMvc(routes => {
                 routes.MapRoute(
