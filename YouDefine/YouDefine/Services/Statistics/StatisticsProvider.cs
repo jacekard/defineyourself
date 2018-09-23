@@ -20,7 +20,7 @@ namespace YouDefine.Services
             long ideasCharCount = 0;
             long definitionsCharCount = 0;
 
-            var ideas = _DBcontext.Ideas;
+            var ideas = _DBcontext.Ideas.Include(x => x.Definitions);
             foreach (var idea in ideas)
             {
                 ideasCharCount += idea.Title.Count();
@@ -39,6 +39,19 @@ namespace YouDefine.Services
         }
 
         public List<Tuple<string, long>> GetIdeasAndDefinitionsCount()
+        {
+            var result = new List<Tuple<string, long>>();
+            var ideas = _DBcontext.Ideas.Include(x => x.Definitions);
+
+            foreach (var idea in ideas)
+            {
+                result.Add(new Tuple<string, long>(idea.Title, idea.Definitions.Count()));
+            }
+
+            return result;
+        }
+
+        public List<Tuple<string, long>> GetTitlesAndDefinitionsCount()
         {
             var result = new List<Tuple<string, long>>();
             var ideas = _DBcontext.Ideas.Include(x => x.Definitions);

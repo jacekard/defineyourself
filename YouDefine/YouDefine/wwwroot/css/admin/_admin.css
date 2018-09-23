@@ -37,8 +37,8 @@
 }
 
 .page-icon {
-    position: absolute;
-    top: 10vh;
+    position: fixed;
+    top: 12vh !important;
     left: 1%;
     font-size: 60px;
     color: lightslategray;

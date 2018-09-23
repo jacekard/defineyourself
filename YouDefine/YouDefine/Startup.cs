@@ -32,8 +32,8 @@ namespace YouDefine
             services.AddScoped<IStatisticsProvider, StatisticsProvider>();
             services.AddScoped<IStatisticsService, StatisticsService>();
             services.AddScoped<IAuthorsProvider, AuthorsProvider>();
+            services.AddScoped<IWebServiceProvider, WebServiceProvider>();
 
-            
             //services.AddDbContext<YouDefineContext>(
             //    opt => opt.UseInMemoryDatabase("YouDefineContext")
             //);

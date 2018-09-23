@@ -10,13 +10,18 @@
     /// <summary>
     /// StatisticsController - API controller with I/O file methods
     /// </summary>
+    [Produces("application/json")]
+    [Route("api/stats")]
     public class StatisticsService : Controller, IStatisticsService 
     {
         private readonly IStatisticsProvider _provider;
 
-        public StatisticsService(IStatisticsProvider provider)
+        private readonly IWebServiceProvider _webProvider;
+
+        public StatisticsService(IStatisticsProvider provider, IWebServiceProvider webProvider)
         {
             _provider = provider;
+            _webProvider = webProvider;
         }
 
         public void InitializeStatistics()
@@ -25,6 +30,8 @@
             //that's only one method for now.
         }
 
+        [HttpGet]
+        [Route("charsCount")]
         public IActionResult AllCharactersCount()
         {
             var data = _provider.GetAllCharactersCount();
@@ -34,6 +41,19 @@
             return Json(
                 new { IdeasChars = ideasChars, DefinitionsChars = definitionsChars }
                 ); 
+        }
+
+        [HttpGet]
+        [Route("websiteInfo")]
+        public IActionResult WebsiteInfo()
+        {
+            var timespan = _webProvider.GetWebsiteOnlineDateTime();
+            var days = Math.Round(timespan.TotalDays);
+            var hours = Math.Round(timespan.TotalHours % 24);
+            var minutes = Math.Round(timespan.TotalMinutes % 60);
+            var seconds = Math.Round(timespan.TotalSeconds % 60);
+
+            return Json(new { days, hours, minutes, seconds });
         }
 
         public IActionResult HowManyAuthorsCount()
