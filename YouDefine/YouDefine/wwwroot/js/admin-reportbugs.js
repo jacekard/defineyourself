@@ -39,7 +39,7 @@ function changeBugStatus(row, status, bugId) {
         type: 'PUT',
         url: url,
         success: function (data) {
-            console.log("ok");
+            updateProgressBar();
         }
     });
 
@@ -125,9 +125,9 @@ function updateTables(data, selector, statusColor, bugStatusOption) {
             var actionTd = jQuery('<td/>', {
             }).appendTo('.' + bug.id);
 
-            var buttonText
+            var buttonText = "";
             if (bugStatusOption === 'no') {
-                buttonText = "Not Completed"
+                buttonText = "Not Completed";
             } else {
                 buttonText = "Completed";
             }
@@ -143,7 +143,7 @@ function updateTables(data, selector, statusColor, bugStatusOption) {
                 changeBugStatus(row, bugStatusOption, bug.id);
             });
         }
-    })
+    });
 }
 
 
@@ -155,8 +155,6 @@ function updateTables(data, selector, statusColor, bugStatusOption) {
     updateProgressBar();
     sortByDropdown();
     getActiveReports();
-    getCompletedReports();
-    getAllReports();
 
     $("#active-tab").click(function () {
         getActiveReports();

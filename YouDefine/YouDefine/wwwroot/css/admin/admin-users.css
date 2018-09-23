@@ -1,0 +1,12 @@
+﻿.panel-default {
+    position: relative;
+    top: 12vh;
+    width: 70vw;
+    padding: 0px;
+    margin: 0 auto;
+}
+
+.table {
+    min-width: 50%;
+    width: 73%;
+}

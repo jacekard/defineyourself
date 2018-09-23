@@ -13,7 +13,8 @@ namespace YouDefine.Services
         
         public static readonly string IdeasByDateIdeas = FilePrefix + "ideas_by_date_y.txt";
 
+        public static readonly string DefinitionByIdeasTitles = FilePrefix + "definitions_by_ideas_titles.txt";
 
-
+        public static readonly string DefinitionByIdeasTexts = FilePrefix + "definitions_by_ideas_texts.txt";
     }
 }

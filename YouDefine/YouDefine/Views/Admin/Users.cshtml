@@ -3,7 +3,30 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 
 }
+
+<link rel="stylesheet" href="@Url.Content("~/css/admin/admin-users.css")" type="text/css" />
 <i class="material-icons page-icon">supervisor_account</i>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Users Panel</div>
+    <div class="panel-body container">
+        <div class="container table-container table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th style="width: 5%">Id</th>
+                        <th style="width: 20%">Username</th>
+                        <th style="width: 15%">Creation Date</th>
+                        <th style="width: 10%">Last Logged In</th>
+                        <th style="width: 5%">Ideas Added</th>
+                        <th style="width: 5%">Definitions Added</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
 <script>
     $(".users-page").addClass("active");

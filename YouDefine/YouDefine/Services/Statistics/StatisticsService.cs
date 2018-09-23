@@ -2,9 +2,6 @@
 {
     using System;
     using System.IO;
-    using System.Collections.Generic;
-    using System.Linq;
-    using YouDefine.Models;
     using Microsoft.AspNetCore.Mvc;
 
     /// <summary>
@@ -12,7 +9,7 @@
     /// </summary>
     [Produces("application/json")]
     [Route("api/stats")]
-    public class StatisticsService : Controller, IStatisticsService 
+    public class StatisticsService : Controller, IStatisticsService
     {
         private readonly IStatisticsProvider _provider;
 
@@ -27,7 +24,7 @@
         public void InitializeStatistics()
         {
             IdeasByDateStats();
-            //that's only one method for now.
+            DefinitionsByIdeasStats();
         }
 
         [HttpGet]
@@ -39,8 +36,10 @@
             long definitionsChars = data.Item2;
 
             return Json(
-                new { IdeasChars = ideasChars, DefinitionsChars = definitionsChars }
-                ); 
+                new {
+                    IdeasChars = ideasChars,
+                    DefinitionsChars = definitionsChars
+                });
         }
 
         [HttpGet]
@@ -56,6 +55,8 @@
             return Json(new { days, hours, minutes, seconds });
         }
 
+        [HttpGet]
+        [Route("authorsCount")]
         public IActionResult HowManyAuthorsCount()
         {
             long count = 5;
@@ -70,9 +71,17 @@
         public void DefinitionsByIdeasStats()
         {
             var data = _provider.GetIdeasAndDefinitionsCount();
-            using (StreamWriter file = new StreamWriter("teeest.txt"))
+
+            using (var ideas = new StreamWriter(FileRegistry.DefinitionByIdeasTitles))
             {
-                file.WriteLine("writing in text file");
+                using (var definitions = new StreamWriter(FileRegistry.DefinitionByIdeasTexts))
+                {
+                    foreach (var e in data)
+                    {
+                        ideas.WriteLine(e.Item1);
+                        definitions.WriteLine(e.Item2);
+                    }
+                }
             }
         }
 
@@ -92,8 +101,5 @@
             }
         }
 
-        public void YouDefinePageDurationStats()
-        { 
-        }
     }
 }
