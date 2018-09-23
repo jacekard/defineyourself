@@ -6,14 +6,14 @@
 <link rel="stylesheet" href="@Url.Content("~/css/admin/admin-stats.css")" type="text/css" />
 <i class="material-icons page-icon" style="top:-5vh">insert_chart_outlined</i>
 
-<body data-spy="scroll" data-target="#myScrollspy" data-offset="50">
+<body data-spy="scroll" data-target="#myScrollspy" data-offset="0">
     <div class="container">
         <div class="row">
             <nav class="col-sm-3" id="myScrollspy">
-                <ul class="nav nav-pills nav-stacked" data-spy="affix" data-offset-top="10">
+                <ul class="nav nav-pills nav-stacked" data-spy="affix" data-offset-top="0">
                     <li><a href="#section1">Statistics Bundle</a></li>
                     <li><a href="#section2">Ideas plot</a></li>
-                    <li><a href="#section3">Section 3</a></li>
+                    <li><a href="#section3">Definitions plot</a></li>
                     <li><a href="#section4">Section 4</a></li>
                     <li><a href="#section5">Section 5</a></li>
                 </ul>
@@ -26,13 +26,15 @@
                 </div>
                 <div id="section2" class="plot-section">
                     <h3>How many ideas were added recently?</h3>
-                    <object data="@Url.Content("~/statistics/plot.html")" width="1000" height="500">
+                    <object data="@Url.Content("~/statistics/ideas_by_date.html")" width="950" height="500">
                         Error: Embedded data could not be displayed.
                     </object>
                 </div>
                 <div id="section3" class="plot-section">
-                    <h3>How many </h3>
-                    <p>Nam ut nulla sed ante ipsum ante, sagittis mi. Nullam suscipit quis, eleifend in, dui. Cras consectetuer lacus. Nulla eu wisi. Suspendisse ac quam at orci luctus et malesuada ultricies lacinia lacus.</p>
+                    <h3>How many definitons are in ideas?</h3>
+                    <object data="@Url.Content("~/statistics/definitions_by_ideas.html")" width="950" height="500">
+                        Error: Embedded data could not be displayed.
+                    </object>
                 </div>
                 <div id="section4" class="plot-section">
                     <h3>Section 4</h3>

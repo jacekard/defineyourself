@@ -3,7 +3,7 @@
     using System.Diagnostics;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using YouDefine.Data;
+    using YouDefine.Models;
 
     /// <summary>
     /// Home Controller used for returning corresponding views

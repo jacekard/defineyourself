@@ -1,4 +1,4 @@
-namespace YouDefine.Data
+namespace YouDefine.Models
 {
     /// <summary>
     /// ErrorViewModel
