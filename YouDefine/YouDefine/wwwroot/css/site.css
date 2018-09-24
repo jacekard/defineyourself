@@ -20,6 +20,10 @@ body {
     background-size: 5000%;
 }
 
+.grecaptcha-badge {
+    /*display: none !important*/
+}
+
 .container {
     display: flex;
     min-width: 90vw;
