@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using YouDefine.Data;
 using YouDefine.Services;
 using System.Data.SqlClient;
-//using Hangfire;
+using Hangfire;
 
 namespace YouDefine
 {
@@ -27,26 +27,23 @@ namespace YouDefine
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddDbContext<YouDefineContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("YouDefineConnection")));
+            //services.AddHangfire(x => x.UseSqlServerStorage(Configuration.GetConnectionString("HangfireConnection")));
+
             services.AddScoped<IIdeasMapper, IdeasMapper>();
             services.AddScoped<IProviderIdeas, IdeasProvider>();
             services.AddScoped<IStatisticsProvider, StatisticsProvider>();
             services.AddScoped<IStatisticsService, StatisticsService>();
             services.AddScoped<IAuthorsProvider, AuthorsProvider>();
             services.AddScoped<IWebServiceProvider, WebServiceProvider>();
-
-            //services.AddDbContext<YouDefineContext>(
-            //    opt => opt.UseInMemoryDatabase("YouDefineContext")
-            //);
-            services.AddDbContext<YouDefineContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            //services.AddHangfire(x => x.UseSqlServerStorage("HangfireConnection"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IStatisticsService statistics)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IStatisticsService statisticsService)
         {
 
-            //env.EnvironmentName = EnvironmentName.Production;
+            env.EnvironmentName = EnvironmentName.Development;
 
             if (env.IsDevelopment())
             {
@@ -58,19 +55,18 @@ namespace YouDefine
                 app.UseExceptionHandler("/Error");
             }
 
-            //app.UseStatusCodePages("text/plain", "Status code page, status code: {0}");
             //app.UseHangfireServer();
             //app.UseHangfireDashboard();
             app.UseStaticFiles();
             app.UseDefaultFiles();
-
-            statistics.InitializeStatistics();
 
             app.UseMvc(routes => {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            statisticsService.InitializeStatistics();
         }
     }
 }

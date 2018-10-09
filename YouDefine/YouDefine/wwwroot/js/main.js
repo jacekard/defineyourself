@@ -25,7 +25,7 @@ function validateDefinitionsLS(id) {
     var list = str.split(',');
     var result = true;
     list.forEach(function (i) {
-        if (i === id) {
+        if (parseInt(i) === parseInt(id)) {
             result = false;
         }
     });

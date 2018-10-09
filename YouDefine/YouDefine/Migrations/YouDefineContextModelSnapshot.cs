@@ -20,7 +20,23 @@ namespace YouDefine.Migrations
                 .HasAnnotation("ProductVersion", "2.0.3-rtm-10026")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("YouDefine.Data.Definition", b =>
+            modelBuilder.Entity("YouDefine.Models.Bug", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Information");
+
+                    b.Property<bool>("IsFixed");
+
+                    b.Property<DateTime>("ReportDate");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Bugs");
+                });
+
+            modelBuilder.Entity("YouDefine.Models.Definition", b =>
                 {
                     b.Property<long>("DefinitionId")
                         .ValueGeneratedOnAdd();
@@ -40,7 +56,7 @@ namespace YouDefine.Migrations
                     b.ToTable("Definitions");
                 });
 
-            modelBuilder.Entity("YouDefine.Data.Idea", b =>
+            modelBuilder.Entity("YouDefine.Models.Idea", b =>
                 {
                     b.Property<long>("IdeaId")
                         .ValueGeneratedOnAdd();
@@ -58,25 +74,9 @@ namespace YouDefine.Migrations
                     b.ToTable("Ideas");
                 });
 
-            modelBuilder.Entity("YouDefine.Models.Bug", b =>
+            modelBuilder.Entity("YouDefine.Models.Definition", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Information");
-
-                    b.Property<bool>("IsFixed");
-
-                    b.Property<DateTime>("ReportDate");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Bugs");
-                });
-
-            modelBuilder.Entity("YouDefine.Data.Definition", b =>
-                {
-                    b.HasOne("YouDefine.Data.Idea")
+                    b.HasOne("YouDefine.Models.Idea")
                         .WithMany("Definitions")
                         .HasForeignKey("IdeaId")
                         .OnDelete(DeleteBehavior.Cascade);
