@@ -1,121 +1,37 @@
-﻿* {
-    margin: 0;
-    padding: 0;
-}
-
-html {
-    overflow: hidden;
-    min-height: 100%;
-}
-
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
+for details on configuring this project to bundle and minify static web assets. */
 body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Carousel */
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"] {
     width: 100%;
-    min-height: 100%;
-    background: linear-gradient(50deg, #ff9a9e, #fad0c4, lightcoral, #fcb69f, #ff9a9e, #fecfef, #a1c4fd, #c2e9fb, #cfd9df, #e2ebf0, #89f7fe, #66a6ff, #93a5cf, #e4efe9, #ff758c, #ff7eb3, #96deda, #50c9c3, #ffc3a0, #ffafbd) top right no-repeat;
-    background-repeat: no-repeat;
-    -webkit-animation: animateBackground 60s infinite linear forwards;
-    -moz-animation: animateBackground 260s infinite linear forwards;
-    -o-animation: animateBackground 60s infinite linear forwards;
-    animation: animateBackground 60s infinite linear forwards;
-    background-size: 5000%;
 }
 
-.container {
-    display: flex;
-    min-width: 90vw;
-    min-height: 100vh;
-    z-index: 1;
-    align-content: center;
-    justify-content: center;
+/* QR code generator */
+#qrCode {
+    margin: 15px;
 }
 
-::-moz-selection {
-    color: dodgerblue;
-    background: white;
-}
-
-::selection {
-    color: dodgerblue;
-    background: white;
-}
-
-.material-icons {
-    opacity: 0.5;
-    color: lightslategrey;
-    -webkit-transition: opacity 0.5s;
-    transition: opacity 0.5s;
-    cursor: default;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-    .material-icons:hover {
-        opacity: 1;
-    }
-
-.footer-icon {
-    position: absolute;
-    font-size: 45px;
-    bottom: 2%;
-    right: 15px;
-    transition: box-shadow 2s;
-}
-
-    .footer-icon:hover {
-        -webkit-box-shadow: 3px 10px 68px 21px rgba(0,0,0,0.2);
-        -moz-box-shadow: 3px 10px 68px 21px rgba(0,0,0,0.2);
-        box-shadow: 3px 10px 68px 21px rgba(0,0,0,0.2);
-    }
-
-
-@-webkit-keyframes animateBackground {
-    0% {
-        background-position: 0%;
-        opacity: 0.9;
-    }
-
-    100% {
-        background-position: 100%;
-        opacity: 1;
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
     }
 }
-
-@-moz-keyframes animateBackground {
-    0% {
-        background-position: 0%;
-        opacity: 0.9;
-    }
-
-    100% {
-        background-position: 100%;
-        opacity: 1;
-    }
-}
-
-@-o-keyframes animateBackground {
-    0% {
-        background-position: 0%;
-        opacity: 0.9;
-    }
-
-    100% {
-        background-position: 100%;
-        opacity: 1;
-    }
-}
-
-@keyframes animateBackground {
-    0% {
-        background-position: 0%;
-        opacity: 0.9;
-    }
-
-    100% {
-        background-position: 100%;
-        opacity: 1;
-    }
-}
-
-/* Add responsive design for smaller devices! */
