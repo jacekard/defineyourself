@@ -8,6 +8,8 @@
 *.user
 *.userosscache
 *.sln.docstates
+preloader
+YouDefine/YouDefine/wwwroot/statistics/data/*
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

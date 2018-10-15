@@ -1,5 +1,6 @@
 ﻿namespace YouDefine.Services
 {
+    using System;
     using System.Linq;
     using Microsoft.AspNetCore.Mvc;
 
@@ -15,6 +16,21 @@
         public IdeasController(IProviderIdeas provider)
         {
             _provider = provider;
+
+            string title = "love";
+            string text = "love is all we need";
+
+            try
+            {
+                if(_provider.GetAll() == null)
+                {
+                    var idea = _provider.Add(title, text);
+                }
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
         }
 
         [HttpGet]
@@ -39,32 +55,8 @@
             {
                 return NotFound();
             }
-            //        String[] obj = {
-            //"ActionScript",
-            //"AppleScript",
-            //"Asp",
-            //"BASIC",
-            //"C",
-            //"C++",
-            //"Clojure",
-            //"COBOL",
-            //"ColdFusion",
-            //"Erlang",
-            //"Fortran",
-            //"Groovy",
-            //"Haskell",
-            //"Java",
-            //"JavaScript",
-            //"Lisp",
-            //"Perl",
-            //"PHP",
-            //"Python",
-            //"Ruby",
-            //"Scala",
-            //"Scheme"
-            //        };
-            return Ok(ideas.ToArray());
 
+            return Ok(ideas.ToArray());
         }
 
         [HttpGet]

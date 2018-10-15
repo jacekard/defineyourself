@@ -1,19 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
-using YouDefine.Data;
-using YouDefine.Services;
-using System.Data.SqlClient;
-//using Hangfire;
-
-namespace YouDefine
+﻿namespace YouDefine
 {
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.EntityFrameworkCore;
+    using YouDefine.Data;
+    using YouDefine.Services;
+    using System.Data.SqlClient;
+    using YouDefine.Models;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Http;
+    //using Hangfire;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -43,29 +43,34 @@ namespace YouDefine
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IStatisticsService statistics)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
 
             //env.EnvironmentName = EnvironmentName.Production;
 
             if (env.IsDevelopment())
             {
-                app.UseBrowserLink();
+                app.UseDatabaseErrorPage();
                 app.UseDeveloperExceptionPage();
             }
             else
             {
-                app.UseExceptionHandler("/Error");
+                app.UseExceptionHandler("/Home/Error");
+                app.UseHsts();
             }
 
-            //app.UseStatusCodePages("text/plain", "Status code page, status code: {0}");
-            //app.UseHangfireServer();
-            //app.UseHangfireDashboard();
+            ///*****************************************
+            /// Uncomment Hangfire Server and Dashboard
+            /// to use Hangfire Provider!
+            //  app.UseHangfireServer();
+            //  app.UseHangfireDashboard();
+            ///*****************************************
+
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseDefaultFiles();
-
-            statistics.InitializeStatistics();
-
+            app.UseCookiePolicy();
+            app.UseAuthentication();
             app.UseMvc(routes => {
                 routes.MapRoute(
                     name: "default",

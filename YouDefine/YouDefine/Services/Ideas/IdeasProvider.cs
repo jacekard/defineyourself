@@ -5,7 +5,6 @@
     using Microsoft.EntityFrameworkCore;
     using YouDefine.Data;
     using YouDefine.Models;
-    using System;
 
     /// <summary>
     /// ProviderIdeas Service
@@ -62,6 +61,7 @@
                 var idea = _DBcontext.Ideas
                     .Where(m => m.Title == title)
                     .Include(x => x.Definitions)
+                    .OrderBy(y => y.Likes)
                     .Single();
 
                 return _mapper.Map(idea);
@@ -94,6 +94,10 @@
         public IdeaResult Add(string title, string text)
         {
             bool ideaExist = true;
+            if (title == null || text == null)
+
+                return null;
+
             try
             {
                 var ideaPromise = _DBcontext.Ideas
@@ -138,6 +142,11 @@
         {
             bool definitionPromise = true;
             Idea idea = null;
+
+            if (title == null || text == null)
+
+                return null;
+
             try
             {
                 idea = _DBcontext.Ideas.Where(x => x.Title == title)
