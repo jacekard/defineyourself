@@ -3,6 +3,7 @@
     using System;
     using System.Linq;
     using Microsoft.AspNetCore.Mvc;
+    using YouDefine.Data;
 
     /// <summary>
     /// IdeasController - API controller with CRUD methods
@@ -81,8 +82,8 @@
             {
                 return NoContent();
             }
-            return Ok(idea);
 
+            return Ok(idea);
         }
 
         [HttpPut]
@@ -107,6 +108,7 @@
             {
                 return BadRequest();
             }
+
             return Ok(result);
         }
 
@@ -114,6 +116,11 @@
         [Route("")]
         public IActionResult Put(string title, string text)
         {
+            if (SwearingDictionary.Has(title) || SwearingDictionary.Has(text))
+            {
+                return StatusCode(422);
+            }
+
             var idea = _provider.Update(title, text);
             if(idea == null)
             {
@@ -127,8 +134,13 @@
         [Route("")]
         public IActionResult Post(string title, string text)
         {
+            if (SwearingDictionary.Has(title) || SwearingDictionary.Has(text))
+            {
+                return StatusCode(422);
+            }
+
             var idea = _provider.Add(title, text);
-            if(idea == null)
+            if (idea == null)
             {
                 return BadRequest();
             }

@@ -33,10 +33,6 @@
             services.AddScoped<IStatisticsService, StatisticsService>();
             services.AddScoped<IAuthorsProvider, AuthorsProvider>();
             services.AddScoped<IWebServiceProvider, WebServiceProvider>();
-
-            //services.AddDbContext<YouDefineContext>(
-            //    opt => opt.UseInMemoryDatabase("YouDefineContext")
-            //);
             services.AddDbContext<YouDefineContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             //services.AddHangfire(x => x.UseSqlServerStorage("HangfireConnection"));

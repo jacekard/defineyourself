@@ -174,8 +174,15 @@ function postNewIdea(title, text) {
             getIdeas();
             newIdeaSuccessfullyPosted(true);
         },
-        error: function (data) {
-            $(".failure-message").addClass("message-animation");
+        statusCode: {
+            422: function () {
+                $(".failure-message").text("We do not accept bad language...");
+                $(".failure-message").addClass("message-animation");
+            },
+            400: function () {
+                $(".failure-message").text("There was some problem...");
+                $(".failure-message").addClass("message-animation");
+            }
         }
     });
 }
@@ -192,8 +199,16 @@ function putNewIdea(title, text) {
             createDefinitions(currentIdea, data, true);
             newIdeaSuccessfullyPosted(false);
         },
-        error: function (data) {
-            $(".failure-message").addClass("message-animation");
+        statusCode: {
+            422: function () {
+                $(".failure-message").text("We do not accept bad language...");
+                $(".failure-message").addClass("message-animation");
+            },
+            400: function () {
+                $(".failure-message").text("There was some problem...");
+                $(".failure-message").addClass("message-animation");
+
+            }
         }
     });
 }

@@ -26,8 +26,19 @@
         {
             try
             {
-                var ideas = _DBcontext.Ideas.Include(x => x.Definitions).ToList();
-                return _mapper.Map(ideas);
+                var ideas = _DBcontext.Ideas
+                    .Include(x => x.Definitions)
+                    .OrderBy(y => y.Likes)
+                    .ToList();
+
+                if (ideas.Count != 0)
+                {
+                    return _mapper.Map(ideas);
+                }
+                else
+                {
+                    return null;
+                }
             }
             catch
             {
@@ -61,7 +72,6 @@
                 var idea = _DBcontext.Ideas
                     .Where(m => m.Title == title)
                     .Include(x => x.Definitions)
-                    .OrderBy(y => y.Likes)
                     .Single();
 
                 return _mapper.Map(idea);
@@ -79,7 +89,6 @@
                 var idea = _DBcontext.Ideas
                     .Where(m => m.IdeaId == id)
                     .Include(x => x.Definitions)
-                    .OrderBy(y => y.Likes)
                     .Single();
 
                 return _mapper.Map(idea);

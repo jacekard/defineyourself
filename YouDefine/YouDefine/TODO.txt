@@ -22,25 +22,23 @@ TODO LIST:
 
 
 4. Create Validation for user's input
-   -> Swear Filtering
+   -> Swear Filtering --> DONE
    -> Min and Max character length:
 	  -> client-side --> DONE
 	  -> server-side
-   -> Before adding, search if the word makes sense 
-   (this is somehow impossible so probably leave it as it is)
    -> Show messages with errors client-side!
-	  -> for example: idea exists, definition exists, something went wrong with server/database...
+	  -> for example: idea exists, definition exists, something went wrong with server/database... --> DONE
 
 5. Create Javascript and Styles responsible for input dialog
-   -> styling caret (Optional)
-   -> Rewrite animations for Mozilla and Opera browsers so they'd actually work.
-   -> Autocompletion by jQueryUI
+   -> Rewrite animations for Mozilla and Opera browsers so they'd actually work. --> NOT DONE...
+   -> Autocompletion by jQueryUI --> DONE
 	  -> Styling suggestions  --> DONE
 	  -> Displaying "likes" near the definition --> DONE
    -> AJAX calls
 		-> Add new idea with definition --> DONE
-		-> update idea with definition
+		-> update idea with definition --> DONE
 		-> like a definition --> DONE
+		-> unlike a definiton --> DONE
 
 
 6. Create accounts and display <private> definitions specified only for author.
@@ -52,10 +50,12 @@ TODO LIST:
 	-> create sorting methods for better data displaying (while logged in)
 	
 
+   ** OPTIONAL **
 7. Create Ideas View provided by DataBase source and backend using API
    Integrate p5.js with main page -> responsible for showing text as particles
    which can move and slightly rotate.
 
+   ** OPTIONAL **
    A. Create user's setting for <SPLASH MODE> which is stored in LocalStorage,
 	   -> in <NORMAL MODE> definitions are displayed by side as list.
 	   -> in <SPLASH MODE> definitions are displayed in fancy way.
@@ -69,11 +69,8 @@ TODO LIST:
 
 8. Create Administration Panel
    -> Using Authentication and login/password authorization
-   -> Create simple Admin View
-   -> Create bug tracker as to-do list with provided messages by users (/About.cshtml)
-   -> Option settings
-	  -> enable/disable swearing filter
-	  -> and more...
+   -> Create simple Admin View --> DONE
+   -> Create bug tracker as to-do list with provided messages by users (/About.cshtml) --> DONE
 
 
 8. Create simple statistics with ChartFramework (probably in Python):
@@ -91,6 +88,7 @@ TODO LIST:
    {
 		USE GOOGLE ANALYTICS!!!
    }
+
 
 9. Add Hangfire framework dependency for background jobs:
 	-> Create BackgroundJob that alerts administrator with e-mail notification
