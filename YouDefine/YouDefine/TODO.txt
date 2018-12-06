@@ -86,7 +86,7 @@ TODO LIST:
    }
    -> how many visitors on-site 
    {
-		USE GOOGLE ANALYTICS!!!
+		USE GOOGLE ANALYTICS!!! --> DONE
    }
 
 

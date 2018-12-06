@@ -475,5 +475,5 @@ function welcomeMessage() {
     //});
 
     //signalR should be used in here
-    //setInterval(getIdeas, 5000);
+    setInterval(getIdeas, 5000);
 })();

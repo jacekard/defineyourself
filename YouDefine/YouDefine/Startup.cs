@@ -63,8 +63,8 @@
             ///*****************************************
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
             app.UseDefaultFiles();
+            app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseAuthentication();
             app.UseMvc(routes => {
